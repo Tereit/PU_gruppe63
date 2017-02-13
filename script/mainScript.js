@@ -6,11 +6,11 @@
 
 function Lecturify() {
     this.initFirebase();
-    this.paceUp = document.getElementById('buttonSpeedUp');
-    this.paceDown = document.getElementById('buttonSlowDown');
 
-    this.paceUp.addEventListener('click', this.speedUp);
-    this.paceDown.addEventListener('click', this.slowDown);
+    this.user = document.getElementById("user");
+    this.pass = document.getElementById("pass");
+
+  //  this.paceUp.addEventListener('click', this.speedUp);
 }
 
 Lecturify.prototype.initFirebase = function() {
