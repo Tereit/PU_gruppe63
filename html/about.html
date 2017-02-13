@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="topContainer">
-
+    <div id="lecturifyText">Lecturify</div>
 </div>
 <div id="mainContainer">
     <div id="projectDescription">
@@ -24,5 +24,23 @@
 
 </footer>
 <script src="../script/mainScript.js"></script>
+<script>
+    var text = document.getElementById("lecturifyText");
+    var topContainer = document.getElementById("topContainer");
+    function scrollEvent() {
+        window.addEventListener('scroll', function(){
+            var distanceY = window.pageYOffset;
+            if (distanceY > 100) {
+                topContainer.style.width = "4%";
+                text.innerHTML="☰";
+            } else {
+                topContainer.style.width = 100-(distanceY*0.9)+"%";
+                text.innerHTML="Lecturify";
+            }
+        });
+    }
+    scrollEvent();
+</script>
+
 </body>
 </html>
