@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lecture</title>
+    <link rel="stylesheet" type="text/css" href="css/lecture.css">
+</head>
+<body>
+<div id="topContainer">
+    <div id="lecturifyText">Lecturify</div>
+</div>
+<div id="mainContainer">
+
+</div>
+<footer>
+
+</footer>
+<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyA3wCVMG1f33-WnafKkgF6cNtnoDFJB_IM",
+        authDomain: "lecturify.firebaseapp.com",
+        databaseURL: "https://lecturify.firebaseio.com",
+        storageBucket: "lecturify.appspot.com",
+        messagingSenderId: "946578632705"
+    };
+    firebase.initializeApp(config);
+    window.onload = function(){
+        window.lecturify = new Lecturify();
+    };
+</script>
+<script src="../script/mainScript.js"></script>
+</body>
+</html>
