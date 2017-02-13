@@ -5,27 +5,39 @@
 'use strict';
 
 function Lecturify() {
-	
-	this.paceUp = document.getElementById('');
-	this.paceDown = document.getElementById('');
-	
-	this.paceUp.addEventListener('click', this.speedUp());
-	this.paceDown.addEventListener('click', this.speedDown());
-	
-	this.initFirebase();
+    this.initFirebase();
+    this.paceUp = document.getElementById('buttonSpeedUp');
+    this.paceDown = document.getElementById('buttonSlowDown');
+
+    this.paceUp.addEventListener('click', this.speedUp);
+    this.paceDown.addEventListener('click', this.slowDown);
 }
 
 Lecturify.prototype.initFirebase = function() {
-	// Shortcuts to Firebase SDK features
-	this.auth = firebase.auth();
-	this.database = firebase.database();
-	this.storage = firebase.storage();
+    // Shortcuts to Firebase SDK features
+    this.auth = firebase.auth();
+    this.database = firebase.database();
+    this.storage = firebase.storage();
 };
 
 Lecturify.prototype.speedUp = function() {
-	
+    firebase.database().ref("pace").transaction(function(tall){
+        if(tall){
+            tall++;
+        }
+        return tall;
+    })
 };
 
 Lecturify.prototype.slowDown = function() {
-	
+    firebase.database().ref("pace").transaction(function(tall){
+        if(tall){
+            tall--;
+        }
+        return tall;
+    })
+};
+
+window.onload = function(){
+    window.lecturify = new Lecturify();
 };
