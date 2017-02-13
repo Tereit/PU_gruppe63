@@ -8,9 +8,10 @@ function Lecturify() {
     this.initFirebase();
 
     this.btnLogin = document.getElementById("btnLogin");
+    this.R_btnLogin = document.getElementById("R_btnLogin");
 
-  //  this.paceUp.addEventListener('click', this.speedUp);
     this.btnLogin.addEventListener("click", this.onLogin);
+    this.R_btnLogin.addEventListener("click", this.onRegister);
 }
 
 Lecturify.prototype.initFirebase = function() {
@@ -18,27 +19,62 @@ Lecturify.prototype.initFirebase = function() {
     this.auth = firebase.auth();
     this.database = firebase.database();
     this.storage = firebase.storage();
+
+    //SJEKKER OM BRUKER TILSTANDEN HAR ENDRET SEG
+    //Hvis du gitt ut av nettsiden uten å logge inn, kommer du automatisk inn
+    firebase.auth().onAuthStateChanged(user => {
+      updateUser(user);
+    });
 };
 
 
 //LOGIN
 Lecturify.prototype.onLogin = function(){
-
   this.user = document.getElementById("user").value;
   this.pass = document.getElementById("pass").value;
-  console.log(this.user);
-  console.log(this.pass);
-  firebase.auth().signInWithEmailAndPassword(this.user, this.pass).catch(function(error) {
-    if (error.code === 'INVALID_EMAIL') {
-        console.log('email invalid or not signed up');
-    } else if (error.code === 'INVALID_PASSWORD') {
-        console.log('invalid password');
-    }
-    location.reload();
-
-  });
-  window.location.assign("../html/main.html");
+  var professor = document.getElementById("r2");
+  firebase.auth().signInWithEmailAndPassword(this.user, this.pass).catch(
+    error => console.log(error.message));
 };
+
+//REGISTRERE NY BRUKER
+Lecturify.prototype.onRegister = function(){
+  this.user = document.getElementById("R_user").value;
+  this.pass = document.getElementById("R_pass").value;
+  if(this.user != "" && this.pass != ""){
+    firebase.auth().createUserWithEmailAndPassword(this.user, this.pass).catch(
+      error => console.log(error.message));
+  }else{
+    alert("Invalid information");
+  }
+};
+
+
+
+
+//Oppdatere databasen ved innlogging
+function updateUser(user){
+  var student1 = document.getElementById("r1");
+  var student2 = document.getElementById("radio1");
+  var dbRef = firebase.database().ref();
+  if(user){
+    if(student1.checked || student2.checked){
+      dbRef.child("users/students/" + user.uid).set({
+        email: user.email
+      }).then(window.location.href = "../html/main.html");
+    }
+    else{
+      dbRef.child("users/professors/" + user.uid).set({
+        email: user.email
+      }).then(window.location.href = "../html/main.html");
+    }
+    }
+    else{
+    console.log("not logged in");
+  }
+}
+
+
 
 Lecturify.prototype.speedUp = function() {
     firebase.database().ref("pace").transaction(function(tall){

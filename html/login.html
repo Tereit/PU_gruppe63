@@ -22,8 +22,10 @@
 					<input id="pass" type="password" class="input" data-type="password">
 				</div>
 				<div class="group">
-					<input id="check" type="checkbox" class="check" checked>
-					<label for="check"><span class="icon"></span> Keep me Signed in</label>
+          <input type="radio" id="r1" name="rr"/>
+          <label for="r1"><span></span>Student</label>
+          <input type="radio" id="r2" name="rr" checked=true/>
+          <label for="r2"><span></span>Professor</label>
 				</div>
 				<div class="group">
 					<input id="btnLogin" type="submit" class="button" value="Sign In">
@@ -36,22 +38,20 @@
 			<div class="sign-up-htm">
 				<div class="group">
 					<label for="user" class="label">Username</label>
-					<input id="user" type="text" class="input">
+					<input id="R_user" type="text" class="input">
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
-					<input id="pass" type="password" class="input" data-type="password">
+					<input id="R_pass" type="password" class="input" data-type="password">
 				</div>
+        <div class="group">
+          <input type="radio" id="radio1" name="rr" checked=true class="radio"/>
+          <label for="radio1"><span></span>Student</label>
+          <input type="radio" id="radio2" name="rr" class="radio"/>
+          <label for="radio2"><span></span>Professor</label>
+        </div>
 				<div class="group">
-					<label for="pass" class="label">Repeat Password</label>
-					<input id="pass" type="password" class="input" data-type="password">
-				</div>
-				<div class="group">
-					<label for="pass" class="label">Email Address</label>
-					<input id="pass" type="text" class="input">
-				</div>
-				<div class="group">
-					<input type="submit" class="button" value="Sign Up">
+					<input id="R_btnLogin" type="submit" class="button" value="Sign Up">
 				</div>
 				<div class="hr"></div>
 				<div class="foot-lnk">
