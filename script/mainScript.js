@@ -7,8 +7,6 @@
 function Lecturify() {
     this.initFirebase();
 
-    this.user = document.getElementById("user");
-    this.pass = document.getElementById("pass");
     this.btnLogin = document.getElementById("btnLogin");
 
   //  this.paceUp.addEventListener('click', this.speedUp);
@@ -22,9 +20,25 @@ Lecturify.prototype.initFirebase = function() {
     this.storage = firebase.storage();
 };
 
+
+//LOGIN
 Lecturify.prototype.onLogin = function(){
-  console.log("kjører")
-}
+
+  this.user = document.getElementById("user").value;
+  this.pass = document.getElementById("pass").value;
+  console.log(this.user);
+  console.log(this.pass);
+  firebase.auth().signInWithEmailAndPassword(this.user, this.pass).catch(function(error) {
+    if (error.code === 'INVALID_EMAIL') {
+        console.log('email invalid or not signed up');
+    } else if (error.code === 'INVALID_PASSWORD') {
+        console.log('invalid password');
+    }
+    location.reload();
+
+  });
+  window.location.assign("../html/main.html");
+};
 
 Lecturify.prototype.speedUp = function() {
     firebase.database().ref("pace").transaction(function(tall){
