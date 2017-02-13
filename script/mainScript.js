@@ -38,10 +38,6 @@ Lecturify.prototype.slowDown = function() {
     })
 };
 
-window.onload = function(){
-    window.lecturify = new Lecturify();
-    scrollEvent();
-};
 
 //martin: makes the scroll effect of the topContainer
 var text = document.getElementById("lecturifyText");
@@ -58,3 +54,4 @@ function scrollEvent() {
         }
     });
 }
+scrollEvent();

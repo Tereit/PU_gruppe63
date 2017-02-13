@@ -28,6 +28,9 @@
     messagingSenderId: "946578632705"
   };
   firebase.initializeApp(config);
+  window.onload = function(){
+      window.lecturify = new Lecturify();
+  };
 </script>
 <script src="../script/mainScript.js"></script>
 </body>
