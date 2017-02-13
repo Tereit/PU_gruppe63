@@ -1,4 +1,5 @@
 body {
+    font-family: "Century Gothic";
 }
 
 #topContainer {
@@ -31,6 +32,10 @@ footer {
 #lecturifyText {
     position: absolute;
     color: #FFFFFF;
-    font-family: "Century Gothic";
     font-size: 3.1em;
+}
+
+.sectionOverhead {
+    font-weight: bold;
+    font-size: 2em;
 }
