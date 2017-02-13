@@ -48,23 +48,5 @@
 </footer>
 <script src="../script/mainScript.js"></script>
 <script src="../script/userInterface.js"></script>
-<script>
-    var text = document.getElementById("lecturifyText");
-    var topContainer = document.getElementById("topContainer");
-    function scrollEvent() {
-        window.addEventListener('scroll', function(){
-            var distanceY = window.pageYOffset;
-            if (distanceY > 100) {
-                topContainer.style.width = "3.5em";
-                text.innerHTML="☰";
-            } else {
-                topContainer.style.width = 100-(distanceY*0.9)+"%";
-                text.innerHTML="Lecturify";
-            }
-        });
-    }
-    scrollEvent();
-</script>
-
 </body>
 </html>

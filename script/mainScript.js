@@ -40,4 +40,21 @@ Lecturify.prototype.slowDown = function() {
 
 window.onload = function(){
     window.lecturify = new Lecturify();
+    scrollEvent();
 };
+
+//martin: makes the scroll effect of the topContainer
+var text = document.getElementById("lecturifyText");
+var topContainer = document.getElementById("topContainer");
+function scrollEvent() {
+    window.addEventListener('scroll', function(){
+        var distanceY = window.pageYOffset;
+        if (distanceY > 100) {
+            topContainer.style.width = "3.5em";
+            text.innerHTML="☰";
+        } else {
+            topContainer.style.width = 100-(distanceY*0.9)+"%";
+            text.innerHTML="Lecturify";
+        }
+    });
+}
