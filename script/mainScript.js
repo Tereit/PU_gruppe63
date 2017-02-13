@@ -6,7 +6,11 @@
 
 function Lecturify() {
 	
+	this.paceUp = document.getElementById('');
+	this.paceDown = document.getElementById('');
 	
+	this.paceUp.addEventListener('click', this.speedUp());
+	this.paceDown.addEventListener('click', this.speedDown());
 	
 	this.initFirebase();
 }
@@ -16,4 +20,12 @@ Lecturify.prototype.initFirebase = function() {
 	this.auth = firebase.auth();
 	this.database = firebase.database();
 	this.storage = firebase.storage();
+};
+
+Lecturify.prototype.speedUp = function() {
+	
+};
+
+Lecturify.prototype.slowDown = function() {
+	
 };
