@@ -9,8 +9,10 @@ function Lecturify() {
 
     this.user = document.getElementById("user");
     this.pass = document.getElementById("pass");
+    this.btnLogin = document.getElementById("btnLogin");
 
   //  this.paceUp.addEventListener('click', this.speedUp);
+    this.btnLogin.addEventListener("click", this.onLogin);
 }
 
 Lecturify.prototype.initFirebase = function() {
@@ -19,6 +21,10 @@ Lecturify.prototype.initFirebase = function() {
     this.database = firebase.database();
     this.storage = firebase.storage();
 };
+
+Lecturify.prototype.onLogin = function(){
+  console.log("kjører")
+}
 
 Lecturify.prototype.speedUp = function() {
     firebase.database().ref("pace").transaction(function(tall){
