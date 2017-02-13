@@ -10,11 +10,11 @@ firebase.initializeApp({
 })
 
 var dbRef = firebase.database().ref("meldinger");
-var messagesRef = dbRef.child("random"):
+var messagesRef = dbRef.child("random");
 var messageRef = messagesRef.push();
 
   messageRef.set({
-    navn: Kjetil Vaagen,
+    navn: "Kjetil Vaagen",
     alder: 20,
     kul: JAAAA,
   });
