@@ -1,6 +1,7 @@
 QUnit.test( "User story 1 tests", function( assert ) {
 	function getPace() {
-		firebase.database.ref("pace").on("value", function(snapshot) {
+		firebase.database.ref("lecturify/subjects/algdat/lecture1/pace").on("value", function(snapshot) {
+			console.log(snapshot.val());
 			return snapshot.val();
 		});
 	}

@@ -4,40 +4,6 @@
 
 //'use strict';
 
-function Lecturify() {
-    this.paceUp = document.getElementById("increasePace");
-    this.paceDown = document.getElementById("decreasePace");
-    this.paceUp.addEventListener('click', this.speedUp);
-    this.paceDown.addEventListener('click', this.slowDown);
-
-    //this.btnLogin = document.getElementById("btnLogin");
-    //this.R_btnLogin = document.getElementById("R_btnLogin");
-
-    //this.btnLogin.addEventListener("click", this.onLogin);
-    //this.R_btnLogin.addEventListener("click", this.onRegister);
-};
-
-
-
-Lecturify.prototype.speedUp = function() {
-    firebase.database().ref("pace").transaction(function(tall){
-        if(tall){
-            tall++;
-        }
-        return tall;
-    })
-};
-
-Lecturify.prototype.slowDown = function() {
-    firebase.database().ref("pace").transaction(function(tall){
-        if(tall){
-            tall--;
-        }
-        return tall;
-    })
-};
-
-
 //martin: makes the scroll effect of the topContainer
 var text = document.getElementById("lecturifyText");
 var topContainer = document.getElementById("topContainer");
@@ -67,10 +33,6 @@ function init() {
     scrollEvent();
 
 }
-
-window.onload = function() {
-	this.lecturify = new Lecturify();
-};
 
 function changeToLecture() {
     document.getElementById("lectureFeed").style.display="block";
