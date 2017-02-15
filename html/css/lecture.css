@@ -20,7 +20,25 @@
     height: 100%;
 }
 #upperMain {
-    height: 100%;
+    width: 100%;
+}
+
+#lectureFeed {
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 10;
+    background-color: rgba(150, 150, 150, .5);
+    left:0;
+}
+#lectureContent {
+    position: fixed;
+    width: 90vw;
+    height: 90vh;
+    margin-left: 5vw;
+    margin-top: 2vh;
+    background-color: #fff;
 }
 
 footer {
