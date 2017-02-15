@@ -1,12 +1,9 @@
 function Lecturify() {
-    this.paceUp = document.getElementById("increasePace");
-    this.paceDown = document.getElementById("decreasePace");
-    this.paceUp.addEventListener('click', this.speedUp);
-    this.paceDown.addEventListener('click', this.slowDown);
+    
 };
 
-Lecturify.prototype.speedUp = function() {
-    firebase.database().ref("pace").transaction(function(tall){
+Lecturify.prototype.speedUp = function(ref) {
+    firebase.database().ref(ref).transaction(function(tall){
         if(tall){
             tall++;
         }
@@ -14,15 +11,11 @@ Lecturify.prototype.speedUp = function() {
     })
 };
 
-Lecturify.prototype.slowDown = function() {
-    firebase.database().ref("pace").transaction(function(tall){
+Lecturify.prototype.slowDown = function(ref) {
+    firebase.database().ref(ref).transaction(function(tall){
         if(tall){
             tall--;
         }
         return tall;
     })
-};
-
-window.onload = function() {
-	this.lecturify = new Lecturify();
 };

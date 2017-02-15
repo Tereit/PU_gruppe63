@@ -37,3 +37,11 @@ function init() {
 function changeToLecture() {
     document.getElementById("lectureFeed").style.display="block";
 }
+
+window.onload = function() {
+	this.lecturify = new Lecturify();
+	this.paceUp = document.getElementById("increasePace");
+    this.paceDown = document.getElementById("decreasePace");
+    this.paceUp.addEventListener('click', lecturify.speedUp);
+    this.paceDown.addEventListener('click', lecturify.slowDown);
+}
