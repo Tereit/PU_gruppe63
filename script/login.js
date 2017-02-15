@@ -1,22 +1,25 @@
-function checkIfProfessorExist(username){
-	professorUsernames = [];
-	db = firebase.database().ref();
-	db.child("users/professors").once("value").then(function(snapshot){
+function checkIfProfessorExist(user, pass){
+	 professorUsernames = [];
+	 db = firebase.database().ref();
+	 db.child("users/professors").once("value").then(function(snapshot){
 		var object = snapshot.val();
 		for (var key in object){
-			professorUsernames.push(object[key].email)
+			professorUsernames.push(object[key].username)
+		}
+		if(professorUsernames.indexOf(user) != -1){
+			console.log("true professor")
+			onLogin(user, pass);
+		}
+		else{
+			return false;
 		}
 	})
-	if(professorUsernames.indexOf(username) != -1){
-		return true;
-	}
-	else{
-		return false;
-	}
 };
 
 function onLogin(user, pass){
-	if (user != "" || pass != ""){
+	console.log(user)
+	console.log(pass)
+	if (user == "" || pass == ""){
 		alert("Invalid information");
 		window.location.reload();
 	}
@@ -25,8 +28,9 @@ function onLogin(user, pass){
 		window.location.reload();
 	}
 	else{
-		firebase.auth().signInWithEmailAndPassword(this.user, this.pass).catch(
-		error => console.log(error.message));
+		console.log("DU ER LOGGET INN")
+		firebase.auth().signInWithEmailAndPassword(user, pass).catch(
+		error => alert(error.message));
 	}
 }
 
@@ -38,15 +42,8 @@ function onLoginAction() {
 		if(!user.includes("@stud.ntnu.no")){
 			user = user + "@stud.ntnu.no";
 		}
-
 		if(professorRadio.checked){
-			if(checkIfProfessorExist(user)){
-				onLogin(user, pass);
-			}
-			else{
-				alert("You are not an professor!")
-				window.location.reload();
-			}
+			checkIfProfessorExist(user, pass)
 		}
 		else{
 			onLogin(user, pass);
@@ -70,7 +67,6 @@ function onRegister() {
 
 function updateUser(user) {
 	  var student1 = document.getElementById("r1");
-	  var student2 = document.getElementById("radio1");
 	  var dbRef = firebase.database().ref();
 	  if(user){
 	    if(student1.checked || student2.checked){
@@ -87,30 +83,8 @@ function updateUser(user) {
 	    else{
 	    console.log("not logged in");
 	  }
-};
+}
 
-
-//setter opp struktur for databasen -- Skal ikke kjøres med mindre databasen trenger struktur!
-function databaseStructure() {
-  console.log("kjører");
-  var lecture = "subjects/algdat/lecture1";
-  var questions = "messages/questions";
-  var answer = "messages/answers";
-
-  firebase.database().ref().child(lecture).set({
-    navn: "random",
-    id: "kult",
-    currentUsers: 100,
-		pace: 50,
-  })
-  firebase.database().ref().child(questions).set({
-    question: "Hvor kul er kjetil",
-  })
-  firebase.database().ref().child(answer).set({
-    answer: "martin er kjempe teit",
-  })
-
-};
 
 window.onload = function() {
 	  this.btnLogin = document.getElementById("btnLogin");
