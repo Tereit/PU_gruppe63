@@ -2,8 +2,8 @@ function Lecturify() {
     
 };
 
-Lecturify.prototype.speedUp = function() {
-    firebase.database().ref("pace").transaction(function(tall){
+Lecturify.prototype.speedUp = function(ref) {
+    firebase.database().ref(ref).transaction(function(tall){
         if(tall){
             tall++;
         }
@@ -11,8 +11,8 @@ Lecturify.prototype.speedUp = function() {
     })
 };
 
-Lecturify.prototype.slowDown = function() {
-    firebase.database().ref("pace").transaction(function(tall){
+Lecturify.prototype.slowDown = function(ref) {
+    firebase.database().ref(ref).transaction(function(tall){
         if(tall){
             tall--;
         }
