@@ -9,7 +9,7 @@
 <body>
   <div class="login-wrap">
 	<div class="login-html">
-		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-1" type="radio" name="tab" class="sign-in" onchange="change()" checked><label for="tab-1" class="tab">Sign In</label>
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
 		<div class="login-form">
 			<div class="sign-in-htm">
@@ -45,10 +45,6 @@
 					<input id="R_pass" type="password" class="input" data-type="password">
 				</div>
         <div class="group">
-          <input type="radio" id="radio1" name="rr" checked=true class="radio"/>
-          <label for="radio1"><span></span>Student</label>
-          <input type="radio" id="radio2" name="rr" class="radio"/>
-          <label for="radio2"><span></span>Professor</label>
         </div>
 				<div class="group">
 					<input id="R_btnLogin" type="submit" class="button" value="Sign Up">
@@ -61,7 +57,6 @@
 		</div>
 	</div>
 </div>
-
 <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
 <script src="../script/firebaseAuth.js"></script>
 <script src="../script/mainScript.js"></script>
