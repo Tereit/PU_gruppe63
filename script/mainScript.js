@@ -104,22 +104,21 @@ Lecturify.prototype.slowDown = function() {
 var text = document.getElementById("lecturifyText");
 var topContainer = document.getElementById("topContainer");
 var upperMainRect = document.getElementById("upperMain").getBoundingClientRect();
-console.log(upperMainRect.bottom);
 //document.getElementById("upperMain").style.boxShadow="0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)";
 function scrollEvent() {
     window.addEventListener('scroll', function(){
         var distanceY = window.pageYOffset;
-        if (distanceY > 100) {
+        if (distanceY > 100 && distanceY+200 < upperMainRect.bottom) {
             topContainer.style.width = "3.5em";
             text.innerHTML="☰";
-            //console.log(distanceY+200)
-            //document.getElementById("upperMain").style.boxShadow="0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)";
         } else if(distanceY+200 > upperMainRect.bottom) {
-            console.log("hurra");
-            //document.getElementById("lowerMain").style.boxShadow="0 0 15px 10px rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)";
+            document.getElementById("lowerMain").style.boxShadow="0 0 15px 10px rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)";
+            document.getElementById("upperMain").style.boxShadow="0 12px 15px 0 rgba(0,0,0,0),0 17px 50px 0 rgba(0,0,0,0)";
         } else {
             topContainer.style.width = 100-(distanceY*0.9)+"%";
             text.innerHTML="Lecturify";
+            document.getElementById("lowerMain").style.boxShadow="0 0 15px 10px rgba(0,0,0,0),0 17px 50px 0 rgba(0,0,0,0)";
+            document.getElementById("upperMain").style.boxShadow="0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)";
         }
     });
 }
