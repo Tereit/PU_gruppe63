@@ -6,6 +6,7 @@
     z-index: 10;
     background-color: rgba(150, 150, 150, .5);
     left:0;
+    top:0;
 }
 #lectureContent {
     position: fixed;
@@ -20,6 +21,11 @@
     float: left;
     height: 100%;
     width: 80%;
+}
+#lowerMain {
+    cursor: pointer;
+}
+#lowerMain:hover {
 
 }
 
