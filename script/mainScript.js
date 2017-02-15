@@ -31,7 +31,6 @@ scrollEvent();
 
 function init() {
     scrollEvent();
-
 }
 
 function changeToLecture() {
@@ -40,6 +39,10 @@ function changeToLecture() {
 
 window.onload = function() {
 	this.lecturify = new Lecturify();
+  var uid = sessionStorage.bruker
+  var type = sessionStorage.userType
+  console.log(uid)
+  console.log(type)
 	this.paceUp = document.getElementById("increasePace");
     this.paceDown = document.getElementById("decreasePace");
     this.paceUp.addEventListener('click', lecturify.speedUp);

@@ -66,15 +66,18 @@ function onRegister() {
 };
 
 function updateUser(user) {
+		sessionStorage.bruker = JSON.stringify(user.uid);
 	  var student1 = document.getElementById("r1");
 	  var dbRef = firebase.database().ref();
 	  if(user){
 	    if(student1.checked || student2.checked){
+				sessionStorage.userType = "student"
 	      dbRef.child("users/students/" + user.uid).set({
 	        username: user.email
 	      }).then(window.location.href = "../html/main.html");
 	    }
 	    else{
+				sessionStorage.userType = "professor"
 	      dbRef.child("users/professors/" + user.uid).set({
 	        username: user.email
 	      }).then(window.location.href = "../html/main.html");
