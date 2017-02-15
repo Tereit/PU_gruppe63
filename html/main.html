@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Lecturify</title>
-    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'>
-    <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+<meta charset="UTF-8">
+<title>Lecturify</title>
+<link rel='stylesheet prefetch'
+	href='http://fonts.googleapis.com/css?family=Open+Sans:600'>
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
-<div id="topContainer">
-    <div id="lecturifyText">Lecturify</div>
-</div>
-<div id="mainContainer">
-    <div id="upperMain">
-        <div id="newsFeed">
-
-        </div>
-        <div id="subjectsBar">
-            <a style="font-size: 20px; font-weight: bold; margin-left: 2px">Available subjects</a>
-        </div>
-    </div>
-    <div id="lowerMain"></div>
-</div>
-<footer>
-
-</footer>
-<script src="../script/mainScript.js"></script>
+	<div id="topContainer">
+		<div id="lecturifyText">Lecturify</div>
+	</div>
+	<div id="mainContainer">
+		<div id="upperMain">
+			<div id="newsFeed">
+				<button id="increasePace">Speed up!</button>
+				<button id="decreasePace">Slow down!</button>
+			</div>
+			<div id="subjectsBar">
+				<a style="font-size: 20px; font-weight: bold; margin-left: 2px">Available
+					subjects</a>
+			</div>
+		</div>
+		<div id="lowerMain"></div>
+	</div>
+	<footer> </footer>
+	<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+	<script src="../script/firebaseAuth.js"></script>
+	<script src="../script/mainScript.js"></script>
 </body>
 </html>
