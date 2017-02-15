@@ -66,7 +66,6 @@ window.onload = function() {
 
     this.btnLogin.addEventListener("click", this.onLogin);
     this.R_btnLogin.addEventListener("click", this.onRegister);
-		this.databaseStructure();
     // SJEKKER OM BRUKER TILSTANDEN HAR ENDRET SEG
     // Hvis du gitt ut av nettsiden uten å logge inn, kommer du automatisk inn
     firebase.auth().onAuthStateChanged(user => {
