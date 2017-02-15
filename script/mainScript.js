@@ -71,3 +71,7 @@ function init() {
 window.onload = function() {
 	this.lecturify = new Lecturify();
 };
+
+function changeToLecture() {
+    document.getElementById("lectureFeed").style.display="block";
+}
