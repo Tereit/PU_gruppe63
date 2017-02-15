@@ -1,8 +1,5 @@
 function Lecturify() {
-    this.paceUp = document.getElementById("increasePace");
-    this.paceDown = document.getElementById("decreasePace");
-    this.paceUp.addEventListener('click', this.speedUp);
-    this.paceDown.addEventListener('click', this.slowDown);
+    
 };
 
 Lecturify.prototype.speedUp = function() {
@@ -21,8 +18,4 @@ Lecturify.prototype.slowDown = function() {
         }
         return tall;
     })
-};
-
-window.onload = function() {
-	this.lecturify = new Lecturify();
 };
