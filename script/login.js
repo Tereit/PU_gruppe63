@@ -35,6 +35,9 @@ function onLoginAction() {
 		var user = document.getElementById("user").value;
 	  var pass = document.getElementById("pass").value;
 		var professorRadio = document.getElementById("r2");
+		if(!user.includes("@stud.ntnu.no")){
+			user = user + "@stud.ntnu.no";
+		}
 
 		if(professorRadio.checked){
 			if(checkIfProfessorExist(user)){
