@@ -101,9 +101,16 @@ var topContainer = document.getElementById("topContainer");
 function scrollEvent() {
     window.addEventListener('scroll', function(){
         var distanceY = window.pageYOffset;
+        document.getElementById("upperMain").style.boxShadow="0 0 5px #000000";
+        var mainContainerRect = document.getElementById("upperMain").getBoundingClientRect();
         if (distanceY > 100) {
             topContainer.style.width = "3.5em";
             text.innerHTML="☰";
+            document.getElementById("upperMain").style["boxShadow"]="0 0 5px #000000";
+                //"0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)";
+        } else if(distanceY > mainContainerRect.bottom-300) {
+            console.log("kult");
+            document.getElementById("upperMain").style="box-shadow: 0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)";
         } else {
             topContainer.style.width = 100-(distanceY*0.9)+"%";
             text.innerHTML="Lecturify";
