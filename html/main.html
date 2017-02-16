@@ -10,8 +10,20 @@
 <body>
 <div id="lectureFeed">
 	<a id="exit" onclick="exitLecture()">X</a>
-	<div id="lectureContent">
+	<div id="lectureContent" class="lecture">
+		<div id="lectureTopContainer">
 
+
+		<div id="paceControll">
+			<button id="slowBtn" onclick=paceController("s")>To slow</button>
+			<div id="pcIndicator">
+				<a>Pace controll</a>
+				<img src="images/paceControll.png">
+				<div id="indicator"></div>
+			</div>
+			<button id="fastBtn" onclick=paceController("f")>To fast</button>
+		</div>
+		</div>
 	</div>
 </div>
 	<div id="topContainer">
@@ -28,7 +40,7 @@
 					subjects</a>
 			</div>
 		</div>
-		<div id="lowerMain" onclick="changeToLecture()">
+		<div id="lowerMain" class="lecture" onclick="changeToLecture()">
 			<div id="fullscreenInfo">Click box for fullscreen</div>
 		</div>
 	</div>

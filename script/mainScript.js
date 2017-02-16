@@ -3,7 +3,7 @@
  */
 
 //'use strict';
-
+init();
 //martin: makes the scroll effect of the topContainer
 var text = document.getElementById("lecturifyText");
 var topContainer = document.getElementById("topContainer");
@@ -26,8 +26,21 @@ function scrollEvent() {
         }
     });
 }
-scrollEvent();
 
+//martin: write the average between 0-10 and change the paceControll bar. For lecturer??
+/* TODO(fix variables)
+var paceInt = 0;
+var paceAnswers = 0;
+function paceController(pace) {
+    if(pace==="f") {
+        paceInt++;
+    } else {
+        paceInt--;
+    }
+    paceAnswers++;
+    document.getElementById("indicator").style.left=(paceInt/paceAnswers)*10+52.5+"%";
+}
+*/
 
 function init() {
     scrollEvent();
