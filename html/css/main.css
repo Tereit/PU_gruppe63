@@ -26,13 +26,33 @@
     cursor: pointer;
 }
 #lowerMain:hover {
-
+    border: 1px solid black;
 }
 
 #subjectsBar {
     height: 100%;
     display: inline-block;
     box-shadow: -8px 0px 10px rgba(0, 0, 0, .5);
+}
+
+#fullscreenInfo {
+    position: absolute;
+    right: 0;
+    background-color: red;
+    z-index: 9;
+    padding: 12px;
+    font-size: 12px;
+}
+#exit {
+    position: fixed;
+    font-size: 40px;
+    right: 1vw;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
 }
 
 @media (max-width: 700px) {

@@ -18,7 +18,7 @@ function scrollEvent() {
         } else if(distanceY+200 > upperMainRect.bottom) {
             document.getElementById("lowerMain").style.boxShadow="0 0 15px 10px rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)";
             document.getElementById("upperMain").style.boxShadow="0 12px 15px 0 rgba(0,0,0,0),0 17px 50px 0 rgba(0,0,0,0)";
-        } else {
+        } else if(distanceY<100){
             topContainer.style.width = 100-(distanceY*0.9)+"%";
             text.innerHTML="Lecturify";
             document.getElementById("lowerMain").style.boxShadow="0 0 15px 10px rgba(0,0,0,0),0 17px 50px 0 rgba(0,0,0,0)";
@@ -35,6 +35,9 @@ function init() {
 
 function changeToLecture() {
     document.getElementById("lectureFeed").style.display="block";
+}
+function exitLecture() {
+    document.getElementById("lectureFeed").style.display="none";
 }
 
 window.onload = function() {
