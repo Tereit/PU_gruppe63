@@ -17,20 +17,34 @@ QUnit.test("User story 1 tests", function(assert) {
 });
 
 QUnit.test("User story 2 tests", function(assert) {
-	//TODO: asynchronous data causing issues for the test
-	var done = assert.async();
+	var done1 = assert.async();
+	var done2 = assert.async();
 	var testRef = firebase.database().ref();
 	var testUsername = "martin@stud.ntnu.no";
+	var testUsername2 = "bla@bla.bla.no";
+	var result = false;
+	var result2 = false;
 	function checkUser() {
 		testRef.child("users/professors").once('value').then(function(snapshot) {
 			snapshot.forEach(function(childSnapshot) {
 				if(childSnapshot.val().username === testUsername) {
-					assert.ok(true);
-					done();
+					result = true;
+					return;
+				}
+				if(childSnapshot.val().username === testUsername2) {
+					result2 = true;
 				}
 			});
+			assert.ok(result);
+			done1();
+			assert.notOk(result2);
+			done2();
 		}, function(error) {
+			console.log(error);
 			assert.ok(false);
+			done1();
+			assert.notOk(true);
+			done2();
 		});
 	}
 	checkUser();
