@@ -1,17 +1,13 @@
 function checkIfProfessorExist(user, pass){
-	 professorUsernames = [];
 	 db = firebase.database().ref();
 	 db.child("users/professors").once("value").then(function(snapshot){
-		var object = snapshot.val();
-		for (var key in object){
-			professorUsernames.push(object[key].username)
-		}
-		if(professorUsernames.indexOf(user) != -1){
-			console.log("true professor")
-			onLogin(user, pass);
-		}
-		else{
-			return false;
+		console.log(snapshot.val())
+		for (var key in snapshot.val()){
+			console.log(snapshot.val()[key].username)
+			if(user == snapshot.val()[key].username){
+				console.log("true professor!");
+				onLogin(user, pass);
+			}
 		}
 	})
 };
@@ -66,11 +62,11 @@ function onRegister() {
 };
 
 function updateUser(user) {
-		sessionStorage.bruker = JSON.stringify(user.uid);
 	  var student1 = document.getElementById("r1");
 	  var dbRef = firebase.database().ref();
 	  if(user){
-	    if(student1.checked || student2.checked){
+			sessionStorage.bruker = JSON.stringify(user.uid);
+	    if(student1.checked){
 				sessionStorage.userType = "student"
 	      dbRef.child("users/students/" + user.uid).set({
 	        username: user.email
@@ -80,7 +76,7 @@ function updateUser(user) {
 				sessionStorage.userType = "professor"
 	      dbRef.child("users/professors/" + user.uid).set({
 	        username: user.email
-	      }).then(window.location.href = "../html/main.html");
+	      }).then(window.location.href = "../html/professorMain.html");
 	    }
 	    }
 	    else{
