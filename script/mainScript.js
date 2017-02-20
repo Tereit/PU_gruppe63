@@ -28,7 +28,7 @@ function scrollEvent() {
 }
 
 //martin: write the average between 0-10 and change the paceControll bar. For lecturer??
-/* TODO(fix variables)
+/* TODO(fix calculations)
 var paceInt = 0;
 var paceAnswers = 0;
 function paceController(pace) {
