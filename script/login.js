@@ -76,7 +76,7 @@ function updateUser(user) {
 				sessionStorage.userType = "professor"
 	      dbRef.child("users/professors/" + user.uid).set({
 	        username: user.email
-	      }).then(window.location.href = "../html/professorMain.html");
+	      }).then(window.location.href = "../html/professor.html");
 	    }
 	    }
 	    else{
