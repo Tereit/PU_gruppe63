@@ -31,16 +31,26 @@ function fetchLectures(user){
 	}
 }
 
+//Searches for a subject based on a subject ID to check for its existence
+function verifySubject(subjectId){
+	var dbRef = firebase.database().ref();
+	dbRef.child("subjects").once("value", function(snapshot){
+		snapshot.forEach(function(childsnap){
+			if(childsnap.val().subjectId == subjectId){
+				return true;
+			}
+		})
+	})
+	return false;
+}
+
 function trialFunction(){
 	var dbRef = firebase.database().ref();
 	var arrayOfLectures = [];
-	dbRef.child("users/students/X3SJ2TMw3yMwz04fPoxSSuZCxW13/subscriptions").once("value", function(snapshot){
+	var studentId = "X3SJ2TMw3yMwz04fPoxSSuZCxW13"
+	dbRef.child("users/students/" + studentId + "/subscriptions").once("value", function(snapshot){
 		var out = "";
-		console.log("#1");
-		console.log(snapshot.val());
 		snapshot.forEach(function(childSnap){
-			console.log("#2");
-			console.log(childSnap.val());
 			out += childSnap.val().id + "\n";
 			var td = document.createElement("TD");
 			var tr = document.createElement("TR");
