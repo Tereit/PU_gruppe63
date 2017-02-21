@@ -119,17 +119,18 @@ body {
 #newsFeed {
     float: left;
     height: 100%;
-    width: 80%;
+    width: 63vw;
 }
 #lowerMain {
     cursor: pointer;
 }
 #lowerMain:hover {
-    border: 1px solid black;
+    border: 1px solid #000;
 }
 
 #subjectsBar {
     height: 100%;
+    width: 14vw;
     display: inline-block;
     box-shadow: -8px 0px 10px rgba(0, 0, 0, .5);
 }

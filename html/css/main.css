@@ -11,8 +11,8 @@
 
 /*martin: pace controll field end*/
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
     #newsFeed {
-        width: 70%;
+        width: 60vw;
     }
 }
