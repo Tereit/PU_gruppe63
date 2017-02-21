@@ -4,6 +4,8 @@
 
 //'use strict';
 init();
+//Firebase ref
+var ref = firebase.database().ref();
 //martin: makes the scroll effect of the topContainer
 var text = document.getElementById("lecturifyText");
 var topContainer = document.getElementById("topContainer");
@@ -26,6 +28,50 @@ function scrollEvent() {
         }
     });
 }
+
+//Legger til generelle firebase funksjoner som kommer til å bli brukt flere ganger
+
+//Professor: Lage nytt fag
+//code er en unik kode for faget
+function createSubject(subjectName, uid){
+  ref.child("subjects/" + subjectName).set({
+    id: "unknown",
+  })
+  ref.child("users/professors/" + uid + "/subscriptions").push({
+    id: subjectName
+  })
+}
+
+
+
+//Hente alle fag som bruker følger
+//type skal være en string professor eller student. bruk sessionStorage
+/*
+function getSubscribedSubjects(uid, type){
+  var fag = []
+  if(type = "professor"){
+    ref.child("users/professors/" + uid + "/subscriptions").once("value").then(function(snapshot){
+      object = snapshot.val()
+      for (var key in object){
+        fag.push(object[key].fag)
+      }
+      return fag
+    })
+  }
+  else if(type = "student"){
+    ref.child("users/students/" + uid + "/subscriptions").once("value").then(function(snapshot){
+      object = snapshot.val()
+      for (var key in object){
+        fag.push(object[key].fag)
+      }
+      return fag
+    })
+  }
+  else{
+    return "Invalid user type";
+  }
+}
+*/
 
 //martin: write the average between 0-10 and change the paceControll bar. For lecturer??
 /* TODO(fix calculations)
