@@ -1,19 +1,14 @@
 /*martin: pace control buttons*/
-#slowBtn {
+.paceBtn {
     display: inline-block;
-    background-color: #f00;
     width: 7vw;
-    height: 100%;
+    height: 101%;
     border: none;
+    color: #fff;
+    background: rgba(0, 0, 0, .2);
     cursor: pointer;
 }
-#fastBtn {
-    background-color: #0f0;
-    height: 100%;
-    width: 7vw;
-    border: none;
-    cursor: pointer;
-}
+
 /*martin: pace controll field end*/
 
 @media (max-width: 700px) {
