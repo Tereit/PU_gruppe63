@@ -53,6 +53,7 @@ function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }
 
+/*
 window.onload = function() {
 	this.lecturify = new Lecturify();
   var uid = sessionStorage.bruker
@@ -64,3 +65,4 @@ window.onload = function() {
     this.paceUp.addEventListener('click', lecturify.speedUp);
     this.paceDown.addEventListener('click', lecturify.slowDown);
 }
+*/
