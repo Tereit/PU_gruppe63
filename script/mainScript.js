@@ -68,6 +68,15 @@ function getAllSubjects(callback){
   })
 }
 
+//Get username of user
+function getUserName(uid, type, callback){
+  ref.child("users/" + type + "/" + uid + "/username").once("value", function(name){
+    if(name.val()){
+      callback(name.val())
+    }
+  })
+}
+
 
 //martin: write the average between 0-10 and change the paceControll bar. For lecturer??
 /* TODO(fix calculations)

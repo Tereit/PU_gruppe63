@@ -1,23 +1,28 @@
 
 console.log(sessionStorage.bruker)
 
-getAllSubjects(getAllSubjectsCallback)
+currentSubjects = []
+
 subjectListener(sessionStorage.bruker)
+getUserName(sessionStorage.bruker, "students", getUserNamerCallback)
+getAllSubjects(getAllSubjectsCallback)
 //LISTENER FOR FAG SOM BRUKER HAR SUBCRIBED TIL
 function subjectListener(uid){
     var liste = document.getElementById("subjectList");
     ref = firebase.database().ref();
     ref.child("users/students/" + uid + "/subscriptions").on("value", function(snapshot){
-        var fag = []
-        document.getElementById("subscribeLoader").style.display="none";
+        //Martin: Lager error. Orker ikke å fikse nå
+        //document.getElementById("subscribeLoader").style.display="none";
+        currentSubjects = []
+        liste.innerHTML = ""
         var object = snapshot.val()
         for (var key in object){
-            fag.push(object[key].id)
+            currentSubjects.push(object[key].id)
         }
-        if(fag.length > 1){
-            for(var i = 0; i < fag.length; i++){
+        if(currentSubjects.length > 0){
+            for(var i = 0; i < currentSubjects.length; i++){
                 var liElement = document.createElement("li")
-                liElement.innerHTML = fag[i]
+                liElement.innerHTML = currentSubjects[i]
                 liste.appendChild(liElement)
             }
         } else {
@@ -27,17 +32,24 @@ function subjectListener(uid){
     })
 }
 
-function filterOutAlreadyUsedSubjects(fag){
-    var resultat = []
-    var elements = document.getElementById("subjectList").getElementsByTagName("li");
-    console.log(elements)
-    console.log(elements.length)
-    return [];
+function getUserNamerCallback(username){
+  navn = username.replace("@stud.ntnu.no", "")
+  alertOfChange("Welcome, " + navn + "!")
+}
+
+function filterOutAlreadyUsedSubjects(subjects){
+  for (var i = 0; i < currentSubjects.length; i++){
+    for(var k = 0; k < subjects.length; k++){
+      if(currentSubjects[i] == subjects[k]){
+        subjects.splice(subjects.indexOf(subjects[k]), 1)
+      }
+    }
+  }
+  return subjects;
 }
 
 function getAllSubjectsCallback(subjects){
     if(subjects.length > 0){
-        console.log("subject>0");
         var fag = filterOutAlreadyUsedSubjects(subjects);
         if (fag.length<1) {
             alertOfChange("There are no subjects to subscribe to.")
@@ -77,6 +89,14 @@ function alertOfChange(message) {
 
 function testAllerting(fag) {
     //TODO(move this up and use this. instead of fag)
+    liste = document.getElementById("allSubjects")
     addSubscriptionToUser(sessionStorage.bruker, fag, "students")
+    items = liste.childNodes;
+    console.log(items[0].innerHTML)
+    for(var i = 0; i < items.length; i++){
+      if(items[i].innerHTML == fag){
+        liste.removeChild(items[i])
+      }
+    }
     //TODO(alert og change if this is successful)
 }
