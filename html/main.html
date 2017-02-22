@@ -3,25 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Lecturify</title>
-<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'>
-<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
 <div id="lectureFeed">
 	<a id="exit" onclick="exitLecture()">X</a>
 	<div id="lectureContent" class="lecture">
 		<div id="lectureTopContainer">
-
-
+			<a id="subjectName">Subject name/lecture name</a>
 		<div id="paceControll">
-			<button id="slowBtn" onclick=paceController("s")>To slow</button>
+			<button class="paceBtn" id="slowBtn" onclick=paceController("s")>To slow</button>
 			<div id="pcIndicator">
 				<a>Pace controll</a>
-				<img src="images/paceControll.png">
+				<img src="images/wave.PNG">
 				<div id="indicator"></div>
 			</div>
-			<button id="fastBtn" onclick=paceController("f")>To fast</button>
+			<button class="paceBtn" id="fastBtn" onclick=paceController("f")>To fast</button>
 		</div>
 		</div>
 	</div>
@@ -36,12 +34,15 @@
 				<button id="decreasePace">Slow down!</button>
 			</div>
 			<div id="subjectsBar">
-				<a style="font-size: 20px; font-weight: bold; margin-left: 2px">Available
+				<a style="font-size: 2vw; font-weight: bold; margin-left: 0.1vw">Available
 					subjects</a>
 				<textarea id="searchSubjectId" style="resize:none" rows="1" cols="15" onclick="this.select(this.value)">Search subject</textarea>
 				<button onclick=searchForAndDisplaySubject(searchSubjectId.value)></button>
 				<textbox id="searchFailureId" rows="1" cols="40"></textbox>
+				<ul id="subjectList">
+				</ul>
 			</div>
+
 		</div>
 		<div id="lowerMain" class="lecture" onclick="changeToLecture()">
 			<div id="fullscreenInfo">Click box for fullscreen</div>
@@ -51,6 +52,7 @@
 	<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
 	<script src="../script/firebaseAuth.js"></script>
 	<script src="../script/mainScript.js"></script>
+	<script src="../script/student.js"></script>
 	<script src="../script/lecturify.js"></script>
 	<script src="../script/subscriptionLogic.js"></script>
 </body>

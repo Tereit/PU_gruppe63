@@ -13,8 +13,6 @@ function checkIfProfessorExist(user, pass){
 };
 
 function onLogin(user, pass){
-	console.log(user)
-	console.log(pass)
 	if (user == "" || pass == ""){
 		alert("Invalid information");
 		window.location.reload();
@@ -30,15 +28,26 @@ function onLogin(user, pass){
 	}
 }
 
+function setSessionStorage(){
+	var student1 = document.getElementById("r1");
+	if(student1.checked){
+		sessionStorage.userType = "student";
+	}
+	else{
+		sessionStorage.userType = "professor";
+	}
+}
+
 
 function onLoginAction() {
+		setSessionStorage()
 		var user = document.getElementById("user").value;
 	  var pass = document.getElementById("pass").value;
 		var professorRadio = document.getElementById("r2");
 		if(!user.includes("@stud.ntnu.no")){
 			user = user + "@stud.ntnu.no";
 		}
-		if(professorRadio.checked){
+		if(sessionStorage.userType == "professor"){
 			checkIfProfessorExist(user, pass)
 		}
 		else{
@@ -47,13 +56,14 @@ function onLoginAction() {
 };
 
 function onRegister() {
+		setSessionStorage();
 		var user = document.getElementById("R_user").value
 	  var pass = document.getElementById("R_pass").value
 		if(!user.includes("@stud.ntnu.no")){
 			user = user + "@stud.ntnu.no";
 		}
 	  if(user != "" || pass != "" || pass.length > 4){
-	    firebase.auth().createUserWithEmailAndPassword(this.user, this.pass).catch(
+	    firebase.auth().createUserWithEmailAndPassword(user, pass).catch(
 	      error => alert(error.message));
 	  }else{
 			window.location.reload();
@@ -62,26 +72,24 @@ function onRegister() {
 };
 
 function updateUser(user) {
-	  var student1 = document.getElementById("r1");
 	  var dbRef = firebase.database().ref();
 	  if(user){
 			sessionStorage.bruker = JSON.stringify(user.uid);
-	    if(student1.checked){
-				sessionStorage.userType = "student"
-	      dbRef.child("users/students/" + user.uid).set({
+	    if(sessionStorage.userType == "student"){
+	      dbRef.child("users/students/" + sessionStorage.bruker).set({
 	        username: user.email
 	      }).then(window.location.href = "../html/main.html");
 	    }
 	    else{
-				sessionStorage.userType = "professor"
-	      dbRef.child("users/professors/" + user.uid).set({
+	      dbRef.child("users/professors/" + sessionStorage.bruker).set({
 	        username: user.email
-	      }).then(window.location.href = "../html/professorMain.html");
+	      }).then(window.location.href = "../html/professor.html");
 	    }
 	    }
 	    else{
 	    console.log("not logged in");
 	  }
+
 }
 
 

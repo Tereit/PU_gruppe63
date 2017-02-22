@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Professor</title>
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="css/professor.css" />
+</head>
+<body>
+<div id="lectureFeed">
+    <a id="exit" onclick="exitLecture()">X</a>
+    <div id="lectureContent" class="lecture">
+        <div id="lectureTopContainer">
+            <div id="paceControll">
+                <div id="pcIndicator">
+                    <a>Pace controll</a>
+                    <img src="images/wave.PNG">
+                    <div id="indicator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="topContainer">
+    <div id="lecturifyText">Lecturify</div>
+</div>
+<div id="mainContainer">
+    <div id="upperMain">
+        <div id="newsFeed">
+
+        </div>
+        <div id="subjectsBar">
+            <a style="font-size: 20px; font-weight: bold; margin-left: 2px">Available subjects</a>
+            <ul id="subjectList">
+            </ul>
+            <div id="createSubject">
+                <a>Create new subject<br></a>
+                <input type="text" id="newSubjectName" placeholder="Subject name"><br>
+                <button onclick=addSubject()>Submit</button>
+            </div>
+        </div>
+    </div>
+    <div id="lowerMain" class="lecture" onclick="changeToLecture()">
+        <div id="fullscreenInfo">Click box for fullscreen</div>
+    </div>
+</div>
+<footer> </footer>
+
+
+<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+<script src="../script/firebaseAuth.js"></script>
+
+<script src="../script/mainScript.js"></script>
+<script src="../script/professor.js"></script>
+</body>
+</html>

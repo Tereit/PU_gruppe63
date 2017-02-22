@@ -6,10 +6,14 @@
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
 </head>
 <body>
+<div id="lectureFeed">
+
+</div>
 <div id="topContainer">
     <div id="lecturifyText">Lecturify</div>
 </div>
 <div id="mainContainer">
+    <div id="upperMain"></div>
     <div id="projectDescription">
         <p>TDT4140 is a project based subject in Computer Science 2nd grade at NTNU. We where devided into
         pseudorandom groups based on computing skills. We were informed that we would make a PekkaBot and,
@@ -46,7 +50,22 @@
 <footer>
 
 </footer>
+
+<script>
+    function loadSite() {
+        //document.getElementById("lectureFeed").style.display="block";
+        document.getElementById("mainContainer").innerHTML='<object type="text/html" data="lecture.html">';
+    }
+    loadSite();
+    /*
+     $(document).ready( function() {
+     document.getElementById("lectureFeed").style.display="block";
+     $("#lectureFeed").load("lecture.html");
+     });
+     */
+</script>
 <script src="../script/mainScript.js"></script>
 <script src="../script/userInterface.js"></script>
+
 </body>
 </html>

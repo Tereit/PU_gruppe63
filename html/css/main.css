@@ -1,121 +1,18 @@
-/*martin: window when entering lecture mode*******************/
-#lectureFeed {
-    /*display: none;*/
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    z-index: 10;
-    background-color: rgba(150, 150, 150, .5);
-    left:0;
-    top:0;
-}
-    #lectureContent {
-        position: fixed;
-        width: 90vw;
-        height: 95vh;
-        margin-left: 5vw;
-        margin-top: 2vh;
-        background-color: #fff;
-    }
-/*martin: end of lecture window*******************/
-
-/*martin: everything within lecture content ***********/
-#lectureTopContainer {
-    width: 100%;
-    height: 7.1vh;
-    background-color: #1161ee;
-}
-
-/*martin: pace controll field*/
-#paceControll {
-    position: absolute;
-    display: inline-flex;
+/*martin: pace control buttons*/
+.paceBtn {
+    display: inline-block;
+    width: 7vw;
+    height: 101%;
+    border: none;
     color: #fff;
-    height: 7vh;
-    width: 30vw;
-    left: 30vw;
-    text-align: center;
+    background: rgba(0, 0, 0, .2);
+    cursor: pointer;
 }
-    #slowBtn {
-        display: inline-block;
-        background-color: #f00;
-        width: 7vw;
-        height: 100%;
-        border: none;
-        cursor: pointer;
-    }
-    #fastBtn {
-        background-color: #0f0;
-        height: 100%;
-        width: 7vw;
-        border: none;
-        cursor: pointer;
-    }
 
-    #pcIndicator {
-        width: 15vw;
-    }
-        #paceControll img {
-            height: 4vh;
-            width: 100%;
-        }
-        #indicator {
-            position: relative;
-            height: 4vh;
-            width: 0.3vw;
-            border: 3px solid #000;
-            left: 47.5%;
-            top: -72%;
-        }
 /*martin: pace controll field end*/
 
-
-
-
-/*martin: end of lecture content*/
-
-#newsFeed {
-    float: left;
-    height: 100%;
-    width: 80%;
-}
-#lowerMain {
-    cursor: pointer;
-}
-#lowerMain:hover {
-    border: 1px solid black;
-}
-
-#subjectsBar {
-    height: 100%;
-    display: inline-block;
-    box-shadow: -8px 0px 10px rgba(0, 0, 0, .5);
-}
-
-/*martin: this the red info on the right*/
-#fullscreenInfo {
-    position: absolute;
-    right: 0;
-    background-color: red;
-    z-index: 9;
-    padding: 12px;
-    font-size: 12px;
-}
-
-#exit {
-    position: fixed;
-    font-size: 40px;
-    right: 1vw;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    cursor: pointer;
-}
-
-@media (max-width: 700px) {
+@media (max-width: 900px) {
     #newsFeed {
-        width: 70%;
+        width: 60vw;
     }
 }

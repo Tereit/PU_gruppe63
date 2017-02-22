@@ -30,6 +30,111 @@ body {
     height: 400px;
 }
 
+/*martin: window when entering lecture mode*******************/
+#lectureFeed {
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 10;
+    background-color: rgba(150, 150, 150, .5);
+    left:0;
+    top:0;
+}
+    #lectureContent {
+        position: fixed;
+        width: 90vw;
+        height: 95vh;
+        margin-left: 5vw;
+        margin-top: 2vh;
+        background-color: #fff;
+    }
+/*martin: end of lecture window*******************/
+
+/*martin: pace control bar*/
+#paceControll {
+    position: absolute;
+    display: inline-flex;
+    color: #fff;
+    height: 7vh;
+    width: 30vw;
+    left: 30vw;
+    text-align: center;
+}
+#pcIndicator {
+    width: 15vw;
+}
+#paceControll img {
+    height: 4vh;
+    width: 100%;
+}
+#indicator {
+    position: relative;
+    height: 4vh;
+    width: 0.3vw;
+    border: 3px solid #000;
+    left: 47.5%;
+    top: -72%;
+}
+/*martin: end of pace control*/
+
+#subjectName {
+    font-size: 2vw;
+}
+
+
+
+/*martin: everything within lecture content ***********/
+#lectureTopContainer {
+    width: 100%;
+    height: 7.1vh;
+    background-color: #f1c40f;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, .5);;
+}
+
+/*martin: this the red info on the right*/
+#fullscreenInfo {
+    position: absolute;
+    right: 0;
+    background-color: #f00;
+    z-index: 9;
+    padding: 12px;
+    font-size: 12px;
+}
+
+#exit {
+    position: fixed;
+    font-size: 40px;
+    right: 1vw;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
+}
+
+/*martin: end of lecture content**********/
+
+#newsFeed {
+    float: left;
+    height: 100%;
+    width: 63vw;
+}
+#lowerMain {
+    cursor: pointer;
+}
+#lowerMain:hover {
+    border: 1px solid #000;
+}
+
+#subjectsBar {
+    height: 100%;
+    width: 14vw;
+    display: inline-block;
+    box-shadow: -8px 0px 10px rgba(0, 0, 0, .5);
+}
+
 footer {
     position: static;
     bottom: 0;
