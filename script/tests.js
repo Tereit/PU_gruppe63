@@ -1,37 +1,50 @@
 QUnit.test("User story 1 tests", function(assert) {
-	var testRef = "subjects/algdat/lecture1/pace";
+	//var done1 = assert.async();
+	//var done2 = assert.async();
+	assert.equal(1,1);
+	var subject = "subject";
+	var lecture = "lecture";
 	function getPace() {
-		var ref = firebase.database().ref(testRef);
-		ref.on("value", function(snapshot) {
-			return snapshot.val();
-		});
+		var ref = firebase.database().ref();
+		console.log(ref);
+		/*
+		ref.child(subject).child(lecture).once("value", function(snapshot) {
+			console.log(snapshot.val());
+		});*/
 	}
+	getPace();
+	//lecturify.speedUp()
+	/*
 	var originalPace = getPace();
 	var increasedPace = originalPace + 1;
 	lecturify.speedUp(testRef);
-	var increasedPace = getPace();
-	assert.equal(increasedPace, increasedPace);
+	var newPace = getPace();
+	assert.equal(newPace, increasedPace);
+	//done1();
 	lecturify.slowDown(testRef);
 	var slowedPace = getPace();
 	assert.equal(slowedPace, originalPace);
+	//done2();
+	console.log(originalPace, newPace, increasedPace, slowedPace);
+	*/
 });
 
 QUnit.test("User story 2 tests", function(assert) {
 	var done1 = assert.async();
 	var done2 = assert.async();
 	var testRef = firebase.database().ref();
-	var testUsername = "martin@stud.ntnu.no";
+	var testUsername = "test@stud.ntnu.no";
 	var testUsername2 = "bla@bla.bla.no";
 	var result = false;
 	var result2 = false;
 	function checkUser() {
 		testRef.child("users/professors").once('value').then(function(snapshot) {
 			snapshot.forEach(function(childSnapshot) {
-				if(childSnapshot.val().username === testUsername) {
+				if(childSnapshot.val().username == testUsername) {
 					result = true;
 					return;
 				}
-				if(childSnapshot.val().username === testUsername2) {
+				if(childSnapshot.val().username == testUsername2) {
 					result2 = true;
 				}
 			});
@@ -52,5 +65,4 @@ QUnit.test("User story 2 tests", function(assert) {
 
 window.onload = function() {
 	window.lecturify = new Lecturify();
-	// this.firebase = new Firebase("lecturify.firebaseapp.com");
 };
