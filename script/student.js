@@ -25,29 +25,34 @@ function subjectListener(uid){
 }
 
 function filterOutAlreadyUsedSubjects(fag){
-  resultat = []
-  var elements = document.getElementById("subjectList").getElementsByTagName("li");
-  console.log(elements)
-  console.log(elements.length)
+    var resultat = []
+    var elements = document.getElementById("subjectList").getElementsByTagName("li");
+    console.log(elements)
+    console.log(elements.length)
+    return [];
 }
 
 function getAllSubjectsCallback(subjects){
-  console.log("kjører")
-  if(subjects.length > 0){
-    fag = filterOutAlreadyUsedSubjects(subjects);
-    var liste = document.getElementById("allSubjects");
-    document.getElementById("loader").style.display="none";
-    for(var i=0; i < fag.length;i++){
-      var liElement = document.createElement("li");
-      liElement.innerHTML = fag[i];
-      liElement.onclick=function () {
-          testAllerting(this.innerHTML);
-      };
-      liste.appendChild(liElement);
+    if(subjects.length > 0){
+        console.log("subject>0");
+        var fag = filterOutAlreadyUsedSubjects(subjects);
+        if (fag.length<1) {
+            document.getElementById("loader").innerHTML="There are no subjects to subscribe to.";
+            return;
+        }
+        var liste = document.getElementById("allSubjects");
+        document.getElementById("loader").style.display="none";
+        for(var i=0; i < fag.length;i++){
+            var liElement = document.createElement("li");
+            liElement.innerHTML = fag[i];
+            liElement.onclick=function () {
+                testAllerting(this.innerHTML);
+            };
+            liste.appendChild(liElement);
+        }
     }
-  }
-  else{
-    console.log("NO INFO")
+    else {
+        document.getElementById("loader").innerHTML="There are no subjects available.";
   }
 }
 
