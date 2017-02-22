@@ -32,12 +32,14 @@
 			<div id="newsFeed">
 				<button id="increasePace">Speed up!</button>
 				<button id="decreasePace">Slow down!</button>
+				<h2>Subscribe to a subject!</h2>
+				<ul id="allSubjects">
+				</ul>
 			</div>
+
 			<div id="subjectsBar">
 				<a style="font-size: 2vw; font-weight: bold; margin-left: 0.1vw">Available
 					subjects</a>
-				<ul id="subjectList">
-				</ul>
 				<textarea id="searchSubjectId" style="resize:none" rows="1" cols="15" onclick="this.select(this.value)">Search subject</textarea>
 				<button onclick=searchForAndDisplaySubject(searchSubjectId.value)>Search</button>
 				<textbox id="searchFailureId" rows="1" cols="40"></textbox>
@@ -46,14 +48,12 @@
 					<td><button id="searchResultButtonId">Subscribe</button></td>
 				</tr></table>
 				<label>Subscribed to:</label>
+				<ul id="subjectList">
+				</ul>
 				<table id="subListId" style="background-color: gray"><tr>
 					<td><textbox id="" rows="1" cols="100">Farendal</textbox></td>
 					<td><button id="searchResultButtonId">Subscribe</button></td>
 				</tr></table>
-				
-				
-				<ul id="subjectList">
-				</ul>
 			</div>
 
 		</div>

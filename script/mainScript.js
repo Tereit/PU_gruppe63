@@ -47,35 +47,48 @@ function addSubject(subjectName, uid){
 //Hente alle fag som bruker følger
 //type skal være en string professor eller student. bruk sessionStorage
 
-function getSubscribedSubjects(uid, type, idListe){
-  console.log("kjører");
-  var liElement = document.createElement("li");
-  var fag = []
-  if(type = "professor"){
-    ref.child("users/professors/" + uid + "/subscriptions").once("value").then(var a = function(snapshot){
-      object = snapshot.val()
-      for (var key in object){
-        fag.push(object[key].fag)
-      }
-      return fag
-    })
-  }
-  else if(type = "student"){
-    ref.child("users/students/" + uid + "/subscriptions").once("value").then(function(snapshot){
-      object = snapshot.val()
-      for (var key in object){
-        fag.push(object[key].fag)
-      }
-      for (var i=0; i < fag.length; i++){
-        var liElement = document.createElement("li");
-        liElement.innerHTML = fag[i];
-        liste.appendChild(liElement)
-      }
-    })
+function getSubscribedSubjects(uid, type, callback){
+  fag = []
+  if(uid && type){
+    if(type == "student"){
+      ref.child("users/students/" + uid + "/subscribtions").once("value", function(snapshot){
+        object = snapshot.val()
+        for(var key in object){
+          fag.push(object[key].id)
+        }
+      }).then(function(){
+        callback(fag)
+      })
+    }
+    else if(type == "professor"){
+      ref.child("users/professors/" + uid + "/subscribtions").once("value", function(snapshot){
+        object = snapshot.val()
+        for(var key in object){
+          fag.push(object[key].id)
+        }
+      }).then(function(){
+        callback(fag)
+      })
+    }
+    else{
+      return "Invalid type of user";
+    }
   }
   else{
-    return "Invalid user type";
+    return "Invalid paramater";
   }
+}
+
+function getAllSubjects(callback){
+  fag = []
+  ref.child("subjects").once("value", function(snapshot){
+    object = snapshot.val()
+    for (var key in object){
+      fag.push(key)
+    }
+  }).then(function(){
+    callback(fag);
+  })
 }
 
 

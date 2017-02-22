@@ -1,20 +1,25 @@
 
 console.log(sessionStorage.bruker)
 
-function getSubscribedSubjects(){
-  var liste = document.getElementById("subjectList");
-  var fag = []
-  ref.child("users/students/" + sessionStorage.bruker + "/subscriptions").once("value").then(function(snapshot){
-    object = snapshot.val()
-    for (var key in object){
-    fag.push(object[key].fag)
-    }
-    for (var i = 0; i < fag.length; i++){
-      var liElement = document.createElement("li");
-      liElement.innerHTML = fag[i];
-      liste.appendChild(liElement)
-    }
-  })
+getAllSubjects(getAllSubjectsCallback)
+getSubscribedSubjects(sessionStorage.bruker, "student", getSubscribedSubjectsCallback)
+
+function getAllSubjectsCallback(fag){
+  var liste = document.getElementById("allSubjects");
+  console.log(fag.length)
+  for(var i=0; i < fag.length;i++){
+    var liElement = document.createElement("li");
+    liElement.innerHTML = fag[i];
+    liste.appendChild(liElement);
+  }
 }
 
-getSubscribedSubjects();
+
+function getSubscribedSubjectsCallback(fag){
+  var liste = document.getElementById("subjectList");
+  for(var i=0; i < fag.length;i++){
+    var liElement = document.createElement("li");
+    liElement.innerHTML = fag[i];
+    liste.appendChild(liElement);
+  }
+}
