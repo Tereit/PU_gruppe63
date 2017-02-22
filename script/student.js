@@ -11,10 +11,13 @@ function getAllSubjectsCallback(fag){
     var liElement = document.createElement("li");
     liElement.innerHTML = fag[i];
     liElement.onclick=function () {
-        console.log("fett");
+        testAllerting(this.innerHTML);
     };
     liste.appendChild(liElement);
   }
+}
+function testAllerting(fag) {
+    console.log(fag);
 }
 
 

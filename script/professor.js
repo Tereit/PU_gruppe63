@@ -4,7 +4,7 @@ var type = sessionStorage.userType
 console.log(random)
 console.log(type)
 */
-console.log(sessionStorage.bruker)
+console.log(sessionStorage.bruker);
 
 
 function addSubject() {
