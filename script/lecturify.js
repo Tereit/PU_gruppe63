@@ -3,12 +3,16 @@ function Lecturify() {
 };
 
 Lecturify.prototype.speedUp = function(ref) {
-    firebase.database().ref(ref).transaction(function(tall){
-        if(tall){
-            tall++;
+	console.log(ref);
+    ref.transaction(function(tall){
+    	console.log(tall);
+        if(tall) {
+        	console.log(tall);
+        	tall.val().pace++;
         }
-        return tall;
-    })
+        //tall.val().pace++;
+        //return tall;
+    });
 };
 
 Lecturify.prototype.slowDown = function(ref) {
@@ -16,6 +20,6 @@ Lecturify.prototype.slowDown = function(ref) {
         if(tall){
             tall--;
         }
-        return tall;
-    })
+        //return tall;
+    });
 };
