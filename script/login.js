@@ -21,8 +21,9 @@ function onLogin(user, pass){
 		alert("Password must be longer than 4 characters!")
 		window.location.reload();
 	}
-	else{
-		console.log("DU ER LOGGET INN")
+	else {
+        alertOnLogin();
+        console.log("DU ER LOGGET INN")
 		firebase.auth().signInWithEmailAndPassword(user, pass).catch(
 		error => alert(error.message));
 	}

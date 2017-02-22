@@ -22,4 +22,9 @@ function chooseSubject(subjectName) {
     console.log(subjectName);
 }
 
-getSubjects();
+
+function alertOnLogin() {
+    window.onload(function () {
+        console.log("eid");
+    })
+}
