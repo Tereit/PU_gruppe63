@@ -78,7 +78,7 @@ function updateUser(user) {
 	    if(sessionStorage.userType == "student"){
 	      dbRef.child("users/students/" + sessionStorage.bruker).set({
 	        username: user.email
-	      }).then(window.location.href = "../html/main.html");
+	      }).then(window.location.href = "../html/student.html");
 	    }
 	    else{
 	      dbRef.child("users/professors/" + sessionStorage.bruker).set({
