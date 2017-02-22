@@ -6,7 +6,7 @@ getSubscribedSubjects(sessionStorage.bruker, "student", getSubscribedSubjectsCal
 
 function getAllSubjectsCallback(fag){
   var liste = document.getElementById("allSubjects");
-  console.log(fag.length)
+  document.getElementById("loader").style.display="none";
   for(var i=0; i < fag.length;i++){
     var liElement = document.createElement("li");
     liElement.innerHTML = fag[i];
@@ -20,6 +20,7 @@ function getAllSubjectsCallback(fag){
 
 function getSubscribedSubjectsCallback(fag){
   var liste = document.getElementById("subjectList");
+  //document.getElementById("subscribeLoader").style.display="none";
   for(var i=0; i < fag.length;i++){
     var liElement = document.createElement("li");
     liElement.innerHTML = fag[i];
