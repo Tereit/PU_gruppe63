@@ -33,12 +33,12 @@ function scrollEvent() {
 
 //Professor: Lage nytt fag
 //code er en unik kode for faget
-function createSubject(subjectName, uid){
+function addSubject(subjectName, uid){
   ref.child("subjects/" + subjectName).set({
     id: "unknown",
   })
   ref.child("users/professors/" + uid + "/subscriptions").push({
-    id: subjectName
+    id: subjectName,
   })
 }
 
@@ -46,11 +46,13 @@ function createSubject(subjectName, uid){
 
 //Hente alle fag som bruker følger
 //type skal være en string professor eller student. bruk sessionStorage
-/*
-function getSubscribedSubjects(uid, type){
+
+function getSubscribedSubjects(uid, type, idListe){
+  console.log("kjører");
+  var liElement = document.createElement("li");
   var fag = []
   if(type = "professor"){
-    ref.child("users/professors/" + uid + "/subscriptions").once("value").then(function(snapshot){
+    ref.child("users/professors/" + uid + "/subscriptions").once("value").then(var a = function(snapshot){
       object = snapshot.val()
       for (var key in object){
         fag.push(object[key].fag)
@@ -64,14 +66,18 @@ function getSubscribedSubjects(uid, type){
       for (var key in object){
         fag.push(object[key].fag)
       }
-      return fag
+      for (var i=0; i < fag.length; i++){
+        var liElement = document.createElement("li");
+        liElement.innerHTML = fag[i];
+        liste.appendChild(liElement)
+      }
     })
   }
   else{
     return "Invalid user type";
   }
 }
-*/
+
 
 //martin: write the average between 0-10 and change the paceControll bar. For lecturer??
 /* TODO(fix calculations)
