@@ -8,6 +8,18 @@
     background: rgba(0, 0, 0, .2);
     cursor: pointer;
 }
+ #allSubjects li {
+     cursor: pointer;
+     -webkit-touch-callout: none;
+     -webkit-user-select: none;
+     -khtml-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+ }
+ #allSubjects li:hover {
+     font-weight: bold;
+ }
+
 
 /*martin: pace controll field end*/
 

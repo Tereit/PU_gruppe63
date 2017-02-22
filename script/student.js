@@ -10,6 +10,9 @@ function getAllSubjectsCallback(fag){
   for(var i=0; i < fag.length;i++){
     var liElement = document.createElement("li");
     liElement.innerHTML = fag[i];
+    liElement.onclick=function () {
+        console.log("fett");
+    };
     liste.appendChild(liElement);
   }
 }
