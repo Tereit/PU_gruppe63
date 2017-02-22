@@ -6,6 +6,8 @@
 init();
 //Firebase ref
 var ref = firebase.database().ref();
+
+
 //martin: makes the scroll effect of the topContainer
 var text = document.getElementById("lecturifyText");
 var topContainer = document.getElementById("topContainer");
@@ -29,7 +31,6 @@ function scrollEvent() {
     });
 }
 
-//Legger til generelle firebase funksjoner som kommer til å bli brukt flere ganger
 
 //Professor: Lage nytt fag
 //code er en unik kode for faget
@@ -45,10 +46,10 @@ function addSubject(subjectName, uid){
 
 //Add subject to user profile
 function addSubscriptionToUser(uid, subject, type){
-  console.log("kjører")
-  ref.child("users/" + type + "/" + uid + "/subscriptions").push({
-    id: subject
-  })
+    console.log("kjører")
+    ref.child("users/" + type + "/" + uid + "/subscriptions").push({
+        id: subject
+    })
 }
 
 //Hente alle fag som bruker følger
