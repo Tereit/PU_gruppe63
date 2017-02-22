@@ -1,13 +1,65 @@
-<link rel="stylesheet" type="text/css" href="css/lecture.css">
-<a id="exit" onclick="exitLecture()">X</a>
-<div id="lectureContent" class="lecture">
-    <div id="lectureTopContainer">
-        <div id="paceControll">
-            <div id="pcIndicator">
-                <a>Pace controll</a>
-                <img src="images/wave.PNG">
-                <div id="indicator"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testing!!!</title>
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/lecture.css" />
+</head>
+<body>
+<div id="lectureFeed">
+    <a id="exit" onclick="exitLecture()">X</a>
+    <div id="lectureContent" class="lecture">
+        <div id="lectureTopContainer">
+            <a id="subjectName">Subject name/lecture name</a>
+            <div id="paceControll">
+                <button class="paceBtn" id="slowBtn" onclick=paceController("s")>To slow</button>
+                <div id="pcIndicator">
+                    <a>Pace controll</a>
+                    <img src="images/wave.PNG">
+                    <div id="indicator"></div>
+                </div>
+                <button class="paceBtn" id="fastBtn" onclick=paceController("f")>To fast</button>
             </div>
         </div>
     </div>
 </div>
+<div id="topContainer">
+    <div id="lecturifyText">Lecturify</div>
+</div>
+<div id="mainContainer">
+    <div id="upperMain">
+        <div id="newsFeed">
+            <button id="increasePace">Speed up!</button>
+            <button id="decreasePace">Slow down!</button>
+        </div>
+        <!--
+        <div id="editSubjects" class="subjectList">
+
+        </div>
+        -->
+        <div id="subjectsBar">
+            <a style="font-size: 2vw; font-weight: bold; margin-left: 0.1vw">Available
+                subjects</a>
+            <ul id="subjectList" class="subjectList">
+            </ul>
+        </div>
+        <div id="editSubjects" class="subjectList">
+
+        </div>
+
+    </div>
+    <div id="lowerMain" class="lecture" onclick="changeToLecture()">
+        <div id="fullscreenInfo">Click box for fullscreen</div>
+    </div>
+</div>
+<footer> </footer>
+<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+<script src="../script/firebaseAuth.js"></script>
+<script src="../script/mainScript.js"></script>
+<script src="../script/student.js"></script>
+<script src="../script/lecturify.js"></script>
+<script src="../script/subscriptionLogic.js"></script>
+</body>
+</html>
