@@ -37,8 +37,19 @@
 				<a style="font-size: 2vw; font-weight: bold; margin-left: 0.1vw">Available
 					subjects</a>
 				<textarea id="searchSubjectId" style="resize:none" rows="1" cols="15" onclick="this.select(this.value)">Search subject</textarea>
-				<button onclick=searchForAndDisplaySubject(searchSubjectId.value)></button>
+				<button onclick=searchForAndDisplaySubject(searchSubjectId.value)>Search</button>
 				<textbox id="searchFailureId" rows="1" cols="40"></textbox>
+				<table id="searchResultId" style="background-color: gray; visibility: hidden"><tr>
+					<td><textbox id="searchResultTextId" rows="1" cols="100">Farendal</textbox></td>
+					<td><button id="searchResultButtonId">Subscribe</button></td>
+				</tr></table>
+				<label>Subscribed to:</label>
+				<table id="subListId" style="background-color: gray"><tr>
+					<td><textbox id="" rows="1" cols="100">Farendal</textbox></td>
+					<td><button id="searchResultButtonId">Subscribe</button></td>
+				</tr></table>
+				
+				
 				<ul id="subjectList">
 				</ul>
 			</div>
