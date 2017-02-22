@@ -38,8 +38,9 @@
 			<div id="subjectsBar">
 				<a style="font-size: 20px; font-weight: bold; margin-left: 2px">Available
 					subjects</a>
-				<button onclick=(text.innerHTML = verifySubject("TDT-4120"))/>
-				<a id="text"></a>
+				<textarea id="searchSubjectId" style="resize:none" rows="1" cols="15" onclick="this.select(this.value)">Search subject</textarea>
+				<button onclick=searchForAndDisplaySubject(searchSubjectId.value)></button>
+				<textbox id="searchFailureId" rows="1" cols="40"></textbox>
 			</div>
 		</div>
 		<div id="lowerMain" class="lecture" onclick="changeToLecture()">
@@ -51,6 +52,6 @@
 	<script src="../script/firebaseAuth.js"></script>
 	<script src="../script/mainScript.js"></script>
 	<script src="../script/lecturify.js"></script>
-	<script src="../subscriptionLogic.js"></script>
+	<script src="../script/subscriptionLogic.js"></script>
 </body>
 </html>
