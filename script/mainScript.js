@@ -43,41 +43,17 @@ function addSubject(subjectName, uid){
 }
 
 
+//Add subject to user profile
+function addSubscriptionToUser(uid, subject, type){
+  console.log("kjører")
+  ref.child("users/" + type + "/" + uid + "/subscriptions").push({
+    id: subject
+  })
+}
 
 //Hente alle fag som bruker følger
 //type skal være en string professor eller student. bruk sessionStorage
 
-function getSubscribedSubjects(uid, type, callback){
-  fag = []
-  if(uid && type){
-    if(type == "student"){
-      ref.child("users/students/" + uid + "/subscribtions").once("value", function(snapshot){
-        object = snapshot.val()
-        for(var key in object){
-          fag.push(object[key].id)
-        }
-      }).then(function(){
-        callback(fag)
-      })
-    }
-    else if(type == "professor"){
-      ref.child("users/professors/" + uid + "/subscribtions").once("value", function(snapshot){
-        object = snapshot.val()
-        for(var key in object){
-          fag.push(object[key].id)
-        }
-      }).then(function(){
-        callback(fag)
-      })
-    }
-    else{
-      return "Invalid type of user";
-    }
-  }
-  else{
-    return "Invalid paramater";
-  }
-}
 
 function getAllSubjects(callback){
   fag = []
