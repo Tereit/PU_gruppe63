@@ -4,6 +4,7 @@
 
 //'use strict';
 init();
+addListenerToPace()
 //Firebase ref
 var ref = firebase.database().ref();
 
@@ -31,18 +32,27 @@ function scrollEvent() {
     });
 }
 
-
-//Professor: Lage nytt fag
-//code er en unik kode for faget
-function addSubject(subjectName, uid){
-  ref.child("subjects/" + subjectName).set({
-    id: "unknown",
-  })
-  ref.child("users/professors/" + uid + "/subscriptions").push({
-    id: subjectName,
-  })
+//Logg ut bruker
+function logout(uid, type){
+  firebase.auth().signOut().then(function(){
+    ref.child("users/" + type + "/" + uid + "/subscriptions").off()
+    window.location.href = "../html/index.html";
+  }, function(error){
+    console.log(error.message)
+    alertOfChange("Something wrong happened")
+  });
 }
 
+//Listener for pace
+function addListenerToPace(){
+  firebase.database().ref("subjects/subject/lecture/pace").on("value", function(tall){
+    pace = tall.val()
+    studentPace = document.getElementById("studentPace")
+    professorPace = document.getElementById("professorPace")
+    studentPace.innerHTML = pace
+    professorPace.innerHTML = pace
+  })
+}
 
 //Add subject to user profile
 function addSubscriptionToUser(uid, subject, type){
