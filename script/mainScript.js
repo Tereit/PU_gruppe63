@@ -4,6 +4,7 @@
 
 //'use strict';
 init();
+addListenerToPace()
 //Firebase ref
 var ref = firebase.database().ref();
 
@@ -42,7 +43,16 @@ function logout(uid, type){
   });
 }
 
-
+//Listener for pace
+function addListenerToPace(){
+  firebase.database().ref("subjects/subject/lecture/pace").on("value", function(tall){
+    pace = tall.val()
+    studentPace = document.getElementById("studentPace")
+    professorPace = document.getElementById("professorPace")
+    studentPace.innerHTML = pace
+    professorPace.innerHTML = pace
+  })
+}
 
 //Add subject to user profile
 function addSubscriptionToUser(uid, subject, type){
