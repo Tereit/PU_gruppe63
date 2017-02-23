@@ -31,17 +31,17 @@ function scrollEvent() {
     });
 }
 
-
-//Professor: Lage nytt fag
-//code er en unik kode for faget
-function addSubject(subjectName, uid){
-  ref.child("subjects/" + subjectName).set({
-    id: "unknown",
-  })
-  ref.child("users/professors/" + uid + "/subscriptions").push({
-    id: subjectName,
-  })
+//Logg ut bruker
+function logout(uid, type){
+  firebase.auth().signOut().then(function(){
+    ref.child("users/" + type + "/" + uid + "/subscriptions").off()
+    window.location.href = "../html/index.html";
+  }, function(error){
+    console.log(error.message)
+    alertOfChange("Something wrong happened")
+  });
 }
+
 
 
 //Add subject to user profile
