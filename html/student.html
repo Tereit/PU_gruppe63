@@ -30,21 +30,22 @@
 	<div id="mainContainer">
 		<div id="upperMain">
 			<div id="newsFeed">
-				<button id="increasePace">Speed up!</button>
-				<button id="decreasePace">Slow down!</button>
 				<h2>Subscribe to a subject!</h2>
 				<ul id="allSubjects">
-					<img id="loader" src="images/ring-alt.svg" style="width: 4vw">
+					<a id="loader"><img src="images/ring-alt.svg" style="width: 4vw" alt="loading"></a>
 				</ul>
 				<ul>
-					<textarea id="searchTextId" style="resize:none" rows="1" cols="15" onclick="this.select(this.value)" oninput=updateSubjectList(searchTextId.value) placeholder="Search subject"></textarea><br>
-					<button onclick=updateSubjectList(searchTextId.value)>Search</button>
+					<textarea id="searchTextId" style="resize:none" rows="1" cols="15" oninput=updateSearchSubjectList(searchTextId.value) onclick="this.select(this.value)" placeholder="Search subject"></textarea><br>
+					<button onclick=updateSearchSubjectList(searchTextId.value) onclick="this.select(this.value)">Search</button>
 				</ul>
 			</div>
 
 			<div id="subjectsBar">
 				<a style="font-size: 2vw; font-weight: bold; margin-left: 0.1vw">Available
 					subjects</a>
+				<ul id="subjectList">
+					<a id="subscribeLoader"><img src="images/ring-alt.svg" style="width: 4vw" alt="loading"></a>
+				</ul>
 			</div>
 
 		</div>
