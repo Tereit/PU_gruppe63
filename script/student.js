@@ -100,3 +100,18 @@ function testAllerting(fag) {
     }
     //TODO(alert og change if this is successful)
 }
+
+function paceController(button) {
+	var dbRef = firebase.database().ref("subjects/subject/lecture/pace");
+	dbRef.transaction(function(tall) {
+		if(tall) {
+			if(button == "f") {
+				tall = tall - 1;
+			} else if(button == "s") {
+				tall = tall + 1;
+			}
+		}
+		//console.log(tall);
+		return tall;
+	});
+}
