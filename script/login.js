@@ -21,8 +21,9 @@ function onLogin(user, pass){
 		alert("Password must be longer than 4 characters!")
 		window.location.reload();
 	}
-	else{
-		console.log("DU ER LOGGET INN")
+	else {
+        alertOnLogin();
+        console.log("DU ER LOGGET INN")
 		firebase.auth().signInWithEmailAndPassword(user, pass).catch(
 		error => alert(error.message));
 	}
@@ -96,11 +97,11 @@ function updateUser(user) {
 window.onload = function() {
 	  this.btnLogin = document.getElementById("btnLogin");
     this.R_btnLogin = document.getElementById("R_btnLogin");
-
+		sessionStorage.userType = "student";
     this.btnLogin.addEventListener("click", onLoginAction);
     this.R_btnLogin.addEventListener("click", onRegister);
     // SJEKKER OM BRUKER TILSTANDEN HAR ENDRET SEG
-    // Hvis du gitt ut av nettsiden uten å logge inn, kommer du automatisk inn
+    // Hvis du gitt ut av nettsiden uten å logge ut, kommer du automatisk inn
     firebase.auth().onAuthStateChanged(user => {
       updateUser(user);
     });

@@ -6,6 +6,8 @@
 init();
 //Firebase ref
 var ref = firebase.database().ref();
+
+
 //martin: makes the scroll effect of the topContainer
 var text = document.getElementById("lecturifyText");
 var topContainer = document.getElementById("topContainer");
@@ -29,7 +31,6 @@ function scrollEvent() {
     });
 }
 
-//Legger til generelle firebase funksjoner som kommer til å bli brukt flere ganger
 
 //Professor: Lage nytt fag
 //code er en unik kode for faget
@@ -43,41 +44,17 @@ function addSubject(subjectName, uid){
 }
 
 
+//Add subject to user profile
+function addSubscriptionToUser(uid, subject, type){
+    console.log("kjører")
+    ref.child("users/" + type + "/" + uid + "/subscriptions").push({
+        id: subject
+    })
+}
 
 //Hente alle fag som bruker følger
 //type skal være en string professor eller student. bruk sessionStorage
 
-function getSubscribedSubjects(uid, type, callback){
-  fag = []
-  if(uid && type){
-    if(type == "student"){
-      ref.child("users/students/" + uid + "/subscribtions").once("value", function(snapshot){
-        object = snapshot.val()
-        for(var key in object){
-          fag.push(object[key].id)
-        }
-      }).then(function(){
-        callback(fag)
-      })
-    }
-    else if(type == "professor"){
-      ref.child("users/professors/" + uid + "/subscribtions").once("value", function(snapshot){
-        object = snapshot.val()
-        for(var key in object){
-          fag.push(object[key].id)
-        }
-      }).then(function(){
-        callback(fag)
-      })
-    }
-    else{
-      return "Invalid type of user";
-    }
-  }
-  else{
-    return "Invalid paramater";
-  }
-}
 
 function getAllSubjects(callback){
   fag = []
@@ -88,6 +65,15 @@ function getAllSubjects(callback){
     }
   }).then(function(){
     callback(fag);
+  })
+}
+
+//Get username of user
+function getUserName(uid, type, callback){
+  ref.child("users/" + type + "/" + uid + "/username").once("value", function(name){
+    if(name.val()){
+      callback(name.val())
+    }
   })
 }
 

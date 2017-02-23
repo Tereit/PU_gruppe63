@@ -3,7 +3,7 @@
  */
 
 var userID = "X3SJ2TMw3yMwz04fPoxSSuZCxW13";
-
+searchList = [];
 
 //Function for a student to subscribe to a subject
 function subscribeToSubject(studentId, subjectId, callback){
@@ -35,17 +35,33 @@ function search(searchText, subjects){
 	return newList;
 }
 
-function updateSubjectList(searchText){
+//Updates the possible subjects to subscribe to 
+function updateSearchSubjectList(searchText){
 	if(searchText != ""){
 		getNotSubscribedSubjects(userID, function(notSubscribed){
 			getSubjectsByName(notSubscribed, function(list){
-				getAllSubjectsCallback(search(searchText, list));
+				searchList = search(searchText, list);
+				getAllSubjectsCallback(searchList);
 			});
 		});
 	}
 	else{
-		getAllSubjects(getAllSubjectsCallback);
+		getAllSubjects(function(subjects){
+			getAllSubjectsCallback(subjects)
+		});
 	}
+}
+
+function getSnittList(list1, list2){
+	var list = [];
+	for(var i = 0; i < list1.length; i++){
+		for(var o = 0; o < list2.length; o++){
+			if(list1[i] == list2[i]){
+				list.push(list1[i]);
+			}
+		}
+	}
+	return list;
 }
 
 //Function for a student to unsubscribe from a subject
@@ -76,6 +92,7 @@ function getSubscribedSubjects(studentId, callback){
 		callback(subjectIdList);
 	});
 }
+
 //Gets a list of the subjects that the student has not subscribed to
 function getNotSubscribedSubjects(studentId, callback){
 	getSubscribedSubjects(studentId, function(subjects){

@@ -4,7 +4,7 @@ var type = sessionStorage.userType
 console.log(random)
 console.log(type)
 */
-console.log(sessionStorage.bruker)
+console.log(sessionStorage.bruker);
 
 
 function addSubject() {
@@ -22,4 +22,9 @@ function chooseSubject(subjectName) {
     console.log(subjectName);
 }
 
-getSubjects();
+
+function alertOnLogin() {
+    window.onload(function () {
+        console.log("eid");
+    })
+}
