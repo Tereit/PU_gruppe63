@@ -4,7 +4,7 @@
 
 //'use strict';
 init();
-addListenerToPace()
+addListenerToPace(sessionStorage.userType)
 //Firebase ref
 var ref = firebase.database().ref();
 
@@ -44,13 +44,20 @@ function logout(uid, type){
 }
 
 //Listener for pace
-function addListenerToPace(){
+function addListenerToPace(type){
   firebase.database().ref("subjects/subject/lecture/pace").on("value", function(tall){
     pace = tall.val()
-    studentPace = document.getElementById("studentPace")
-    professorPace = document.getElementById("professorPace")
-    studentPace.innerHTML = pace
-    professorPace.innerHTML = pace
+    if(type == "professor"){
+      professorPace = document.getElementById("professorPace")
+      professorPace.innerHTML = pace
+    }
+    else if(type == "student"){
+      studentPace = document.getElementById("studentPace")
+      studentPace.innerHTML = pace
+    }
+    else{
+      alert("Invalid userType for pace listener")
+    }
   })
 }
 

@@ -5,6 +5,7 @@ console.log(random)
 console.log(type)
 */
 console.log(sessionStorage.bruker);
+console.log(sessionStorage.userType);
 sessionStorage.currentSubjects = []
 subjectListener(sessionStorage.bruker)
 getUserName(sessionStorage.bruker, "professors", getUserNamerCallback)
