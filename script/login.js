@@ -2,12 +2,13 @@ function checkIfProfessorExist(user, pass){
 	 db = firebase.database().ref();
 	 db.child("users/professors").once("value").then(function(snapshot){
 		for (var key in snapshot.val()){
-			console.log(snapshot.val()[key].username)
 			if(user == snapshot.val()[key].username){
 				console.log("true professor!");
+				sessionStorage.userType = "professor";
 				onLogin(user, pass);
 			}
 		}
+		alert("Your are not registered as a professor!")
 	})
 };
 
@@ -71,8 +72,6 @@ function onRegister() {
 
 function updateUser(user) {
 	  var dbRef = firebase.database().ref();
-	  if(user){
-			sessionStorage.bruker = JSON.stringify(user.uid);
 	    if(sessionStorage.userType == "student"){
 	      dbRef.child("users/students/" + sessionStorage.bruker).update({
 	        username: user.email
@@ -83,13 +82,36 @@ function updateUser(user) {
 	        username: user.email
 	      }).then(window.location.href = "../html/professor.html");
 	    }
-	    }
-	    else{
-	    console.log("not logged in");
-	  }
-
 }
 
+
+function solveSessionStorage(user){
+	firebase.database().ref("users").once("value").then(function(snapshot){
+		brukere = snapshot.val()
+		for (var key in brukere){
+			bruk = brukere[key]
+			if(key == "professors"){
+				for(k in bruk){
+					if(k == sessionStorage.bruker){
+						sessionStorage.userType = "professor"
+					}
+				}
+			}
+			else if (key == "students"){
+				for(k in bruk){
+					if(k == sessionStorage.bruker){
+						sessionStorage.userType = "student"
+					}
+				}
+			}
+			else{
+					console.log("invalid information")
+			}
+		}
+		console.log(sessionStorage.userType)
+		updateUser(user)
+	})
+}
 
 window.onload = function() {
 	  this.btnLogin = document.getElementById("btnLogin");
@@ -100,6 +122,11 @@ window.onload = function() {
     // SJEKKER OM BRUKER TILSTANDEN HAR ENDRET SEG
     // Hvis du gitt ut av nettsiden uten å logge ut, kommer du automatisk inn
     firebase.auth().onAuthStateChanged(user => {
-      updateUser(user);
+			if(user){
+				sessionStorage.bruker = JSON.stringify(user.uid)
+				solveSessionStorage(user)
+			}else{
+				console.log("not logged in")
+			}
     });
 }

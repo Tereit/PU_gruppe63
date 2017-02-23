@@ -37,6 +37,10 @@ function getUserNamerCallback(username){
   alertOfChange("Welcome, " + navn + "!")
 }
 
+function handleLogout(){
+  logout(sessionStorage.bruker, "students")
+}
+
 function filterOutAlreadyUsedSubjects(subjects){
   for (var i = 0; i < currentSubjects.length; i++){
     for(var k = 0; k < subjects.length; k++){
