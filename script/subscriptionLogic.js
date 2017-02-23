@@ -4,6 +4,7 @@
 
 var userID = "X3SJ2TMw3yMwz04fPoxSSuZCxW13";
 
+
 //Function for a student to subscribe to a subject
 function subscribeToSubject(studentId, subjectId, callback){
 	var dbRef = firebase.database().ref();
@@ -14,7 +15,37 @@ function subscribeToSubject(studentId, subjectId, callback){
 			callback;
 		});
 	}
-	
+}
+
+//Returns a list of subjects based on a search text
+function search(searchText, subjects){
+	var newList = [];
+	for(var u = 0; u < subjects.length; u++){
+		for(var i = 0, len = searchText.length; i < len; i++){
+			if(subjects[u].charAt(i) == searchText.charAt(i)){
+				if(i == len - 1){
+					newList.push(subjects[u]);
+				}
+			}
+			else{
+				break;
+			}
+		}
+	}
+	return newList;
+}
+
+function updateSubjectList(searchText){
+	if(searchText != ""){
+		getNotSubscribedSubjects(userID, function(notSubscribed){
+			getSubjectsByName(notSubscribed, function(list){
+				getAllSubjectsCallback(search(searchText, list));
+			});
+		});
+	}
+	else{
+		getAllSubjects(getAllSubjectsCallback);
+	}
 }
 
 //Function for a student to unsubscribe from a subject
@@ -30,8 +61,6 @@ function unsubscribeFromSubject(studentId, subjectId, callback){
 		}).then(function(){
 			callback;
 		});
-		
-		
 	}
 }
 
@@ -42,37 +71,46 @@ function getSubscribedSubjects(studentId, callback){
 	dbRef.child("users/students/" + studentId + "/subscriptions").once("value", function(snapshot){
 		snapshot.forEach(function(childsnap){
 			subjectIdList.push(childsnap.val().subjectId);
-		}).then(function(){
-			callback(subjectIdList);
+		});
+	}).then(function(){
+		callback(subjectIdList);
+	});
+}
+//Gets a list of the subjects that the student has not subscribed to
+function getNotSubscribedSubjects(studentId, callback){
+	getSubscribedSubjects(studentId, function(subjects){
+		getAllSubjectsId(function(allSubjects){
+			var notSubscribedSubjects = [];
+			for(var u = 0; u < allSubjects.length; u++){
+				var samme = true;
+				for(var i = 0; i < subjects.length; i++){
+					if(subjects[i] == allSubjects[u]){
+						samme = false;
+					}
+				}
+				if(samme){
+					notSubscribedSubjects.push(allSubjects[u]);
+				}
+			}
+			callback(notSubscribedSubjects);
 		});
 	});
 }
 
-function createSubjectList(subjectIdList){
-	
-	for(subjectId in subjectIdList){
-		var td1 = document.createElement("TD");
-		var td2 = document.createElement("TD");
-		var tr = document.createElement("TR");
-		var text = document.createElement("TEXTBOX");
-		var btn = document.createElement("BUTTON");
-		var list = document.getElementById("subListId");
-		
-		tr.style = "background-color: gray";
-		text.innerHTML = subjectId;
-		td1.appendChild(text);
-		btn.innerText = "UNSUBSCRIBE";
-		btn.onclick = function(){unsubscribeFromSubject(userID, subjectId)};
-		td2.appendChild(btn);
-		tr.appendChild(td1);
-		tr.appendChild(td2);
-		list.appendChild(tr);
-	}
+function getAllSubjectsId(callback){
+	var dbRef = firebase.database().ref();
+	var subjectIdList = [];
+	dbRef.child("subjects").once("value", function(snapshot){
+		snapshot.forEach(function(childsnap){
+			subjectIdList.push((childsnap.val().subjectId != null ? childsnap.val().subjectId : childsnap.val().id));
+		});
+	}).then(function(){
+		callback(subjectIdList);
+	});
 }
 
 //Searches for a subject and displays a button to subscribe to the subject
 function searchForAndDisplaySubject(subjectId){
-	searchFailureId.innerHTML = "";
 	getSubject(subjectId, function(subjectId, subject){
 		handleSubject(subjectId, subject);
 	});
@@ -81,33 +119,24 @@ function searchForAndDisplaySubject(subjectId){
 
 //Creates the button to subscribe to a lecture
 function handleSubject(subjectId, subject){
-	var area = document.getElementById("searchResultId");
-	var failure = document.getElementById("searchFailureId");
 	var text = document.getElementById("searchResultTextId");
 	var btn = document.getElementById("searchResultButtonId");
 	if(subject != null){
-		updateSubjectButton(subjectId);
-	}
-	else{
-		area.style.visibility = "hidden";
-		failure.style.visibility = "visible";
-		failure.innerHTML = subjectId + " is not a registered subject.";
+		updateSubjectButton(subjectId, btn, text);
 	}
 }
 
-function updateSubjectButton(subjectId, area = document.getElementById("searchResultId"), btn = document.getElementById("searchResultButtonId"), failure = document.getElementById("searchFailureId"), text = document.getElementById("searchResultTextId")){
+function updateSubjectButton(subjectId, btn, text){
 	checkIfSubscribed(userID, subjectId, function(isSubscribed){
-		area.style.visibility = "visible";
-		btn.innerHTML = subjectId + "\n";
-		failure.style.visibility = "hidden";
+		btn.innerHTML = subjectId;
 		text.innerHTML = subjectId;
 		if(isSubscribed){
 			btn.innerHTML = "UNSUBSCRIBE";
-			btn.onclick = function(){unsubscribeFromSubject(userID, subjectId)};
+			btn.onclick = function(){unsubscribeFromSubject(userID, subjectId, function(){updateSubjectButton(subjectId, btn, text)})};
 		}
 		else{
 			btn.innerHTML = "SUBSCRIBE";
-			btn.onclick = function(){subscribeToSubject(userID, subjectId)};
+			btn.onclick = function(){subscribeToSubject(userID, subjectId, function(){updateSubjectButton(subjectId, btn, text)})};
 		}
 	});
 }
@@ -123,12 +152,15 @@ function getProfessor(professorId, callback){
 //Checks if the student has subscribed to the subjects
 function checkIfSubscribed(studentId, subjectId, callback){
 	var dbRef = firebase.database().ref();
+	var isSubscribed = false;
 	dbRef.child("users/students/" + studentId + "/subscriptions").once("value", function(snapshot){
-		var isSubscribed = false;
+		
 		isSubscribed = snapshot.forEach(function(childsnap){
 			if(childsnap.val().subjectId == subjectId)
 				return true;
 		});
+		
+	}).then(function(){
 		callback(isSubscribed);
 	});
 }
@@ -145,26 +177,24 @@ function getSubject(subjectId, callback){
 				callback(subjectId, childsnap);
 			}
 		});
-		
 	});
 }
 
-function trialFunction(){
+function getSubjectsByName(subjectIdList ,callback){
 	var dbRef = firebase.database().ref();
-	var arrayOfLectures = [];
-	var studentId = "X3SJ2TMw3yMwz04fPoxSSuZCxW13"
-	dbRef.child("users/students/" + studentId + "/subscriptions").once("value", function(snapshot){
-		var out = "";
-		snapshot.forEach(function(childSnap){
-			out += childSnap.val().id + "\n";
-			var td = document.createElement("TD");
-			var tr = document.createElement("TR");
-			var t = document.createTextNode(childSnap.val().id);
-			td.appendChild(t);
-			tr.appendChild(td);
-			subjectTableId.appendChild(tr);
+	var list = [];
+	
+	
+	dbRef.child("subjects").once("value", function(snapshot){
+		snapshot.forEach(function(childsnap){
+			for(var i = 0; i < subjectIdList.length; i++){
+				if(subjectIdList[i] == childsnap.val().id){
+					list.push(childsnap.key);
+				}
+			}
 		});
-		
-		document.getElementById("textAreaID").innerHTML = out;
+	}).then(function(){
+		callback(list);
 	});
+	
 }
