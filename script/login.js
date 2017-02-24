@@ -1,14 +1,19 @@
 function checkIfProfessorExist(user, pass){
+	isProfessor = false
 	 db = firebase.database().ref();
 	 db.child("users/professors").once("value").then(function(snapshot){
 		for (var key in snapshot.val()){
 			if(user == snapshot.val()[key].username){
-				console.log("true professor!");
+				isProfessor = true
 				sessionStorage.userType = "professor";
-				onLogin(user, pass);
 			}
 		}
-		alert("Your are not registered as a professor!")
+		if(isProfessor){
+			onLogin(user, pass)
+		}
+		else{
+			alert("You are not registered as a professor!")
+		}
 	})
 };
 
