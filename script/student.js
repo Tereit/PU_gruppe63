@@ -27,7 +27,7 @@ function subjectListener(uid){
             }
         } else {
             alertOfChange("You have no subscription to be loaded.");
-            document.getElementById("subscribeLoader").innerHTML="You have no subscriptions to be loaded.";
+            //document.getElementById("subscribeLoader").innerHTML="You have no subscriptions to be loaded.";
         }
     })
 }
@@ -102,7 +102,6 @@ function testAllerting(fag) {
     liste = document.getElementById("allSubjects")
     addSubscriptionToUser(sessionStorage.bruker, fag, "students")
     items = liste.childNodes;
-    console.log(items[0].innerHTML)
     for(var i = 0; i < items.length; i++){
       if(items[i].innerHTML == fag){
         liste.removeChild(items[i])
