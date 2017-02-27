@@ -1,7 +1,7 @@
 /**
  * http://usejsdoc.org/
  */
-
+/*
 var userID = "X3SJ2TMw3yMwz04fPoxSSuZCxW13";
 searchList = [];
 
@@ -17,40 +17,7 @@ function subscribeToSubject(studentId, subjectId, callback){
 	}
 }
 
-//Returns a list of subjects based on a search text
-function search(searchText, subjects){
-	var newList = [];
-	for(var u = 0; u < subjects.length; u++){
-		for(var i = 0, len = searchText.length; i < len; i++){
-			if(subjects[u].charAt(i) == searchText.charAt(i)){
-				if(i == len - 1){
-					newList.push(subjects[u]);
-				}
-			}
-			else{
-				break;
-			}
-		}
-	}
-	return newList;
-}
 
-//Updates the possible subjects to subscribe to 
-function updateSearchSubjectList(searchText){
-	if(searchText != ""){
-		getNotSubscribedSubjects(userID, function(notSubscribed){
-			getSubjectsByName(notSubscribed, function(list){
-				searchList = search(searchText, list);
-				getAllSubjectsCallback(searchList);
-			});
-		});
-	}
-	else{
-		getAllSubjects(function(subjects){
-			getAllSubjectsCallback(subjects)
-		});
-	}
-}
 
 function getSnittList(list1, list2){
 	var list = [];
@@ -80,39 +47,9 @@ function unsubscribeFromSubject(studentId, subjectId, callback){
 	}
 }
 
-//Gets a list of the subjects that the student has subscribed to
-function getSubscribedSubjects(studentId, callback){
-	var dbRef = firebase.database().ref();
-	var subjectIdList = [];
-	dbRef.child("users/students/" + studentId + "/subscriptions").once("value", function(snapshot){
-		snapshot.forEach(function(childsnap){
-			subjectIdList.push(childsnap.val().subjectId);
-		});
-	}).then(function(){
-		callback(subjectIdList);
-	});
-}
 
-//Gets a list of the subjects that the student has not subscribed to
-function getNotSubscribedSubjects(studentId, callback){
-	getSubscribedSubjects(studentId, function(subjects){
-		getAllSubjectsId(function(allSubjects){
-			var notSubscribedSubjects = [];
-			for(var u = 0; u < allSubjects.length; u++){
-				var samme = true;
-				for(var i = 0; i < subjects.length; i++){
-					if(subjects[i] == allSubjects[u]){
-						samme = false;
-					}
-				}
-				if(samme){
-					notSubscribedSubjects.push(allSubjects[u]);
-				}
-			}
-			callback(notSubscribedSubjects);
-		});
-	});
-}
+
+
 
 function getAllSubjectsId(callback){
 	var dbRef = firebase.database().ref();
@@ -182,10 +119,7 @@ function checkIfSubscribed(studentId, subjectId, callback){
 	});
 }
 
-/*Fetches information about a certain subject and passes that on 
- * to a callback function since database fetching is asyncronous
- * and continues the code.
-*/
+
 function getSubject(subjectId, callback){
 	var dbRef = firebase.database().ref();
 	dbRef.child("subjects").once("value", function(snapshot){
@@ -197,21 +131,5 @@ function getSubject(subjectId, callback){
 	});
 }
 
-function getSubjectsByName(subjectIdList ,callback){
-	var dbRef = firebase.database().ref();
-	var list = [];
-	
-	
-	dbRef.child("subjects").once("value", function(snapshot){
-		snapshot.forEach(function(childsnap){
-			for(var i = 0; i < subjectIdList.length; i++){
-				if(subjectIdList[i] == childsnap.val().id){
-					list.push(childsnap.key);
-				}
-			}
-		});
-	}).then(function(){
-		callback(list);
-	});
-	
-}
+
+*/

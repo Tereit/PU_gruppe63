@@ -5,7 +5,8 @@ currentSubjects = []
 
 subjectListener(sessionStorage.bruker)
 getUserName(sessionStorage.bruker, "students", getUserName)
-getAllSubjects(getAllSubjectsCallback)
+getAllSubjects(function(subjects){getAvailableSubjects(subjects)})
+
 //LISTENER FOR FAG SOM BRUKER HAR SUBCRIBED TIL TODO(Code clean-up): merge and move to main
 function subjectListener(uid){
     var liste = document.getElementById("subjectList");
@@ -31,11 +32,7 @@ function subjectListener(uid){
         }
     })
 }
-//TODO(Code clean-up):move to main
-function getUserName(username){
-  navn = username.replace("@stud.ntnu.no", "")
-  alertOfChange("Welcome, " + navn + "!")
-}
+
 //TODO(Code clean-up): refactor; button can call directly
 function handleLogout(){
   logout(sessionStorage.bruker, "students")
@@ -51,8 +48,8 @@ function filterOutAlreadyUsedSubjects(subjects){
   }
   return subjects;
 }
-//TODO(Code clean-up): refactor; change name(getAvailableSubjects).
-function getAllSubjectsCallback(subjects){
+
+function getAvailableSubjects(subjects){
 	var liste = document.getElementById("allSubjects");
 	var loader = document.getElementById("loader");
 	loader.style.display="none";
@@ -84,18 +81,7 @@ function getAllSubjectsCallback(subjects){
 }
 
 
-//martin: alerts the user of a change with the messag; message. TODO(Code clean-up): move to main
-function alertOfChange(message) {
-    var topContainer = document.getElementById("topContainer");
-    topContainer.style.backgroundColor="#0f0";
-    topContainer.style.width="100vw";
-    var newDiv = document.createElement("a");
-    newDiv.innerHTML=message;
-    topContainer.appendChild(newDiv);
-    setTimeout(function() {topContainer.style.backgroundColor="#999999";
-        topContainer.removeChild(topContainer.lastChild)
-        scrollEvent()}, 2000);
-}
+
 //TODO(Code clean-up): refactor; change name.
 function testAllerting(fag) {
     //TODO(move this up and use this. instead of fag)
@@ -139,3 +125,41 @@ function unsubscribeFromSubject(studentId, subjectId){
         });
     }
 }
+
+//Returns a list of subjects based on a search text
+function search(searchText, subjects){
+	var newList = [];
+	for(var u = 0; u < subjects.length; u++){
+		for(var i = 0, len = searchText.length; i < len; i++){
+			if(subjects[u].charAt(i) == searchText.charAt(i)){
+				if(i == len - 1){
+					newList.push(subjects[u]);
+				}
+			}
+			else{
+				break;
+			}
+		}
+	}
+	return newList;
+}
+
+//Updates the possible subjects to subscribe to 
+function updateSearchSubjectList(searchText){
+	if(searchText != ""){
+		getNotSubscribedSubjects(sessionStorage.bruker, "students", function(notSubscribed){
+			console.log("Not subscribed: " + notSubscribed)
+			searchList = search(searchText, notSubscribed);
+			console.log("Search: " + searchList)
+			getAvailableSubjects(searchList);
+		});
+	}
+	else{
+		getAllSubjects(function(subjects){
+			getAvailableSubjects(subjects)
+		});
+	}
+}
+
+
+

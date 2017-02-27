@@ -103,7 +103,7 @@ function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }
 
-
+//TODO(change to have parameter type, to make it usable for students as well)
 //Listener for fag
 function subjectListener(uid){
     var liste = document.getElementById("subjectList");
@@ -140,6 +140,39 @@ function alertOfChange(message) {
         scrollEvent()}, 2000);
 }
 
+//Gets a list of the subjects that the user has subscribed to
+function getSubscribedSubjects(userId, type, callback){
+	var dbRef = firebase.database().ref();
+	var subjectList = [];
+	dbRef.child("users/" + type + "/" + userId + "/subscriptions").once("value", function(snapshot){
+		snapshot.forEach(function(childsnap){
+			subjectList.push(childsnap.val().id);
+		});
+	}).then(function(){
+		callback(subjectList);
+	});
+}
+
+//Gets a list of the subjects that the user has not subscribed to
+function getNotSubscribedSubjects(userId, type, callback){
+	getSubscribedSubjects(userId, type, function(subjects){
+		getAllSubjects(function(allSubjects){
+			var notSubscribedSubjects = [];
+			for(var u = 0; u < allSubjects.length; u++){
+				var samme = true;
+				for(var i = 0; i < subjects.length; i++){
+					if(subjects[i] == allSubjects[u]){
+						samme = false;
+					}
+				}
+				if(samme){
+					notSubscribedSubjects.push(allSubjects[u]);
+				}
+			}
+			callback(notSubscribedSubjects);
+		});
+	});
+}
 
 
 //always at bottom.
