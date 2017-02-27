@@ -4,9 +4,9 @@ console.log(sessionStorage.bruker)
 currentSubjects = []
 
 subjectListener(sessionStorage.bruker)
-getUserName(sessionStorage.bruker, "students", getUserNamerCallback)
+getUserName(sessionStorage.bruker, "students", getUserName)
 getAllSubjects(getAllSubjectsCallback)
-//LISTENER FOR FAG SOM BRUKER HAR SUBCRIBED TIL
+//LISTENER FOR FAG SOM BRUKER HAR SUBCRIBED TIL TODO(Code clean-up): merge and move to main
 function subjectListener(uid){
     var liste = document.getElementById("subjectList");
     ref = firebase.database().ref();
@@ -31,16 +31,16 @@ function subjectListener(uid){
         }
     })
 }
-
-function getUserNamerCallback(username){
+//TODO(Code clean-up):move to main
+function getUserName(username){
   navn = username.replace("@stud.ntnu.no", "")
   alertOfChange("Welcome, " + navn + "!")
 }
-
+//TODO(Code clean-up): refactor; button can call directly
 function handleLogout(){
   logout(sessionStorage.bruker, "students")
 }
-
+//TODO(performance): improve performance
 function filterOutAlreadyUsedSubjects(subjects){
   for (var i = 0; i < currentSubjects.length; i++){
     for(var k = 0; k < subjects.length; k++){
@@ -51,7 +51,7 @@ function filterOutAlreadyUsedSubjects(subjects){
   }
   return subjects;
 }
-
+//TODO(Code clean-up): refactor; change name(getAvailableSubjects).
 function getAllSubjectsCallback(subjects){
 	var liste = document.getElementById("allSubjects");
 	var loader = document.getElementById("loader");
@@ -84,7 +84,7 @@ function getAllSubjectsCallback(subjects){
 }
 
 
-//martin: alerts the user of a change with the messag; message.
+//martin: alerts the user of a change with the messag; message. TODO(Code clean-up): move to main
 function alertOfChange(message) {
     var topContainer = document.getElementById("topContainer");
     topContainer.style.backgroundColor="#0f0";
@@ -96,7 +96,7 @@ function alertOfChange(message) {
         topContainer.removeChild(topContainer.lastChild)
         scrollEvent()}, 2000);
 }
-
+//TODO(Code clean-up): refactor; change name.
 function testAllerting(fag) {
     //TODO(move this up and use this. instead of fag)
     liste = document.getElementById("allSubjects")
@@ -123,4 +123,19 @@ function paceController(button) {
 		//console.log(tall);
 		return tall;
 	});
+	//TODO(continue): call function in main, that displays pace.
+}
+
+//Function for a student to unsubscribe from a subject
+function unsubscribeFromSubject(studentId, subjectId){
+    var dbRef = firebase.database().ref();
+    if(studentId && subjectId){
+        dbRef.child("users/students/" + studentId + "/subscriptions").once("value", function(snapshot){
+            snapshot.forEach(function(childsnap){
+                if(childsnap.val().subjectId == subjectId){
+                    dbRef.child("users/students/" + studentId + "/subscriptions/" + childsnap.key).remove();
+                }
+            })
+        });
+    }
 }
