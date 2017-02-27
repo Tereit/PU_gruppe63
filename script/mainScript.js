@@ -2,11 +2,13 @@
  * Created by Martin Kostveit on 13.02.2017.
  */
 
+function init() {
+    scrollEvent();
+}
 //'use strict';
-init();
 addListenerToPace(sessionStorage.userType)
 //Firebase ref
-var ref = firebase.database().ref();
+var ref = firebase.database().ref(); //TODO(Code clean-up): refactor; change name (databasRef).
 
 
 //martin: makes the scroll effect of the topContainer
@@ -35,7 +37,7 @@ function scrollEvent() {
 //Logg ut bruker
 function logout(uid, type){
   firebase.auth().signOut().then(function(){
-    ref.child("users/" + type + "/" + uid + "/subscriptions").off()
+    ref.child("users/" + type + "/" + uid + "/subscriptions").off() //TODO(Code clean-up): make list of listeners and detatch all.
     window.location.href = "../html/index.html";
   }, function(error){
     console.log(error.message)
@@ -43,9 +45,9 @@ function logout(uid, type){
   });
 }
 
-//Listener for pace
+//Listener for pace TODO(Code clean-up): add to correct subject.
 function addListenerToPace(type){
-  firebase.database().ref("subjects/subject/lecture/pace").on("value", function(tall){
+  firebase.database().ref("subjects/subject/lecture/pace").on("value", function(tall){ //TODO(Code clean-up): make list of listeners and detatch all.
     pace = tall.val()
     if(type == "professor"){
       professorPace = document.getElementById("professorPace")
@@ -74,14 +76,14 @@ function addSubscriptionToUser(uid, subject, type){
 
 
 function getAllSubjects(callback){
-  fag = []
+  subjects = []
   ref.child("subjects").once("value", function(snapshot){
     object = snapshot.val()
     for (var key in object){
-      fag.push(key)
+      subjects.push(key)
     }
   }).then(function(){
-    callback(fag);
+    callback(subjects);
   })
 }
 
@@ -94,26 +96,6 @@ function getUserName(uid, type, callback){
   })
 }
 
-
-//martin: write the average between 0-10 and change the paceControll bar. For lecturer??
-/* TODO(fix calculations)
-var paceInt = 0;
-var paceAnswers = 0;
-function paceController(pace) {
-    if(pace==="f") {
-        paceInt++;
-    } else {
-        paceInt--;
-    }
-    paceAnswers++;
-    document.getElementById("indicator").style.left=(paceInt/paceAnswers)*10+52.5+"%";
-}
-*/
-
-function init() {
-    scrollEvent();
-}
-
 function changeToLecture() {
     document.getElementById("lectureFeed").style.display="block";
 }
@@ -121,16 +103,9 @@ function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }
 
-/*
-window.onload = function() {
-	this.lecturify = new Lecturify();
-  var uid = sessionStorage.bruker
-  var type = sessionStorage.userType
-  console.log(uid)
-  console.log(type)
-	this.paceUp = document.getElementById("increasePace");
-    this.paceDown = document.getElementById("decreasePace");
-    this.paceUp.addEventListener('click', lecturify.speedUp);
-    this.paceDown.addEventListener('click', lecturify.slowDown);
-}
-*/
+
+
+//always at bottom.
+window.onLoad = function() {
+	init();
+};
