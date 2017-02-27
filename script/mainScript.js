@@ -104,6 +104,29 @@ function exitLecture() {
 }
 
 
+//Listener for fag 
+function subjectListener(uid){
+    var liste = document.getElementById("subjectList");
+    //ref = firebase.database().ref(); //TODO(After code clean-up): This variable was in student, not in professor.
+    ref.child("users/professors/" + uid + "/subscriptions").on("value", function(snapshot){
+        document.getElementById("loader").style.display="none";
+        var currentSubjects = [];
+        liste.innerHTML = "";
+        var object = snapshot.val();
+        for (var key in object){
+            currentSubjects.push(object[key].id)
+        }
+        if(currentSubjects.length > 0){
+            for(var i = 0; i < currentSubjects.length; i++){
+                var liElement = document.createElement("li");
+                liElement.innerHTML = currentSubjects[i];
+                liste.appendChild(liElement)
+            }
+        } else {
+            alertOfChange("You have no subscription to be loaded.");
+        }
+    })
+}
 
 //always at bottom.
 window.onLoad = function() {

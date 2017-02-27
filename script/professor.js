@@ -5,28 +5,7 @@ subjectListener(sessionStorage.bruker)
 getUserName(sessionStorage.bruker, "professors", getUserNamerCallback)
 
 ref = firebase.database().ref()
-//Listener for fag //TODO(Code clean-up): merge with student function and put in main
-function subjectListener(uid){
-    var liste = document.getElementById("subjectList");
-    ref.child("users/professors/" + uid + "/subscriptions").on("value", function(snapshot){
-        document.getElementById("loader").style.display="none";
-        currentSubjects = []
-        liste.innerHTML = ""
-        var object = snapshot.val()
-        for (var key in object){
-            currentSubjects.push(object[key].id)
-        }
-        if(currentSubjects.length > 0){
-            for(var i = 0; i < currentSubjects.length; i++){
-                var liElement = document.createElement("li")
-                liElement.innerHTML = currentSubjects[i]
-                liste.appendChild(liElement)
-            }
-        } else {
-            alertOfChange("You have no subscription to be loaded.");
-        }
-    })
-}
+
 
 //logg professor ut
 function logoutAction(){
