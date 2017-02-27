@@ -36,8 +36,10 @@
 				<ul id="allSubjects">
 					<a id="loader"><img src="images/ring-alt.svg" style="width: 4vw" alt="loading"></a>
 				</ul>
-				<textarea id="searchSubjectId" style="resize:none" rows="1" cols="15" onclick="this.select(this.value)" placeholder="Search subject"></textarea><br>
-				<button onclick=searchForAndDisplaySubject(searchSubjectId.value)>Search</button>
+				<ul>
+					<textarea id="searchTextId" style="resize:none" rows="1" cols="15" oninput=updateSearchSubjectList(searchTextId.value) onclick="this.select(this.value)" placeholder="Search subject"></textarea><br>
+					<button onclick=updateSearchSubjectList(searchTextId.value) onclick="this.select(this.value)">Search</button>
+				</ul>
 			</div>
 
 			<div id="subjectsBar">

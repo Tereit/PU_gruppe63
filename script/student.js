@@ -45,7 +45,7 @@ function filterOutAlreadyUsedSubjects(subjects){
   for (var i = 0; i < currentSubjects.length; i++){
     for(var k = 0; k < subjects.length; k++){
       if(currentSubjects[i] == subjects[k]){
-        subjects.splice(subjects.indexOf(subjects[k]), 1)
+        subjects.splice(k, 1)
       }
     }
   }
@@ -53,6 +53,11 @@ function filterOutAlreadyUsedSubjects(subjects){
 }
 //TODO(Code clean-up): refactor; change name(getAvailableSubjects).
 function getAllSubjectsCallback(subjects){
+	var liste = document.getElementById("allSubjects");
+	var loader = document.getElementById("loader");
+	loader.style.display="none";
+	liste.innerHTML = "";
+	liste.appendChild(loader);
     if(subjects.length > 0){
         var fag = filterOutAlreadyUsedSubjects(subjects);
         if (fag.length<1) {
@@ -61,8 +66,9 @@ function getAllSubjectsCallback(subjects){
             return;
         }
         var liste = document.getElementById("allSubjects");
-        document.getElementById("loader").style.display="none";
+        
         for(var i=0; i < fag.length;i++){
+        	
             var liElement = document.createElement("li");
             liElement.innerHTML = fag[i];
             liElement.onclick=function () {
