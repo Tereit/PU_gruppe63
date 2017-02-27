@@ -103,12 +103,12 @@ function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }
 
-//TODO(change to have parameter type, to make it usable for students as well)
+
 //Listener for fag
-function subjectListener(uid){
+function subjectListener(uid, type){
     var liste = document.getElementById("subjectList");
     //ref = firebase.database().ref(); //TODO(After code clean-up): This variable was in student, not in professor.
-    ref.child("users/professors/" + uid + "/subscriptions").on("value", function(snapshot){
+    ref.child("users/" + type + "/" + uid + "/subscriptions").on("value", function(snapshot){
         document.getElementById("loader").style.display="none";
         var currentSubjects = [];
         liste.innerHTML = "";
@@ -127,7 +127,7 @@ function subjectListener(uid){
         }
     })
 }
-//TODO(Code clean-up): move to main
+
 function alertOfChange(message) {
     var topContainer = document.getElementById("topContainer");
     topContainer.style.backgroundColor="#0f0";
