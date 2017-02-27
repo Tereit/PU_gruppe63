@@ -104,7 +104,7 @@ function exitLecture() {
 }
 
 
-//Listener for fag 
+//Listener for fag
 function subjectListener(uid){
     var liste = document.getElementById("subjectList");
     //ref = firebase.database().ref(); //TODO(After code clean-up): This variable was in student, not in professor.
@@ -127,6 +127,20 @@ function subjectListener(uid){
         }
     })
 }
+//TODO(Code clean-up): move to main
+function alertOfChange(message) {
+    var topContainer = document.getElementById("topContainer");
+    topContainer.style.backgroundColor="#0f0";
+    topContainer.style.width="100vw";
+    var newDiv = document.createElement("a");
+    newDiv.innerHTML= message;
+    topContainer.appendChild(newDiv);
+    setTimeout(function() {topContainer.style.backgroundColor="#999999";
+        topContainer.removeChild(topContainer.lastChild);
+        scrollEvent()}, 2000);
+}
+
+
 
 //always at bottom.
 window.onLoad = function() {

@@ -12,7 +12,6 @@ function logoutAction(){
   logout(sessionStorage.bruker, "professors")
 }
 
-//TODO(Code clean-up): merge with createSubject(), should stay in professor.
 function addSubject() {
     var liElement = document.createElement("li");
     input = document.getElementById("newSubjectName").value;
@@ -35,15 +34,4 @@ function getUserNamerCallback(username){
   alertOfChange("Welcome, " + navn + "!")
 }
 
-//TODO(Code clean-up): move to main
-function alertOfChange(message) {
-    var topContainer = document.getElementById("topContainer");
-    topContainer.style.backgroundColor="#0f0";
-    topContainer.style.width="100vw";
-    var newDiv = document.createElement("a");
-    newDiv.innerHTML= message;
-    topContainer.appendChild(newDiv);
-    setTimeout(function() {topContainer.style.backgroundColor="#999999";
-        topContainer.removeChild(topContainer.lastChild)
-        scrollEvent()}, 2000);
-}
+
