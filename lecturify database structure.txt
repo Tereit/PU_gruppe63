@@ -11,6 +11,12 @@ lecturify
 	|
 	|__users
 	|	|
+	|	|__admin
+	|	|		|
+	|	|		|__uid
+	|	|				|
+	|	|				|_username
+	|	|
 	|	|__professors
 	|	|		|
 	|	|		|__uid
