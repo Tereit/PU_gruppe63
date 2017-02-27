@@ -48,9 +48,14 @@ lecturify
 							|						|__postedby
 							|						|__upvotecount
 							|						|__answers
-							|								|__answer
+							|								|__answerID
 							|										|__answeredby
 							|										|__upvotecount
 							|__questionFromProf
 									|
 									|__answers		(forskjellige typer svar?)
+									
+session storage variabler
+sessionStorage.bruker = uid
+sessionStorage.type = student/professor
+sessionStorage.isbanned = true/false
