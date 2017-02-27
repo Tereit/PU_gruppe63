@@ -1,0 +1,56 @@
+lecturify
+	|
+	|__subjects
+	|		|
+	|		|__fagNavn
+	|				|
+	|				|__id: fagkode
+	|				|__semester
+	|						|
+	|						|__professor
+	|						
+	|__users
+	|	|
+	|	|__professors
+	|	|		|
+	|	|		|__uid
+	|	|			|
+	|	|			|__subjects
+	|	|			|		|
+	|	|			|		|__id: fagkode+semester
+	|	|			|__username
+	|	|			
+	|	|__students
+	|			|
+	|			|__uid
+	|				|
+	|				|__subscription
+	|				|		|
+	|				|		|__id: fagkode+semester
+	|				|__username
+	|				|__studass (boolean) default->false
+	|				
+	|__lectures
+			|
+			|__fagkode+semester
+						|
+						|__dato
+							|
+							|__usercount
+							|__banlist
+							|__pace
+							|__tema			(??? trenger vi dette?)
+							|__questions
+							|		|
+							|		|__questionID
+							|				|
+							|				|__question
+							|						|__postedby
+							|						|__upvotecount
+							|						|__answers
+							|								|__answer
+							|										|__answeredby
+							|										|__upvotecount
+							|__questionFromProf
+									|
+									|__answers		(forskjellige typer svar?)
