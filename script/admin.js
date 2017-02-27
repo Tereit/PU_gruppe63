@@ -3,26 +3,31 @@
  */
 
 function createProfessor() {
-	var user = document.getElementById("R_profID").value
-	var pass = document.getElementById("R_profPass").value
-	if(!user.includes("@stud.ntnu.no")){
-		user = user + "@stud.ntnu.no";
+	var user = document.getElementById("R_profID")
+	var pass = document.getElementById("R_profPass")
+	if(!user.value.includes("@ntnu.no")){
+		user.value = user.value + "@ntnu.no";
 	}
-	if(user != "" || pass != "" || pass.length > 4){
-	    firebase.auth().createUserWithEmailAndPassword(user, pass).catch(
+	if(user.value != "" || pass.value != "" || pass.value.length > 4){
+	    firebase.auth().createUserWithEmailAndPassword(user.value, pass.value).catch(
 	        error => alert(error.message));
 	}else{
-	    window.location.reload();
 	    alert("Invalid information");
+			user.value = "";
+			pass.value = "";
 	}
 };
 
 function updateProf(prof) {
-    console.log(prof);
 	if (prof) {
 		firebase.database().ref("users/professors/" + JSON.stringify(prof.uid)).set({
 			username: prof.email
-		});
+		}).then(function(){
+			alert("Professor created!");
+			var user = document.getElementById("R_profID").value = "";
+			var pass = document.getElementById("R_profPass").value = "";
+		}
+		);
 	}
 }
 
