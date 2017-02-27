@@ -19,19 +19,14 @@ function addSubject() {
     liElement.innerHTML = input
     liElement.onclick="chooseSubject("+this.innerHTML+")";
     /*TODO(make server handle new subject)*/
-    createSubject(input, sessionStorage.bruker)
+    ref.child("subjects/" + input).set({
+        id: input
+    })
+    ref.child("users/professors/" + sessionStorage.bruker + "/subscriptions").push({
+        id: input
+    })
 }
 
-
-//LAger nytt fag og legger til subscriptions til professor bruker
-function createSubject(subject, uid){
-  ref.child("subjects/" + subject).set({
-    id: subject
-  })
-  ref.child("users/professors/" + uid + "/subscriptions").push({
-    id: subject
-  })
-}
 //TODO(new function): deleteSubcjet()
 
 
