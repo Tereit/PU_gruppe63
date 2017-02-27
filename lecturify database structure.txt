@@ -8,7 +8,7 @@ lecturify
 	|				|__semester
 	|						|
 	|						|__professor
-	|						
+	|
 	|__users
 	|	|
 	|	|__professors
@@ -19,7 +19,7 @@ lecturify
 	|	|			|		|
 	|	|			|		|__id: fagkode+semester
 	|	|			|__username
-	|	|			
+	|	|
 	|	|__students
 	|			|
 	|			|__uid
@@ -29,7 +29,7 @@ lecturify
 	|				|		|__id: fagkode+semester
 	|				|__username
 	|				|__studass (boolean) default->false
-	|				
+	|
 	|__lectures
 			|
 			|__fagkode+semester
@@ -54,8 +54,21 @@ lecturify
 							|__questionFromProf
 									|
 									|__answers		(forskjellige typer svar?)
-									
+
 session storage variabler
 sessionStorage.bruker = uid
 sessionStorage.type = student/professor
 sessionStorage.isbanned = true/false
+
+
+Test bruker professor:
+01: username: proftest
+		passord: proftest
+
+Test bruker student:
+01: username: studtest
+		passord: studtest
+
+Test bruker admin:
+01: username: admintest
+		passord: admintest
