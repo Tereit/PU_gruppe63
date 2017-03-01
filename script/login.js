@@ -47,14 +47,16 @@ function onLoginAction() {
 		setSessionStorage()
 		var user = document.getElementById("user").value;
 	  var pass = document.getElementById("pass").value;
-		var professorRadio = document.getElementById("r2");
-		if(!user.includes("@stud.ntnu.no")){
-			user = user + "@stud.ntnu.no";
-		}
 		if(sessionStorage.userType == "professor"){
+			if(!user.includes("ntnu.no")){
+				user = user + "@ntnu.no";
+			}
 			checkIfProfessorExist(user, pass)
 		}
 		else{
+			if(!user.includes("stud.ntnu.no")){
+				user = user + "@stud.ntnu.no";
+			}
 			onLogin(user, pass);
 		}
 };
@@ -63,10 +65,19 @@ function onRegister() {
 	setSessionStorage();
 	var user = document.getElementById("R_user").value
 	var pass = document.getElementById("R_pass").value
-	if(!user.includes("@stud.ntnu.no")){
-		user = user + "@stud.ntnu.no";
-	}
 	if(user != "" || pass != "" || pass.length > 4){
+
+		if(sessionStorage.userType == "professor"){
+			if(!user.includes("ntnu.no")){
+				user = user + "@ntnu.no";
+			}
+		}
+		else{
+			if(!user.includes("stud.ntnu.no")){
+				user = user + "@stud.ntnu.no";
+			}
+		}
+
 		firebase.auth().createUserWithEmailAndPassword(user, pass).catch(
 		error => alert(error.message));
   	}else{
