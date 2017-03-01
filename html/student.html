@@ -33,17 +33,27 @@
 		<div id="lecturifyText">Lecturify</div>
 	</div>
 	<div id="mainContainer">
-		<button id="logoutButton" onclick=logout(sessionStorage.bruker, "students")>Logout</button>
 		<div id="upperMain">
 			<div id="newsFeed">
-				<h2>Subscribe to a subject!</h2>
-				<ul id="allSubjects">
+				<div class="tab">
+				  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'London')">All Subjects</a>
+				  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Paris')">Random</a>
+				  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Tokyo')">Random</a>
+				</div>
+
+				<div id="London" class="tabcontent">
+					<h3>Available subjects:</h3>
+					<ul id="allSubjectsList">
+					</ul>
 					<a id="loader"><img src="images/ring-alt.svg" style="width: 4vw" alt="loading"></a>
-				</ul>
-				<ul>
-					<textarea id="searchTextId" style="resize:none" rows="1" cols="15" oninput=updateSearchSubjectList(searchTextId.value) onclick="this.select(this.value)" placeholder="Search subject"></textarea><br>
-					<button onclick=updateSearchSubjectList(searchTextId.value) onclick="this.select(this.value)">Search</button>
-				</ul>
+				</div>
+
+				<div id="Paris" class="tabcontent">
+
+				</div>
+
+				<div id="Tokyo" class="tabcontent">
+
 			</div>
 
 			<div id="subjectsBar">
@@ -51,6 +61,7 @@
 				<ul id="subjectList">
 					<a id="subscribeLoader"><img src="images/ring-alt.svg" style="width: 4vw" alt="loading"></a>
 				</ul>
+				<button id="logoutButton" onclick=logout(sessionStorage.bruker, "students")>Logout</button>
 			</div>
 
 		</div>
