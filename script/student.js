@@ -1,11 +1,13 @@
-
-console.log(sessionStorage.bruker)
+console.log(sessionStorage.bruker);
 
 currentSubjects = []
 
-subjectListener(sessionStorage.bruker, "students")
-getUserName(sessionStorage.bruker, "students", getUserName)
-getAllSubjects(function(subjects){getAvailableSubjects(subjects)})
+function init() {
+    subjectListener(sessionStorage.bruker, "students");
+    getUserName(sessionStorage.bruker, "students", getUserName);
+    getAllSubjects(function(subjects){getAvailableSubjects(subjects)});
+}
+
 
 //Finds all subjects that is not in currentSubjects
 function filterOutAlreadyUsedSubjects(subjects){
@@ -17,8 +19,8 @@ function filterOutAlreadyUsedSubjects(subjects){
 	}
 	
 	for(var o = 0; o < subjects.length; o++){
-		if(!hashSub[subject[o]]){
-			outSub.push(subject[o])
+		if(!hashSub[subjects[o]]){
+			outSub.push(subjects[o])
 		}
 	}
 	return outSub
@@ -127,3 +129,5 @@ function updateSearchSubjectList(searchText){
 		});
 	}
 }
+
+window.onload(init());
