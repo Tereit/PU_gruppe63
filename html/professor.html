@@ -40,26 +40,26 @@
     <div id="lecturifyText">Lecturify</div>
 </div>
 <div id="mainContainer">
-    <button id="logoutButton" onclick="logout()">Logout</button>
     <div id="upperMain">
         <div id="newsFeed">
-        	<form>
-				Fag: <input id="subjectName" type="text" />
-				<br>Fagkode: <input id="subjectCode" type="text" />
-				<br>Semester: <input id="semester" type="text" />
-				<br>Dato: <input id="date" type="date" />
-
-				<!-- Datepicker for browsers that do not support the HTML 5 version -->
-				<script>
-				    if (!Modernizr.inputtypes.date) {
-					    $('input[type=date]').datepicker({
-					        // Consistent format with the HTML5 picker
-					        dateFormat: 'dd-mm-yy'
-					    });
-					}
-				</script>
-				<br><button onclick=newLecture()>Create lecture</button>
-			</form>
+        	<div>
+                <form id="currentSubject">
+                    <a id="currentSubjectName"></a>
+                    <br>Dato: <input id="date" type="date" />
+                    <br>Fra: <input id="tid" type="string" placeholder="e.g 10:15"/>
+                    <br>Til: <input id="tid" type="string" placeholder="e.g 11:00"/>
+                    <!-- Datepicker for browsers that do not support the HTML 5 version -->
+                    <script>
+                        if (!Modernizr.inputtypes.date) {
+                            $('input[type=date]').datepicker({
+                                // Consistent format with the HTML5 picker
+                                dateFormat: 'dd-mm-yy'
+                            });
+                        }
+                    </script>
+                    <br><button onclick=newLecture()>Create lecture</button>
+                </form>
+            </div>
         </div>
         <div id="subjectsBar">
             <a style="font-size: 20px; font-weight: bold; margin-left: 2px">Available subjects</a>
@@ -71,6 +71,7 @@
                 <input type="text" id="newSubjectName" placeholder="Subject name"><br>
 								<input type="text" id="newSubjectCode" placeholder="Fagekode"><br>
                 <button onclick=addSubject()>Submit</button>
+                <button id="logoutButton" onclick="logout()">Logout</button>
             </div>
         </div>
     </div>

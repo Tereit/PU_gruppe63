@@ -69,3 +69,8 @@ function getDate() {
 	// if no date supplied from form use current date
 	return new Date();
 }
+
+function returnSubjectList() {
+	var subjectList =document.getElementById("subjectList").childNodes;
+    console.log(subjectList[0]);
+}
