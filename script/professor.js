@@ -1,7 +1,7 @@
 console.log(sessionStorage.bruker);
 console.log(sessionStorage.userType);
 sessionStorage.currentSubjects = []
-subjectListener(sessionStorage.bruker)
+subjectListener(sessionStorage.bruker, professor)
 getUserName(sessionStorage.bruker, "professors", getUserNamerCallback)
 
 //logg professor ut

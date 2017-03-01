@@ -101,12 +101,10 @@ function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }
 
-//TODO(change to have parameter type, to make it usable for students as well)
 //Listener for fag
-function subjectListener(uid){
+function subjectListener(uid, type){
     var liste = document.getElementById("subjectList");
-    //dbRef = firebase.database().dbRef(); //TODO(After code clean-up): This variable was in student, not in professor.
-    dbRef.child("users/professors/" + uid + "/subscriptions").on("value", function(snapshot){
+    dbRef.child("users/"+type+"/" + uid + "/subscriptions").on("value", function(snapshot){
         document.getElementById("loader").style.display="none";
         var currentSubjects = [];
         liste.innerHTML = "";
