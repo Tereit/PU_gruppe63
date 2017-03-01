@@ -111,7 +111,7 @@ function search(searchText, subjects){
 	return newList;
 }
 
-//Updates the possible subjects to subscribe to 
+//Updates the possible subjects to subscribe to
 function updateSearchSubjectList(searchText){
 	if(searchText != ""){
 		getNotSubscribedSubjects(sessionStorage.bruker, "students", function(notSubscribed){
@@ -127,6 +127,3 @@ function updateSearchSubjectList(searchText){
 		});
 	}
 }
-
-
-
