@@ -48,8 +48,8 @@ function getAllProfessors() {
 		snapshot.forEach(function (childSnapshot) {
 			professors.push(childSnapshot.val().username);
         })
+        addToList(professors, "allProfessors", "professors");
     });
-	console.log(professors);
 }
 
 function getAllStudents() {
@@ -58,12 +58,33 @@ function getAllStudents() {
         snapshot.forEach(function (childSnapshot) {
             students.push(childSnapshot.val().username);
         })
+        addToList(students, "allStudents", "students");
     });
     console.log(students);
 }
 
 function getAllSubjectsCallback(subjects) {
-	console.log(subjects);
+	addToList(subjects, "allSubjects", "subjects")
+}
+function addToList(type, printTolist, referenceInDB) {
+    var allList = document.getElementById(printTolist);
+    for(var i=0; i<type.length; i++) {
+        var liElement = document.createElement("li");
+        this.deleteButton = document.createElement("button");
+        this.deleteButton.innerHTML="delete";
+        this.deleteButton.value=type[i];
+        this.deleteButton.onclick=function () {
+            deleteElement(this.value, referenceInDB);
+        };
+        liElement.innerHTML=type[i];
+        liElement.appendChild(this.deleteButton);
+        allList.appendChild(liElement);
+    }
+}
+
+function deleteElement(element, referenceInDB) {
+	console.log(element, referenceInDB);
+	//TODO(new function): delete subject
 }
 
 window.onload = function() {
