@@ -64,6 +64,7 @@ function getAllStudents() {
 }
 
 function getAllSubjectsCallback(subjects) {
+	console.log(subjects);
 	addToList(subjects, "allSubjects", "subjects")
 }
 function addToList(type, printTolist, referenceInDB) {

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script src="../script/firebaseAuth.js"></script>
     <script src="../script/redirect.js"></script>
 </head>
 <body>
@@ -27,10 +29,9 @@
     <div>
         <ul id="allSubjects"></ul>
     </div>
+    <button onclick=logout(sessionStorage.bruker,"admin")>Log out</button>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
-<script src="../script/firebaseAuth.js"></script>
 <script src="../script/mainScript.js"></script>
 <script src="../script/admin.js"></script>
 </body>
