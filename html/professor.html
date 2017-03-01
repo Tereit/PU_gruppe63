@@ -3,6 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Professor</title>
+	<!-- Firebase stuff -->
+	<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+	<script src="../script/firebaseAuth.js"></script>
+	<script src="../script/redirect.js"></script>
+	
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="../script/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../script/jquery-ui-1.12.1.custom/jquery-ui.min.css" />
+	
+	<!-- modernizr -->
+	<script src="../script/modernizr-custom.js"></script>
+	
+	
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
     <link rel="stylesheet" type="text/css" href="css/professor.css" />
 </head>
@@ -29,6 +43,23 @@
     <button id="logoutButton" onclick="logout()">Logout</button>
     <div id="upperMain">
         <div id="newsFeed">
+        	<form>
+				Fag: <input id="subjectName" type="text" />
+				<br>Fagkode: <input id="subjectCode" type="text" />
+				<br>Semester: <input id="semester" type="text" />
+				<br>Dato: <input id="date" type="date" />
+		
+				<!-- Datepicker for browsers that do not support the HTML 5 version -->
+				<script>
+				    if (!Modernizr.inputtypes.date) {
+					    $('input[type=date]').datepicker({
+					        // Consistent format with the HTML5 picker
+					        dateFormat: 'dd-mm-yy'
+					    });
+					}
+				</script>
+				<br><button onclick=newLecture()>Create lecture</button>
+			</form>
         </div>
         <div id="subjectsBar">
             <a style="font-size: 20px; font-weight: bold; margin-left: 2px">Available subjects</a>
@@ -49,8 +80,6 @@
 <footer> </footer>
 
 
-<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
-<script src="../script/firebaseAuth.js"></script>
 
 <script src="../script/mainScript.js"></script>
 <script src="../script/professor.js"></script>
