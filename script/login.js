@@ -18,18 +18,8 @@ function checkIfProfessorExist(user, pass){
 };
 
 function onLogin(user, pass){
-	if (user == "" || pass == ""){
-		alert("Invalid information");
-		window.location.reload();
-	}
-	else if(pass.length < 4){
-		alert("Password must be longer than 4 characters!")
-		window.location.reload();
-	}
-	else {
 		firebase.auth().signInWithEmailAndPassword(user, pass).catch(
 		error => alert(error.message));
-	}
 }
 
 function setSessionStorage(){
@@ -42,22 +32,68 @@ function setSessionStorage(){
 	}
 }
 
+function checkAdmin(user, pass, callbackFailed, callbackSucsess){
+	console.log("kjører checkAdmin")
+	found = false
+	firebase.database().ref("users/admin").once("value", function(snapshot){
+		object = snapshot.val()
+		for (var key in object){
+			console.log(user)
+			console.log(object[key].username)
+			if(user == object[key].username){
+				console.log("Admin found!")
+				found = true
+				sessionStorage.userType = "admin"
+				callbackSucsess(user, pass)
+			}
+		}
+		if(found == false){
+			console.log("fant ingen admin")
+			callbackFailed(user, pass)
+		}
+	})
+}
+
+function adminSucsessCallback(user, pass){
+	console.log("admin logget inn")
+	firebase.auth().signInWithEmailAndPassword(user, pass).catch(
+		error => alert(error.message)
+	)
+}
+
+function adminFailedCallback(user, pass){
+	console.log("admin ikke funnet")
+	if(sessionStorage.userType == "professor"){
+		if(!user.includes("ntnu.no")){
+			user = user + "@ntnu.no";
+		}
+		checkIfProfessorExist(user, pass)
+	}
+	else{
+		if(!user.includes("stud.ntnu.no")){
+			user = user + "@stud.ntnu.no";
+		}
+		onLogin(user, pass);
+	}
+}
 
 function onLoginAction() {
 		setSessionStorage()
 		var user = document.getElementById("user").value;
 	  var pass = document.getElementById("pass").value;
-		if(sessionStorage.userType == "professor"){
-			if(!user.includes("ntnu.no")){
-				user = user + "@ntnu.no";
-			}
-			checkIfProfessorExist(user, pass)
+		if (user == "" || pass == ""){
+			alert("Invalid information");
+			window.location.reload();
+		}
+		else if(pass.length < 6){
+			alert("Password must be longer than 4 characters!")
+			window.location.reload();
 		}
 		else{
 			if(!user.includes("stud.ntnu.no")){
 				user = user + "@stud.ntnu.no";
 			}
-			onLogin(user, pass);
+			checkAdmin(user, pass, adminFailedCallback, adminSucsessCallback)
 		}
 };
 
@@ -93,6 +129,9 @@ function updateUser(user) {
 	        username: user.email
 	      }).then(window.location.href = "../html/student.html");
 	    }
+			else if(sessionStorage.userType == "admin"){
+				window.location.href = "../html/admin.html";
+			}
 	    else{
 	      dbRef.child("users/professors/" + sessionStorage.bruker).update({
 	        username: user.email
