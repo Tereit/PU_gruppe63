@@ -101,17 +101,9 @@ function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }
 
-//Listener for fag
-<<<<<<< HEAD
-function subjectListener(uid, type){
-    var liste = document.getElementById("subjectList");
-    dbRef.child("users/"+type+"/" + uid + "/subscriptions").on("value", function(snapshot){
-=======
 function subjectListener(uid, type, callback){
     var liste = document.getElementById("subjectList");
-    //dbRef = firebase.database().dbRef(); //TODO(After code clean-up): This variable was in student, not in professor.
     dbRef.child("users/" + type + "/" + uid + "/subscriptions").on("value", function(snapshot){
->>>>>>> 3c3d594e49777b36233b30884b9dd0872f430489
         document.getElementById("loader").style.display="none";
         var currentSubjects = [];
         liste.innerHTML = "";

@@ -2,7 +2,10 @@
  * Created by Martin Kostveit on 22.02.2017.
  *
  */
-getAllSubjects(getAllSubjectsCallback);
+function init() {
+    getAllSubjects(getAllSubjectsCallback);
+}
+
 
 function createProfessor() {
 	var user = document.getElementById("R_profID");
@@ -49,4 +52,5 @@ window.onload = function() {
 	firebase.auth().onAuthStateChanged(user => {
 		updateProf(user);
 	});
+	init();
 };
