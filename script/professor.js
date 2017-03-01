@@ -1,14 +1,8 @@
 console.log(sessionStorage.bruker);
 console.log(sessionStorage.userType);
-<<<<<<< HEAD
-sessionStorage.currentSubjects = []
-subjectListener(sessionStorage.bruker, professor)
-getUserName(sessionStorage.bruker, "professors", getUserNamerCallback)
-=======
 sessionStorage.currentSubjects = [];
 subjectListener(sessionStorage.bruker);
 getUserName(sessionStorage.bruker, "professors", getUserNamerCallback);
->>>>>>> 3c3d594e49777b36233b30884b9dd0872f430489
 
 // logg professor ut
 function logoutAction() {
