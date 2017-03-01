@@ -1,27 +1,37 @@
 console.log(sessionStorage.bruker);
 console.log(sessionStorage.userType);
-sessionStorage.currentSubjects = [];
-subjectListener(sessionStorage.bruker);
+//subjectListener(sessionStorage.bruker);
+
+//Pop-up notification med brukernavn
 getUserName(sessionStorage.bruker, "professors", getUserNamerCallback);
+
+//Firebase database variabel
+dbRef = firebase.database();
+
 
 // logg professor ut
 function logoutAction() {
 	logout(sessionStorage.bruker, "professors");
 }
 
+//Lage et nytt fag under subjects og brukerens subscriptions
 function addSubject() {
-	var liElement = document.createElement("li");
-	var input = document.getElementById("newSubjectName").value;
-	liElement.innerHTML = input;
-	liElement.onclick = "chooseSubject(" + this.innerHTML + ")";
-	/* TODO(make server handle new subject) */
-	dbRef.child("subjects/" + input).set({
-		id : input
-	});
-	dbRef.child("users/professors/" + sessionStorage.bruker + "/subscriptions")
-			.push({
-				id : input
-			});
+	fag = document.getElementById("newSubjectName")
+	fagkode = document.getElementById("newSubjectCode")
+	subscriptionsId = fag.value + " " + fagkode.value;
+	console.log(subscriptionsId)
+	//Legger til faget under "subjects"
+	dbRef.ref("subjects/" + fag.value).set({
+		id: fagkode.value
+	})
+	//Legger til faget i subscriptions til brukeren
+	dbRef.ref("users/professors/" + sessionStorage.bruker + "/subscriptions").push({
+		id: subscriptionsId
+	})
+
+	fag.value = ""
+	fagkode.value = ""
+
 }
 
 // TODO(new function): deleteSubcjet()
