@@ -15,5 +15,5 @@ Makefile.in
 /.idea
 /*.iml
 /bin/
-/.xml
 /.project
+/.DS_Store
