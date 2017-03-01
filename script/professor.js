@@ -4,9 +4,6 @@ sessionStorage.currentSubjects = []
 subjectListener(sessionStorage.bruker)
 getUserName(sessionStorage.bruker, "professors", getUserNamerCallback)
 
-ref = firebase.database().ref()
-
-
 //logg professor ut
 function logoutAction(){
   logout(sessionStorage.bruker, "professors")
@@ -14,14 +11,14 @@ function logoutAction(){
 
 function addSubject() {
     var liElement = document.createElement("li");
-    input = document.getElementById("newSubjectName").value;
-    liElement.innerHTML = input
+    var input = document.getElementById("newSubjectName").value;
+    liElement.innerHTML = input;
     liElement.onclick="chooseSubject("+this.innerHTML+")";
     /*TODO(make server handle new subject)*/
-    ref.child("subjects/" + input).set({
+    dbRef.child("subjects/" + input).set({
         id: input
     })
-    ref.child("users/professors/" + sessionStorage.bruker + "/subscriptions").push({
+    dbRef.child("users/professors/" + sessionStorage.bruker + "/subscriptions").push({
         id: input
     })
 }

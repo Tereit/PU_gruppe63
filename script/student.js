@@ -10,8 +10,7 @@ getAllSubjects(function(subjects){getAvailableSubjects(subjects)})
 //LISTENER FOR FAG SOM BRUKER HAR SUBCRIBED TIL TODO(Code clean-up): merge and move to main
 function subjectListener(uid){
     var liste = document.getElementById("subjectList");
-    ref = firebase.database().ref();
-    ref.child("users/students/" + uid + "/subscriptions").on("value", function(snapshot){
+    dbRef.child("users/students/" + uid + "/subscriptions").on("value", function(snapshot){
         //Martin: Lager error. Orker ikke å fikse nå
         //document.getElementById("subscribeLoader").style.display="none";
         currentSubjects = []
@@ -58,36 +57,27 @@ function getAvailableSubjects(subjects){
     if(subjects.length > 0){
         var fag = filterOutAlreadyUsedSubjects(subjects);
         if (fag.length<1) {
-            alertOfChange("There are no subjects to subscribe to.")
-            document.getElementById("loader").innerHTML="There are no subjects to subscribe to.";
+            alertOfChange("There are no subjects to subscribe to.");
             return;
         }
         var liste = document.getElementById("allSubjects");
-        
         for(var i=0; i < fag.length;i++){
-        	
             var liElement = document.createElement("li");
             liElement.innerHTML = fag[i];
             liElement.onclick=function () {
-                testAllerting(this.innerHTML);
+                selectSubscription(this.innerHTML);
             };
             liste.appendChild(liElement);
         }
-    }
-    else {
+    } else {
         alertOfChange("There are no subjects available.");
-        document.getElementById("loader").innerHTML="There are no subjects available.";
   }
 }
 
-
-
-//TODO(Code clean-up): refactor; change name.
-function testAllerting(fag) {
-    //TODO(move this up and use this. instead of fag)
-    liste = document.getElementById("allSubjects")
-    addSubscriptionToUser(sessionStorage.bruker, fag, "students")
-    items = liste.childNodes;
+function selectSubscription(fag) {
+    var liste = document.getElementById("allSubjects");
+    addSubscriptionToUser(sessionStorage.bruker, fag, "students");
+    var items = liste.childNodes;
     for(var i = 0; i < items.length; i++){
       if(items[i].innerHTML == fag){
         liste.removeChild(items[i])

@@ -6,10 +6,9 @@ function init() {
     scrollEvent();
 }
 //'use strict';
-addListenerToPace(sessionStorage.userType)
-//Firebase ref
-var ref = firebase.database().ref(); //TODO(Code clean-up): refactor; change name (databasRef).
-
+addListenerToPace(sessionStorage.userType);
+//Firebase dbRef
+var dbRef = firebase.database().ref(); //TODO(Code clean-up): refactor; change name (databasRef).
 
 //martin: makes the scroll effect of the topContainer
 var text = document.getElementById("lecturifyText");
@@ -36,37 +35,36 @@ function scrollEvent() {
 
 //Logg ut bruker
 function logout(uid, type){
-  firebase.auth().signOut().then(function(){
-    ref.child("users/" + type + "/" + uid + "/subscriptions").off() //TODO(Code clean-up): make list of listeners and detatch all.
-    window.location.href = "../html/index.html";
-  }, function(error){
-    console.log(error.message)
-    alertOfChange("Something wrong happened")
-  });
+    firebase.auth().signOut().then(function(){
+        dbRef.child("users/" + type + "/" + uid + "/subscriptions").off(); //TODO(Code clean-up): make list of listeners and detatch all.
+        window.location.href = "../html/index.html";
+    }, function(error){
+        console.log(error.message);
+        alertOfChange("Something wrong happened");
+    });
 }
 
 //Listener for pace TODO(Code clean-up): add to correct subject.
 function addListenerToPace(type){
-  firebase.database().ref("subjects/subject/lecture/pace").on("value", function(tall){ //TODO(Code clean-up): make list of listeners and detatch all.
-    pace = tall.val()
+  dbRef.child("subjects/subject/lecture/pace").on("value", function(tall){ //TODO(Code clean-up): make list of listeners and detatch all.
+    var pace = tall.val();
     if(type == "professor"){
-      professorPace = document.getElementById("professorPace")
-      professorPace.innerHTML = pace
+      var professorPace = document.getElementById("professorPace");
+      professorPace.innerHTML = pace;
     }
     else if(type == "student"){
-      studentPace = document.getElementById("studentPace")
+      var studentPace = document.getElementById("studentPace");
       studentPace.innerHTML = pace
     }
     else{
-      alert("Invalid userType for pace listener")
+      alertOfChange("Invalid userType for pace listener");
     }
   })
 }
 
 //Add subject to user profile
 function addSubscriptionToUser(uid, subject, type){
-    console.log("kjører")
-    ref.child("users/" + type + "/" + uid + "/subscriptions").push({
+    dbRef.child("users/" + type + "/" + uid + "/subscriptions").push({
         id: subject
     })
 }
@@ -76,11 +74,11 @@ function addSubscriptionToUser(uid, subject, type){
 
 
 function getAllSubjects(callback){
-  subjects = []
-  ref.child("subjects").once("value", function(snapshot){
-    object = snapshot.val()
+  var subjects = [];
+  dbRef.child("subjects").once("value", function(snapshot){
+    var object = snapshot.val();
     for (var key in object){
-      subjects.push(key)
+      subjects.push(key);
     }
   }).then(function(){
     callback(subjects);
@@ -89,7 +87,7 @@ function getAllSubjects(callback){
 
 //Get username of user
 function getUserName(uid, type, callback){
-  ref.child("users/" + type + "/" + uid + "/username").once("value", function(name){
+  dbRef.child("users/" + type + "/" + uid + "/username").once("value", function(name){
     if(name.val()){
       callback(name.val())
     }
@@ -107,14 +105,14 @@ function exitLecture() {
 //Listener for fag
 function subjectListener(uid){
     var liste = document.getElementById("subjectList");
-    //ref = firebase.database().ref(); //TODO(After code clean-up): This variable was in student, not in professor.
-    ref.child("users/professors/" + uid + "/subscriptions").on("value", function(snapshot){
+    //dbRef = firebase.database().dbRef(); //TODO(After code clean-up): This variable was in student, not in professor.
+    dbRef.child("users/professors/" + uid + "/subscriptions").on("value", function(snapshot){
         document.getElementById("loader").style.display="none";
         var currentSubjects = [];
         liste.innerHTML = "";
         var object = snapshot.val();
         for (var key in object){
-            currentSubjects.push(object[key].id)
+            currentSubjects.push(object[key].id);
         }
         if(currentSubjects.length > 0){
             for(var i = 0; i < currentSubjects.length; i++){
@@ -127,7 +125,6 @@ function subjectListener(uid){
         }
     })
 }
-//TODO(Code clean-up): move to main
 function alertOfChange(message) {
     var topContainer = document.getElementById("topContainer");
     topContainer.style.backgroundColor="#0f0";
@@ -142,7 +139,7 @@ function alertOfChange(message) {
 
 //Gets a list of the subjects that the user has subscribed to
 function getSubscribedSubjects(userId, type, callback){
-	var dbRef = firebase.database().ref();
+	//var dbRef = firebase.database().dbRef();
 	var subjectList = [];
 	dbRef.child("users/" + type + "/" + userId + "/subscriptions").once("value", function(snapshot){
 		snapshot.forEach(function(childsnap){

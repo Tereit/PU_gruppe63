@@ -8,7 +8,7 @@ QUnit.test("User story 1 tests", function(assert) {
 		var ref = firebase.database().ref();
 		console.log(ref);
 		/*
-		ref.child(subject).child(lecture).once("value", function(snapshot) {
+		dbRef.child(subject).child(lecture).once("value", function(snapshot) {
 			console.log(snapshot.val());
 		});*/
 	}

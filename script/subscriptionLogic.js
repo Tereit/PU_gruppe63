@@ -7,7 +7,7 @@ searchList = [];
 
 //Function for a student to subscribe to a subject
 function subscribeToSubject(studentId, subjectId, callback){
-	var dbRef = firebase.database().ref();
+	var dbRef = firebase.database().dbRef();
 	if(studentId && subjectId){
 		dbRef.child("users/students/" + studentId + "/subscriptions").push().set({
 			subjectId: "" + subjectId
@@ -33,7 +33,7 @@ function getSnittList(list1, list2){
 
 //Function for a student to unsubscribe from a subject
 function unsubscribeFromSubject(studentId, subjectId, callback){
-	var dbRef = firebase.database().ref();
+	var dbRef = firebase.database().dbRef();
 	if(studentId && subjectId){
 		dbRef.child("users/students/" + studentId + "/subscriptions").once("value", function(snapshot){
 			snapshot.forEach(function(childsnap){
@@ -52,7 +52,7 @@ function unsubscribeFromSubject(studentId, subjectId, callback){
 
 
 function getAllSubjectsId(callback){
-	var dbRef = firebase.database().ref();
+	var dbRef = firebase.database().dbRef();
 	var subjectIdList = [];
 	dbRef.child("subjects").once("value", function(snapshot){
 		snapshot.forEach(function(childsnap){
@@ -97,7 +97,7 @@ function updateSubjectButton(subjectId, btn, text){
 
 //Returns a professor based on it's id, with a callback function
 function getProfessor(professorId, callback){
-	var dbRef = firebase.database().ref();
+	var dbRef = firebase.database().dbRef();
 	dbRef.child("users/professors/" + professorId).once("value", function(snapshot){
 		callback(professorId, snapshot);
 	});
@@ -105,7 +105,7 @@ function getProfessor(professorId, callback){
 
 //Checks if the student has subscribed to the subjects
 function checkIfSubscribed(studentId, subjectId, callback){
-	var dbRef = firebase.database().ref();
+	var dbRef = firebase.database().dbRef();
 	var isSubscribed = false;
 	dbRef.child("users/students/" + studentId + "/subscriptions").once("value", function(snapshot){
 		
@@ -121,7 +121,7 @@ function checkIfSubscribed(studentId, subjectId, callback){
 
 
 function getSubject(subjectId, callback){
-	var dbRef = firebase.database().ref();
+	var dbRef = firebase.database().dbRef();
 	dbRef.child("subjects").once("value", function(snapshot){
 		snapshot.forEach(function(childsnap){
 			if(childsnap.val().subjectId == subjectId){
