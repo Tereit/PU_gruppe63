@@ -3,6 +3,8 @@
  *
  */
 function init() {
+	getAllProfessors();
+	getAllStudents();
     getAllSubjects(getAllSubjectsCallback);
 }
 
@@ -16,12 +18,13 @@ function createProfessor() {
 	if(user.value != "" || pass.value != "" || pass.value.length > 4){
 	    firebase.auth().createUserWithEmailAndPassword(user.value, pass.value).catch(
 	        error => alert(error.message));
+	    updateProf(user.value);
 	}else{
 	    alert("Invalid information");
 			user.value = "";
 			pass.value = "";
 	}
-};
+}
 
 function updateProf(prof) {
 	if (prof) {
@@ -29,19 +32,31 @@ function updateProf(prof) {
 			username: prof.email
 		}).then(function(){
 			alert("Professor created!");
-			var user = document.getElementById("R_profID").value = "";
-			var pass = document.getElementById("R_profPass").value = "";
+			document.getElementById("R_profID").value = "";
+			document.getElementById("R_profPass").value = "";
 		}
 		);
 	}
 }
 
 function getAllProfessors() {
-	
+	var professors = [];
+	dbRef.child("users/professors").once('value').then(function (snapshot) {
+		snapshot.forEach(function (childSnapshot) {
+			professors.push(childSnapshot.val().username);
+        })
+    });
+	console.log(professors);
 }
 
 function getAllStudents() {
-	
+    var students = [];
+    dbRef.child("users/students").once('value').then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            students.push(childSnapshot.val().username);
+        })
+    });
+    console.log(students);
 }
 
 function getAllSubjectsCallback(subjects) {
@@ -49,8 +64,5 @@ function getAllSubjectsCallback(subjects) {
 }
 
 window.onload = function() {
-	firebase.auth().onAuthStateChanged(user => {
-		updateProf(user);
-	});
 	init();
 };
