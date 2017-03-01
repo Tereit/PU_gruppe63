@@ -87,7 +87,6 @@ function getAllSubjects(callback){
 
 //Get username of user
 function getUserName(uid, type, callback){
-    console.log("type: "+type);
     dbRef.child("users/" + type + "/" + uid + "/username").once("value", function(name){
         if(name.val()){
             callback(name.val())

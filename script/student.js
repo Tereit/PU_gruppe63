@@ -4,15 +4,20 @@ currentSubjects = [];
 
 function init() {
     subjectListener(sessionStorage.bruker, "students");
-    getUserName(sessionStorage.bruker, "students", getUserName);
+    getUserName(sessionStorage.bruker, "students", getUserNameCallback);
     getAllSubjects(function(subjects){getAvailableSubjects(subjects)});
 }
 
+function getUserNameCallback(username) {
+	alertOfChange("Welcome, "+username);
+}
 
 //Finds all subjects that is not in currentSubjects
 function filterOutAlreadyUsedSubjects(subjects){
-	var hashSub = {}
-	var outSub = []
+	console.log(subjects);
+	console.log(currentSubjects);
+	var hashSub = {};
+	var outSub = [];
 	
 	for(var i = 0; i < currentSubjects.length; i++){
 		hashSub[currentSubjects[i]] = ""
