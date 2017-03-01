@@ -101,6 +101,8 @@ function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }
 
+
+//Listener for fag
 function subjectListener(uid, type, callback){
     var liste = document.getElementById("subjectList");
     dbRef.child("users/" + type + "/" + uid + "/subscriptions").on("value", function(snapshot){
@@ -122,6 +124,7 @@ function subjectListener(uid, type, callback){
         }
     })
 }
+
 function alertOfChange(message) {
     var topContainer = document.getElementById("topContainer");
     topContainer.style.backgroundColor="#0f0";

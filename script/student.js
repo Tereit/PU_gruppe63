@@ -3,51 +3,28 @@ console.log(sessionStorage.bruker)
 
 currentSubjects = []
 
-subjectListener(sessionStorage.bruker)
+subjectListener(sessionStorage.bruker, "students")
 getUserName(sessionStorage.bruker, "students", getUserName)
 getAllSubjects(function(subjects){getAvailableSubjects(subjects)})
 
-//LISTENER FOR FAG SOM BRUKER HAR SUBCRIBED TIL TODO(Code clean-up): merge and move to main
-function subjectListener(uid){
-    var liste = document.getElementById("subjectList");
-    dbRef.child("users/students/" + uid + "/subscriptions").on("value", function(snapshot){
-        //Martin: Lager error. Orker ikke å fikse nå
-        //document.getElementById("subscribeLoader").style.display="none";
-        currentSubjects = []
-        liste.innerHTML = ""
-        var object = snapshot.val()
-        for (var key in object){
-            currentSubjects.push(object[key].id)
-        }
-        if(currentSubjects.length > 0){
-            for(var i = 0; i < currentSubjects.length; i++){
-                var liElement = document.createElement("li")
-                liElement.innerHTML = currentSubjects[i]
-                liste.appendChild(liElement)
-            }
-        } else {
-            alertOfChange("You have no subscription to be loaded.");
-            //document.getElementById("subscribeLoader").innerHTML="You have no subscriptions to be loaded.";
-        }
-    })
-}
-
-//TODO(Code clean-up): refactor; button can call directly
-function handleLogout(){
-  logout(sessionStorage.bruker, "students")
-}
-//TODO(performance): improve performance
+//Finds all subjects that is not in currentSubjects
 function filterOutAlreadyUsedSubjects(subjects){
-  for (var i = 0; i < currentSubjects.length; i++){
-    for(var k = 0; k < subjects.length; k++){
-      if(currentSubjects[i] == subjects[k]){
-        subjects.splice(k, 1)
-      }
-    }
-  }
-  return subjects;
+	var hashSub = {}
+	var outSub = []
+	
+	for(var i = 0; i < currentSubjects.length; i++){
+		hashSub[currentSubjects[i]] = ""
+	}
+	
+	for(var o = 0; o < subjects.length; o++){
+		if(!hashSub[subject[o]]){
+			outSub.push(subject[o])
+		}
+	}
+	return outSub
 }
 
+//
 function getAvailableSubjects(subjects){
 	var liste = document.getElementById("allSubjects");
 	var loader = document.getElementById("loader");
@@ -134,7 +111,7 @@ function search(searchText, subjects){
 	return newList;
 }
 
-//Updates the possible subjects to subscribe to 
+//Updates the possible subjects to subscribe to
 function updateSearchSubjectList(searchText){
 	if(searchText != ""){
 		getNotSubscribedSubjects(sessionStorage.bruker, "students", function(notSubscribed){
@@ -150,6 +127,3 @@ function updateSearchSubjectList(searchText){
 		});
 	}
 }
-
-
-
