@@ -153,7 +153,7 @@ function getSubscribedSubjects(userId, type, callback){
 }
 
 //Gets a list of the subjects that the user has not subscribed to
-function getNotSubscribedSubjects(userId, type, callback){
+/*function getNotSubscribedSubjects(userId, type, callback){
 	getSubscribedSubjects(userId, type, function(subjects){
 		getAllSubjects(function(allSubjects){
 			var notSubscribedSubjects = [];
@@ -172,7 +172,7 @@ function getNotSubscribedSubjects(userId, type, callback){
 		});
 	});
 }
-
+*/
 
 //always at bottom.
 window.onLoad = function() {
