@@ -1,6 +1,6 @@
-console.log(sessionStorage.bruker);
+//console.log(sessionStorage.bruker);
 
-currentSubjects = []
+currentSubjects = [];
 
 function init() {
     subjectListener(sessionStorage.bruker, "students");
@@ -130,4 +130,6 @@ function updateSearchSubjectList(searchText){
 	}
 }
 
-window.onload(init());
+window.onload = function () {
+	init();
+};

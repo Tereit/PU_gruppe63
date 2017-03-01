@@ -14,7 +14,7 @@ var dbRef = firebase.database().ref();
 var text = document.getElementById("lecturifyText");
 var topContainer = document.getElementById("topContainer");
 var upperMainRect = document.getElementById("upperMain").getBoundingClientRect();
-//document.getElementById("upperMain").style.boxShadow="0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)";
+
 function scrollEvent() {
     window.addEventListener('scroll', function(){
         var distanceY = window.pageYOffset;
@@ -87,11 +87,12 @@ function getAllSubjects(callback){
 
 //Get username of user
 function getUserName(uid, type, callback){
-  dbRef.child("users/" + type + "/" + uid + "/username").once("value", function(name){
-    if(name.val()){
-      callback(name.val())
-    }
-  })
+    console.log("type: "+type);
+    dbRef.child("users/" + type + "/" + uid + "/username").once("value", function(name){
+        if(name.val()){
+            callback(name.val())
+        }
+    })
 }
 
 function changeToLecture() {
