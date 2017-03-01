@@ -16,9 +16,12 @@ function createProfessor() {
 		user.value = user.value + "@ntnu.no";
 	}
 	if(user.value != "" || pass.value != "" || pass.value.length > 4){
-	    firebase.auth().createUserWithEmailAndPassword(user.value, pass.value).catch(
-	        error => alert(error.message));
-	    updateProf(user.value);
+	    firebase.auth().createUserWithEmailAndPassword(user.value, pass.value)
+	    		.then(function(user) {
+	    			updateProf(user);
+	    			user.value = "";
+	    			pass.value = "";
+	    		});
 	}else{
 	    alert("Invalid information");
 			user.value = "";
