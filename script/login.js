@@ -64,7 +64,8 @@ function adminSucsessCallback(user, pass){
 function adminFailedCallback(user, pass){
 	console.log("admin ikke funnet")
 	if(sessionStorage.userType == "professor"){
-		if(!user.includes("ntnu.no")){
+		user = user.replace("@stud.ntnu.no", "")
+		if(!user.includes("@ntnu.no")){
 			user = user + "@ntnu.no";
 		}
 		checkIfProfessorExist(user, pass)
