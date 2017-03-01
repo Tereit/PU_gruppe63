@@ -5,10 +5,10 @@
 function init() {
     scrollEvent();
 }
-//'use strict';
-addListenerToPace(sessionStorage.userType);
+
+//addListenerToPace(sessionStorage.userType);
 //Firebase dbRef
-var dbRef = firebase.database().ref(); //TODO(Code clean-up): refactor; change name (databasRef).
+var dbRef = firebase.database().ref(); 
 
 //martin: makes the scroll effect of the topContainer
 var text = document.getElementById("lecturifyText");
