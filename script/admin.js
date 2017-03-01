@@ -5,8 +5,8 @@
 getAllSubjects(getAllSubjectsCallback);
 
 function createProfessor() {
-	var user = document.getElementById("R_profID")
-	var pass = document.getElementById("R_profPass")
+	var user = document.getElementById("R_profID");
+	var pass = document.getElementById("R_profPass");
 	if(!user.value.includes("@ntnu.no")){
 		user.value = user.value + "@ntnu.no";
 	}
@@ -22,7 +22,7 @@ function createProfessor() {
 
 function updateProf(prof) {
 	if (prof) {
-		firebase.database().ref("users/professors/" + JSON.stringify(prof.uid)).set({
+		dbRef.child("users/professors/" + JSON.stringify(prof.uid)).set({
 			username: prof.email
 		}).then(function(){
 			alert("Professor created!");
