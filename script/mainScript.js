@@ -104,7 +104,8 @@ function exitLecture() {
 
 
 //Listener for fag
-function subjectListener(uid, type, callback){
+function subjectListener(uid, type){
+    console.log("kjører")
     var liste = document.getElementById("subjectList");
     dbRef.child("users/" + type + "/" + uid + "/subscriptions").on("value", function(snapshot){
         document.getElementById("loader").style.display="none";

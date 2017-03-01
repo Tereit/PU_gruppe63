@@ -1,6 +1,9 @@
 console.log(sessionStorage.bruker);
 console.log(sessionStorage.userType);
-//subjectListener(sessionStorage.bruker);
+
+
+//Henter alle professor sinde subscriptions, altså sin fag som han har lagd
+subjectListener(sessionStorage.bruker, "professors");
 
 //Pop-up notification med brukernavn
 getUserName(sessionStorage.bruker, "professors", getUserNamerCallback);
