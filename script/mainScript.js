@@ -45,7 +45,7 @@ function logout(uid, type){
 }
 
 //Listener for pace TODO(Code clean-up): add to correct subject.
-function addListenerToPace(type){
+/*function addListenerToPace(type){
   dbRef.child("subjects/subject/lecture/pace").on("value", function(tall){ //TODO(Code clean-up): make list of listeners and detatch all.
     var pace = tall.val();
     if(type == "professor"){
@@ -60,7 +60,7 @@ function addListenerToPace(type){
       alertOfChange("Invalid userType for pace listener");
     }
   })
-}
+}*/
 
 //Add subject to user profile
 function addSubscriptionToUser(uid, subject, type){
@@ -101,12 +101,9 @@ function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }
 
-//TODO(change to have parameter type, to make it usable for students as well)
-//Listener for fag
-function subjectListener(uid){
+function subjectListener(uid, type, callback){
     var liste = document.getElementById("subjectList");
-    //dbRef = firebase.database().dbRef(); //TODO(After code clean-up): This variable was in student, not in professor.
-    dbRef.child("users/professors/" + uid + "/subscriptions").on("value", function(snapshot){
+    dbRef.child("users/" + type + "/" + uid + "/subscriptions").on("value", function(snapshot){
         document.getElementById("loader").style.display="none";
         var currentSubjects = [];
         liste.innerHTML = "";

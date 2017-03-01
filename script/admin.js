@@ -1,6 +1,11 @@
 /**
  * Created by Martin Kostveit on 22.02.2017.
+ *
  */
+function init() {
+    getAllSubjects(getAllSubjectsCallback);
+}
+
 
 function createProfessor() {
 	var user = document.getElementById("R_profID");
@@ -31,8 +36,21 @@ function updateProf(prof) {
 	}
 }
 
+function getAllProfessors() {
+	
+}
+
+function getAllStudents() {
+	
+}
+
+function getAllSubjectsCallback(subjects) {
+	console.log(subjects);
+}
+
 window.onload = function() {
 	firebase.auth().onAuthStateChanged(user => {
 		updateProf(user);
 	});
+	init();
 };
