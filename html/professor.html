@@ -44,7 +44,7 @@
         <div id="newsFeed">
         	<div>
                 <form id="currentSubject">
-                    <a id="currentSubjectName"></a>
+                    <h2 id="currentSubjectName"></h2>
                     <br>Dato: <input id="date" type="date" />
                     <br>Fra: <input id="tid" type="string" placeholder="e.g 10:15"/>
                     <br>Til: <input id="tid" type="string" placeholder="e.g 11:00"/>
@@ -60,9 +60,14 @@
                     <br><button onclick=newLecture()>Create lecture</button>
                 </form>
             </div>
+            <div>
+                <ul id="lecturesForCurrentSubject">
+
+                </ul>
+            </div>
         </div>
         <div id="subjectsBar">
-            <a style="font-size: 20px; font-weight: bold; margin-left: 2px">Available subjects</a>
+            <a style="font-size: 20px; font-weight: bold; margin-left: 2px">My subjects</a><br>
             <a id="loader"><img src="images/ring-alt.svg" style="width: 4vw" alt="loading"></a>
             <ul id="subjectList">
             </ul>

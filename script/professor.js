@@ -1,6 +1,8 @@
 console.log(sessionStorage.bruker);
 console.log(sessionStorage.userType);
 
+function init() {
+}
 
 //Henter alle professor sinde subscriptions, altså sin fag som han har lagd
 subjectListener(sessionStorage.bruker, "professors");
@@ -70,7 +72,10 @@ function getDate() {
 	return new Date();
 }
 
-function returnSubjectList() {
-	var subjectList =document.getElementById("subjectList").childNodes;
-    console.log(subjectList[0]);
+function selectSubject(subjectName) {
+	document.getElementById("currentSubject").style.display="block";
+	document.getElementById("currentSubjectName").innerHTML=subjectName;
+	console.log(subjectName);
 }
+
+init();

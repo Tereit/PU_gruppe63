@@ -119,6 +119,16 @@ function subjectListener(uid, type){
             for(var i = 0; i < currentSubjects.length; i++){
                 var liElement = document.createElement("li");
                 liElement.innerHTML = currentSubjects[i];
+                if(type=="professors") {
+                    liElement.onclick=function () {
+                        selectSubject(this.innerHTML);
+                    };
+                } else if(type=="students") {
+                    liElement.onclick=function () {
+                        selectSubject(this.innerHTML);
+                    };
+                    //console.log("students subject onclick goes here");
+                }
                 liste.appendChild(liElement)
             }
         } else {
