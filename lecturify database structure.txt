@@ -5,9 +5,10 @@ lecturify
 	|		|__fagNavn
 	|				|
 	|				|__id: fagkode
-	|				|__semester
-	|						|
-	|						|__professor
+	|				|__Year
+	|						|__Semester
+	|										|__professor
+	|
 	|
 	|__users
 	|	|
@@ -23,7 +24,7 @@ lecturify
 	|	|			|
 	|	|			|__subjects
 	|	|			|		|
-	|	|			|		|__id: fagkode+semester
+	|	|			|		|__id: fagkode+year+semester
 	|	|			|__username
 	|	|
 	|	|__students
@@ -32,13 +33,13 @@ lecturify
 	|				|
 	|				|__subscription
 	|				|		|
-	|				|		|__id: fagkode+semester
+	|				|		|__id: fagkode+year+semester
 	|				|__username
 	|				|__studass (boolean) default->false
 	|
 	|__lectures
 			|
-			|__fagkode+semester
+			|__fagkode+year+semester
 						|
 						|__dato
 							|

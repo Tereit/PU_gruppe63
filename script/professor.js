@@ -23,20 +23,35 @@ function logoutAction() {
 function addSubject() {
 	fag = document.getElementById("newSubjectName")
 	fagkode = document.getElementById("newSubjectCode")
-	subscriptionsId = fag.value + " " + fagkode.value;
-	console.log(subscriptionsId)
-	//Legger til faget under "subjects"
-	dbRef.ref("subjects/" + fag.value).set({
-		id: fagkode.value
-	})
-	//Legger til faget i subscriptions til brukeren
-	dbRef.ref("users/professors/" + sessionStorage.bruker + "/subscriptions").push({
-		id: subscriptionsId
-	})
+	fagSemester = document.getElementById("newSubjectSemester")
+	fagAr = new Date().getFullYear();
 
-	fag.value = ""
-	fagkode.value = ""
+	if(fag.value != "" || fagkode.value != "" || fagSemester.value != "" || fagkode.value.includes("-") == true){
+		subscriptionsId = fagkode.value.toLowerCase() + " " + fagAr + " " + fagSemester.value;
+		console.log(subscriptionsId)
+		//Legger til faget under "subjects"
+		dbRef.ref("subjects/" + fag.value).set({
+			id: fagkode.value,
+			year: fagAr
+		})
+		dbRef.ref("subjects/" + fag.value + "/" + fagAr + "/").set({
+			semester: fagSemester
+		})
+		dbRef.ref("subjects/" + fag.value + "/" + fagAr + "/" + fagSemester.value).set({
+			professor: sessionStorage.bruker
+		})
 
+		//Legger til faget i subscriptions til brukeren
+		dbRef.ref("users/professors/" + sessionStorage.bruker + "/subscriptions").push({
+			id: subscriptionsId
+		})
+		fag.value = ""
+		fagkode.value = ""
+		fagSemester.value = ""
+	}
+	else{
+		alert("Invalid information")
+	}
 }
 
 // TODO(new function): deleteSubcjet()
