@@ -47,13 +47,17 @@ function getUserNamerCallback(username) {
 }
 
 function newLecture() {
-	var subject = getSubject();
-	var day = getDate();
+	//var subject = getSubject();
+	//var day = getDate();
 
 	// create new lecture with the supplied info and add to database
+	/*
 	dbRef.child("lectures/" + subject).set({
 		date : day
 	});
+	*/
+	document.getElementById("createLecturePopUp").style.display="none";
+    alertOfChange("Successfully created new lecture");
 }
 
 function getSubject() {
@@ -78,6 +82,11 @@ function selectSubject(subjectName) {
 	console.log(subjectName);
 }
 
+function displayCreateLecture() {
+	document.getElementById("createLecturePopUp").style.display="block";
+}
+
+//kjetils piss
 function openCity(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
