@@ -2,6 +2,8 @@ console.log(sessionStorage.bruker);
 console.log(sessionStorage.userType);
 
 function init() {
+	document.getElementById("afterSelectedSubject").style.display = "none";
+	document.getElementById("date").value = new Date()
 }
 
 //Henter alle professor sinde subscriptions, altså sin fag som han har lagd
@@ -12,6 +14,8 @@ getUserName(sessionStorage.bruker, "professors", getUserNamerCallback);
 
 //Firebase database variabel
 dbRef = firebase.database();
+
+
 
 
 // logg professor ut
@@ -26,15 +30,14 @@ function addSubject() {
 	fagSemester = document.getElementById("newSubjectSemester")
 	fagAr = new Date().getFullYear();
 
-	if(fag.value != "" || fagkode.value != "" || fagSemester.value != "" || fagkode.value.includes("-") == true){
+	if(fag.value != "" && fagkode.value != "" && fagSemester.value != "" && fagkode.value.includes("-") == true){
 		subscriptionsId = fagkode.value.toLowerCase() + " " + fagAr + " " + fagSemester.value;
 		console.log(subscriptionsId)
 		//Legger til faget under "subjects"
 		dbRef.ref("subjects/" + fag.value).set({
 			id: fagkode.value,
-			year: fagAr
 		})
-		dbRef.ref("subjects/" + fag.value + "/" + fagAr + "/").set({
+		dbRef.ref("subjects/" + fag.value + "/" + fagAr).set({
 			semester: fagSemester
 		})
 		dbRef.ref("subjects/" + fag.value + "/" + fagAr + "/" + fagSemester.value).set({
@@ -54,6 +57,33 @@ function addSubject() {
 	}
 }
 
+//getAllLecturesToASubject
+function getLecturesFromSubjectCallback(lectures){
+	var lecturesTodayList = document.getElementById("lecturesToday")
+	var upcomingLecturesList = document.getElementById("upcomingLectures")
+	currentDate = new Date().toISOString().slice(0,10).replace(/-/g,"");
+	year = currentDate.substr(0, 4)
+	month = currentDate.substr(4, 2)
+	day = currentDate.substr(6, 2)
+	currentDate = year + "-" + month + "-" + day;
+	for(var key in lectures){
+		if(currentDate == key){
+			//lecture is today
+			var liElement = document.createElement("li")
+			liElement.innerHTML = key
+			lecturesTodayList.appendChild(liElement)
+		}
+		else{
+			//WHAT THE FUCK
+			var liElement = document.createElement("li")
+			liElement.innerHTML = key
+			upcomingLecturesList.appendChild(liElement)
+		}
+	}
+}
+
+
+
 // TODO(new function): deleteSubcjet()
 
 function getUserNamerCallback(username) {
@@ -62,39 +92,39 @@ function getUserNamerCallback(username) {
 }
 
 function newLecture() {
-	//var subject = getSubject();
-	//var day = getDate();
-
-	// create new lecture with the supplied info and add to database
-	/*
-	dbRef.child("lectures/" + subject).set({
-		date : day
-	});
-	*/
-	document.getElementById("createLecturePopUp").style.display="none";
-    alertOfChange("Successfully created new lecture");
+	var day = document.getElementById("date").value;
+	var currentDate = new Date();
+	currentDate.setHours(0,0,0,0);
+	var tidFra = document.getElementById("tidFra").value;
+	var tidTil = document.getElementById("tidTil").value;
+	if(tidFra != "" && tidTil != ""){
+		// create new lecture with the supplied info and add to database
+		dbRef.ref("lectures/" + sessionStorage.currentSubject + "/" + day + "/").set({
+			userCount: 0,
+			banList: "",
+			pace: 50,
+			fra: tidFra,
+			til: tidTil,
+			}).then(function(){
+				document.getElementById("createLecturePopUp").style.display="none";
+				alertOfChange("Successfully created new lecture");
+				getLecturesFromSubject(sessionStorage.currentSubject, getLecturesFromSubjectCallback)
+				}
+			)
+	}
+	else{
+		alert("Invalid information!")
+	}
 }
 
-function getSubject() {
-	// get the correct subject code and semester
-	var subject = document.getElementById("subjectName").value;
-	var code = document.getElementById("subjectCode").value;
-	var semester = document.getElementById("semester").value;
-
-	return "nothing";
-}
-
-function getDate() {
-	// TODO: get date from create lecture form
-
-	// if no date supplied from form use current date
-	return new Date();
-}
-
+//When professor subject is clicked
 function selectSubject(subjectName) {
-	document.getElementById("currentSubject").style.display="block";
-	document.getElementById("currentSubjectName").innerHTML=subjectName;
-	console.log(subjectName);
+	document.getElementById("beforeSelectedSubject").style.display = "none"
+	document.getElementById("afterSelectedSubject").style.display = "block"
+	document.getElementById("subjectTitleText").innerHTML = subjectName;
+	sessionStorage.currentSubject = subjectName
+	getLecturesFromSubject(subjectName, getLecturesFromSubjectCallback)
+
 }
 
 function displayCreateLecture() {

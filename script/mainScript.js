@@ -102,6 +102,14 @@ function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }
 
+//Listener for upcoming and lectures today
+function getLecturesFromSubject(subject, callback){
+  //fetching lectures from database
+  dbRef.ref("lectures/" + subject).once("value", function(snapshot){
+    callback(snapshot.val())
+  })
+}
+
 
 //Listener for fag
 function subjectListener(uid, type){

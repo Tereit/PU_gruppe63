@@ -40,8 +40,8 @@
     <div>
         <h2> Create lecture for: <a id="currentSubjectName"></a> </h2>
         <br>Dato: <input id="date" type="date" />
-        <br>Fra: <input id="tid" type="string" placeholder="e.g 10:15"/>
-        <br>Til: <input id="tid" type="string" placeholder="e.g 11:00"/>
+        <br>Fra: <input id="tidFra" type="string" placeholder="e.g 10:15"/>
+        <br>Til: <input id="tidTil" type="string" placeholder="e.g 11:00"/>
         <!-- Datepicker for browsers that do not support the HTML 5 version -->
         <script>
             if (!Modernizr.inputtypes.date) {
@@ -76,7 +76,23 @@
             </div>
 
             <div id="Paris" class="tabcontent">
-                <button onclick="displayCreateLecture()">Create new lecture</button>
+							<div id="beforeSelectedSubject">
+								<h3 id="selectSubjectText">Please select a subject -------------></h3>
+							</div>
+							<div id="afterSelectedSubject">
+									<div id="upperContainer">
+										<h3 id="subjectTitleText"> </h3>
+										<button id="createNewLectureBtn" onclick="displayCreateLecture()">Create new lecture</button>
+									</div>
+									<div id="bottomContainer">
+										<h4>Lectures Today: </h4>
+										<ul id="lecturesToday">
+										</ul>
+										<h4>Upcoming Lectures:</h4>
+										<ul id="upcomingLectures">
+										</ul>
+									</div>
+							</div>
             </div>
         </div>
         <div id="subjectsBar">
