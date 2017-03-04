@@ -1,17 +1,25 @@
 console.log(sessionStorage.bruker);
 console.log(sessionStorage.userType);
-getAllSubjects(getAllSubjectsCallbackFilter)
 
 
-currentSubjects = [];
 
 function init() {
+    document.getElementById("afterSelected").style.display = "none";
     subjectListener(sessionStorage.bruker, "students");
     getUserName(sessionStorage.bruker, "students", getUserNameCallback);
+    getAllSubjects(getAllSubjectsCallbackFilter)
 }
 
 function getUserNameCallback(username) {
 	alertOfChange("Welcome, "+username);
+}
+
+//When subject item under MY SUBJECTS is clicked
+function selectSubject(subjectName){
+  document.getElementById("beforeSelected").style.display = "none"
+  document.getElementById("afterSelected").style.display = "block"
+  sessionStorage.currentSubject = subjectName
+  getLecturesFromSubject(subjectName, getLecturesFromSubjectCallback)
 }
 
 function getAllSubjectsCallbackFilter(subjects){
@@ -22,7 +30,6 @@ function getAllSubjectsCallbackFilter(subjects){
     for (var key in object){
       fag.push(object[key].id)
     }
-    console.log(fag)
     for(var i = 0; i < fag.length; i++){
       for(var k = 0; k < subjects.length; k++){
         if (fag[i] == subjects[k]){
@@ -40,11 +47,17 @@ function displayFilteredSubjects(subjects){
   for(var i = 0; i < subjects.length; i++){
     liElement = document.createElement("li")
     liElement.innerHTML = subjects[i]
-    liElement.addEventListener("click", function(value){
-      alert(value)
-    })
+    liElement.onclick = function() {
+      listSelectedItem(this.innerHTML)
+      liste.removeChild(this)
+    }
     liste.appendChild(liElement)
   }
+}
+
+//All subject selected item function
+function listSelectedItem(element){
+  addSubscriptionToUser(sessionStorage.bruker, "students", element)
 }
 
 //TABBAR

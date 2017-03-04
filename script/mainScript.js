@@ -63,9 +63,10 @@ function logout(uid, type){
 }*/
 
 //Add subject to user profile
-function addSubscriptionToUser(uid, subject, subjectCode, type){
+//Subject skal inneholde fag + " " + år + " " + semester
+function addSubscriptionToUser(uid, type, subject){
     dbRef.child("users/" + type + "/" + uid + "/subscriptions").push({
-        id: subject + " " + subjectCode
+        id: subject
     })
 }
 
@@ -105,9 +106,38 @@ function exitLecture() {
 //Listener for upcoming and lectures today
 function getLecturesFromSubject(subject, callback){
   //fetching lectures from database
-  dbRef.ref("lectures/" + subject).once("value", function(snapshot){
+  firebase.database().ref("lectures/" + subject).once("value", function(snapshot){
     callback(snapshot.val())
   })
+}
+
+//getAllLecturesToASubject
+function getLecturesFromSubjectCallback(lectures){
+	var lecturesTodayList = document.getElementById("lecturesToday")
+	var upcomingLecturesList = document.getElementById("upcomingLectures")
+	currentDate = new Date().toISOString().slice(0,10).replace(/-/g,"");
+	year = currentDate.substr(0, 4)
+	month = currentDate.substr(4, 2)
+	day = currentDate.substr(6, 2)
+	currentDate = year + "-" + month + "-" + day;
+	for(var key in lectures){
+		if(currentDate == key){
+			//lecture is today
+			var liElement = document.createElement("li")
+			liElement.innerHTML = key
+			lecturesTodayList.appendChild(liElement)
+		}
+		else if(compareDates(currentDate, key) == -1){
+			//lecture is in the future
+			var liElement = document.createElement("li")
+			liElement.innerHTML = key
+			upcomingLecturesList.appendChild(liElement)
+		}
+		else{
+			console.log(key)
+		}
+
+	}
 }
 
 
@@ -169,6 +199,25 @@ function getSubscribedSubjects(userId, type, callback){
 		callback(subjectList);
 	});
 }
+
+
+//Brukes av både professor og student
+//Sammenligner to dato-objecter
+//Retur: -1 one er før to, 0 hvis de er like, 1 hvis en er etter to
+function compareDates(one, two){
+	date1 = new Date(one)
+	date2 = new Date(two)
+	if(date1 < date2){
+    return -1;
+  }
+  else if(date1 > date2){
+    return 1;
+  }
+  else{
+    return 0;
+  }
+}
+
 
 //Gets a list of the subjects that the user has not subscribed to
 /*function getNotSubscribedSubjects(userId, type, callback){
