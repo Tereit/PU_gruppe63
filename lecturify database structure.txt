@@ -2,12 +2,12 @@ lecturify
 	|
 	|__subjects
 	|		|
-	|		|__fagNavn
+	|		|__fagNavn + year + semester
 	|				|
 	|				|__id: fagkode
-	|				|__Year
-	|						|__Semester
-	|										|__professor
+	|				|__professor
+	|
+	|
 	|
 	|
 	|__users
