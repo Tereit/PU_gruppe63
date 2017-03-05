@@ -61,10 +61,10 @@
     <div id="upperMain">
         <div id="newsFeed">
             <div class="tab">
-                  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'London')">Create Subject</a>
-                  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Paris')">Lectures</a>
+                  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'createLectureTab')">Create Subject</a>
+                  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'lectureTab')">Lectures</a>
             </div>
-            <div id="London" class="tabcontent">
+            <div id="createLectureTab" class="tabcontent">
                 <h3>Create Subject</h3>
                 <div id="createSubject">
                     <a>Create new subject<br></a>
@@ -75,27 +75,29 @@
                 </div>
             </div>
 
-            <div id="Paris" class="tabcontent">
-							<div id="beforeSelectedSubject">
-								<h3 id="selectSubjectText">Please select a subject -------------></h3>
-							</div>
-							<div id="afterSelectedSubject">
-									<div id="upperContainer">
-										<h3 id="subjectTitleText"> </h3>
-										<button id="createNewLectureBtn" onclick="displayCreateLecture()">Create new lecture</button>
-									</div>
-									<div id="bottomContainer">
-										<h4>Lectures Today: </h4>
-										<ul id="lecturesToday">
-										</ul>
-										<h4>Upcoming Lectures:</h4>
-										<ul id="upcomingLectures">
-										</ul>
-									</div>
-							</div>
+            <div id="lectureTab" class="tabcontent">
+                <div id="beforeSelectedSubject">
+                    <h3 id="selectSubjectText">Please select a subject</h3>
+                    <img id="arrowAnimation" src="images/arrow.png"/>
+                </div>
+                <div id="afterSelectedSubject">
+                    <div id="upperContainer">
+                        <button id="createNewLectureBtn" onclick="displayCreateLecture()">Create new lecture</button>
+                        <h3 id="subjectTitleText"> </h3>
+                    </div>
+                    <div id="bottomContainer">
+                        <h4>Lectures Today: </h4>
+                        <ul id="lecturesToday">
+                        </ul>
+                        <h4>Upcoming Lectures:</h4>
+                        <ul id="upcomingLectures">
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="subjectsBar">
+        <!--TODO(check styling): preliminary styling-->
+        <div id="subjectsBar" style="box-shadow: 0 0 0 #000; border-left: 1px solid black">
             <a style="font-size: 20px; font-weight: bold; margin-left: 2px">My subjects</a><br>
             <a id="loader"><img src="images/ring-alt.svg" style="width: 4vw" alt="loading"></a>
             <ul id="subjectList">
@@ -108,8 +110,6 @@
     </div>
 </div>
 <footer> </footer>
-
-
 
 <script src="../script/mainScript.js"></script>
 <script src="../script/professor.js"></script>
