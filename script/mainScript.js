@@ -241,6 +241,18 @@ function compareDates(one, two){
 }
 */
 
+function displayDropDown() {
+    var dropDownContent = document.getElementById("dropDownContent");
+    if(dropDownContent.style.display=="none")
+        dropDownContent.style.display="block";
+    else
+        dropDownContent.style.display="none";
+    if(document.getElementById("lecturifyText").innerHTML=="☰")
+        topContainer.style.width="15vw";
+    else
+        scrollEvent();
+}
+
 //always at bottom.
 window.onLoad = function() {
 	init();

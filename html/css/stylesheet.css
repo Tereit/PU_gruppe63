@@ -13,6 +13,28 @@ body {
     transition: 0.5s;
 }
 
+#dropDownContent {
+    display: none;
+    position: fixed;
+    width: 15vw;
+}
+
+#dropDownContent a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #999;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+#dropDownContent a:hover {
+    background-color: #2b2b2b;
+}
+
 #mainContainer {
     width: 80%;
     margin-top: 5.5em;
