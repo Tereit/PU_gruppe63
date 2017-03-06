@@ -4,12 +4,13 @@ lecturify
 	|		|
 	|		|__fagNavn
 	|				|
-	|				|__id: fagkode
+	|				|__id (fagkode)
 	|				|__Year
-	|						|__Semester
-	|										|__professor
-	|
-	|
+	|						|__semester
+	|								  |__professor
+	|								  |__lectures
+	|								  			|
+	|								  			|__dato
 	|__users
 	|	|
 	|	|__admin
@@ -21,46 +22,51 @@ lecturify
 	|	|__professors
 	|	|		|
 	|	|		|__uid
-	|	|			|
-	|	|			|__subjects
-	|	|			|		|
-	|	|			|		|__id: fagkode+year+semester
 	|	|			|__username
+	|	|			|__subjects
+	|	|					|
+	|	|					|__id (fagkode+year+semester)
 	|	|
 	|	|__students
 	|			|
 	|			|__uid
-	|				|
-	|				|__subscription
-	|				|		|
-	|				|		|__id: fagkode+year+semester
 	|				|__username
-	|				|__studass (boolean) default->false
-	|
+	|				|__subscriptions
+	|						|
+	|						|__subjectId (fagkode+year+semester)
+	|														|__studass (boolean) default->false
+	|				
 	|__lectures
+	|		|
+	|		|__lectureId (fagkode+year+semester)
+	|					|
+	|					|__dato
+	|						|
+	|						|__usercount
+	|						|__banlist
+	|						|__pace
+	|						|__tema			(??? trenger vi dette?)
+	|						|__questions
+	|						|		|
+	|						|		|__questionID
+	|						|__questionFromProf
+	|										|
+	|										|__answers		(forskjellige typer svar?)
+	|__questions
 			|
-			|__fagkode+year+semester
-						|
-						|__dato
-							|
-							|__usercount
-							|__banlist
-							|__pace
-							|__tema			(??? trenger vi dette?)
-							|__questions
-							|		|
-							|		|__questionID
-							|				|
-							|				|__question
-							|						|__postedby
-							|						|__upvotecount
-							|						|__answers
-							|								|__answerID
-							|										|__answeredby
-							|										|__upvotecount
-							|__questionFromProf
-									|
-									|__answers		(forskjellige typer svar?)
+			|__questionID
+					|__lectureId
+					|__dato
+					|__questionText
+					|__postedby
+					|__upvotecount
+					|__isRecommended
+					|__answers
+							|__answerID
+									|__answerText
+									|__answeredby
+									|__upvotecount
+									|__isRecommended
 
 session storage variabler
 sessionStorage.bruker = uid
