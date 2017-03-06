@@ -4,11 +4,6 @@
 
 //Creates a new question in a lecture
 function createQuestion(questionText, postedBy, questionID, date){
-	console.log(questionText)
-	console.log(postedBy)
-	console.log(questionID)
-	console.log(date)
-
 	dbRef.child("questions/" + questionID).push({
 		questionText: questionText,
 		postedBy: postedBy,
@@ -51,7 +46,6 @@ function removeUpvoteQuestion(questionId, lectureId, userId){
 //Set a listener for the lecture feed
 function questionFeedListener(lectureId){
 	var questionList = []
-	var listener = ChildEventListener()
 	dbRef.child("questions/" + lectureId).on("child_added", function(question){
 		newQuestion(question);
 	});
@@ -80,9 +74,10 @@ function updateQuestion(questionList){
 }
 
 function newQuestion(question){
+	console.log(questions)
 	var qList = document.getElementsByClassName("messageFeed")
 	var qMain = document.createElement("VBOX")
-	qMain.id = question.key
+	qMain.class = "message"
 	var quest = document.createElement("HBOX")
 	var text = document.createElement("TEXTBOX")
 	var div = document.createElement("DIV")

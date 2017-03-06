@@ -64,7 +64,7 @@ function createQuestionAction(){
     var now = new Date();
     var time = (now.getMonth()+1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes();
     var question = document.getElementById("questionText").value;
-    createQuestion(question, sessionStorage.bruker, sessionStorage.currentSubject, time);
+    createQuestion(question, sessionStorage.bruker, sessionStorage.questionID, time);
 }
 
 
@@ -92,15 +92,6 @@ function openTab(evt, cityName) {
 
 function sortBy(event, sortby) {
     console.log(event+" "+sortby);
-}
-
-function postQuestion(message) {
-    var messageDiv = document.createElement("div");
-    messageDiv.className="message";
-    messageDiv.innerHTML = message;
-    var messageFeeds = document.getElementsByClassName("messageFeed");
-    messageFeeds[0].appendChild(messageDiv);
-    //messageFeeds[1].appendChild(message);
 }
 
 
