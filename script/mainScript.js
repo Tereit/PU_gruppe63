@@ -126,11 +126,17 @@ function getLecturesFromSubjectCallback(lectures){
 			//lecture is today
 			var liElement = document.createElement("li");
 			liElement.innerHTML = key;
-			lecturesTodayList.appendChild(liElement)
+			var goToLectureBtn = document.createElement("button");
+			goToLectureBtn.class="goToLectureBtn";
+			goToLectureBtn.onclick=function () {
+			    changeToLecture(); //TODO(fix parameters): get parameters of the lecture
+            };
+			liElement.appendChild(goToLectureBtn);
+			lecturesTodayList.appendChild(liElement);
 		}
 		else if(compareDates(currentDate, key) == -1){
 			//lecture is in the future
-			var liElement = document.createElement("li")
+			var liElement = document.createElement("li");
 			liElement.innerHTML = key
 			upcomingLecturesList.appendChild(liElement)
 		}
