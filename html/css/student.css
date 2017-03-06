@@ -105,6 +105,8 @@
     -ms-user-select: none;
 }
 
+
+
 /*messageFeed */
 .messageFeed {
     width: 90vw;
@@ -143,7 +145,6 @@
     height: 8ch;
     line-height: 8ch;
     text-align: center;
-    /*padding: 2.5ch .75vw;*/
 }
 
 .tab a {
