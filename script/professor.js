@@ -95,6 +95,8 @@ function newLecture() {
 	currentDate.setHours(0,0,0,0);
 	var tidFra = document.getElementById("tidFra").value;
 	var tidTil = document.getElementById("tidTil").value;
+	var currentYear = new Date().getFullYear()
+	var questionID = sessionStorage.currentSubject + " " + day;
 	if(tidFra != "" && tidTil != ""){
 		// create new lecture with the supplied info and add to database
 		dbRef.ref("lectures/" + sessionStorage.currentSubject + "/" + day + "/").set({
@@ -103,6 +105,7 @@ function newLecture() {
 			pace: 50,
 			fra: tidFra,
 			til: tidTil,
+			questionID: questionID,
 			}).then(function(){
 				document.getElementById("createLecturePopUp").style.display="none";
 				alertOfChange("Successfully created new lecture");
