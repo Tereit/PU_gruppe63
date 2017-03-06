@@ -2,22 +2,24 @@ lecturify
 	|
 	|__subjects
 	|		|
-	|		|__fagNavn
+	|		|__fagNavn + year + semester
 	|				|
 	|				|__id (fagkode)
 	|				|__Year
-	|						|__semester
-	|								  |__professor
-	|								  |__lectures
-	|								  			|
-	|								  			|__dato
+	|				|		|__semester
+	|				|				  |__professor
+	|				|				  |__lectures
+	|				|				  			|
+	|				|				  			|__dato
+	|				|__professor
+	|
 	|__users
 	|	|
 	|	|__admin
 	|	|		|
 	|	|		|__uid
-	|	|				|
-	|	|				|_username
+	|	|			|
+	|	|			|_username
 	|	|
 	|	|__professors
 	|	|		|
@@ -47,8 +49,8 @@ lecturify
 	|						|__pace
 	|						|__tema			(??? trenger vi dette?)
 	|						|__questions
-	|						|		|
 	|						|		|__questionID
+	|						|		
 	|						|__questionFromProf
 	|										|
 	|										|__answers		(forskjellige typer svar?)

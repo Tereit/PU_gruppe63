@@ -31,19 +31,13 @@ function addSubject() {
 	fagAr = new Date().getFullYear();
 
 	if(fag.value != "" && fagkode.value != "" && fagSemester.value != "" && fagkode.value.includes("-") == true){
-		subscriptionsId = fagkode.value.toLowerCase() + " " + fagAr + " " + fagSemester.value;
+		subscriptionsId = fag.value + " " + fagAr + " " + fagSemester.value;
 		console.log(subscriptionsId)
 		//Legger til faget under "subjects"
-		dbRef.ref("subjects/" + fag.value).set({
-			id: fagkode.value,
+		dbRef.ref("subjects/" + subscriptionsId).set({
+			id: fagkode.value.toLowerCase(),
+			professor: sessionStorage.bruker,
 		})
-		dbRef.ref("subjects/" + fag.value + "/" + fagAr).set({
-			semester: fagSemester
-		})
-		dbRef.ref("subjects/" + fag.value + "/" + fagAr + "/" + fagSemester.value).set({
-			professor: sessionStorage.bruker
-		})
-
 		//Legger til faget i subscriptions til brukeren
 		dbRef.ref("users/professors/" + sessionStorage.bruker + "/subscriptions").push({
 			id: subscriptionsId
@@ -73,12 +67,16 @@ function getLecturesFromSubjectCallback(lectures){
 			liElement.innerHTML = key
 			lecturesTodayList.appendChild(liElement)
 		}
-		else{
-			//WHAT THE FUCK
+		else if(compareDates(currentDate, key) == -1){
+			//lecture is in the future
 			var liElement = document.createElement("li")
 			liElement.innerHTML = key
 			upcomingLecturesList.appendChild(liElement)
 		}
+		else{
+			console.log(key)
+		}
+
 	}
 }
 
@@ -122,6 +120,8 @@ function selectSubject(subjectName) {
 	document.getElementById("beforeSelectedSubject").style.display = "none"
 	document.getElementById("afterSelectedSubject").style.display = "block"
 	document.getElementById("subjectTitleText").innerHTML = subjectName;
+	document.getElementById("lecturesToday").innerHTML = ""
+	document.getElementById("upcomingLectures").innerHTML = ""
 	sessionStorage.currentSubject = subjectName
 	getLecturesFromSubject(subjectName, getLecturesFromSubjectCallback)
 

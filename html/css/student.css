@@ -20,6 +20,19 @@
      font-weight: bold;
  }
 
+ #selectSubjectText {
+   opacity: 0.5;
+   text-align: center;
+ }
+
+ #subjectList li:hover {
+   font-weight: bold;
+ }
+
+#allSubjectsList li:hover {
+  font-weight: bold;
+}
+
  /* Style the tab */
  div.tab {
      overflow: hidden;
