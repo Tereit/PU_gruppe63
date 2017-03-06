@@ -16,29 +16,29 @@ function getUserNameCallback(username) {
 
 //When subject item under MY SUBJECTS is clicked
 function selectSubject(subjectName){
-  document.getElementById("beforeSelected").style.display = "none"
-  document.getElementById("afterSelected").style.display = "block"
-  sessionStorage.currentSubject = subjectName
-  getLecturesFromSubject(subjectName, getLecturesFromSubjectCallback)
+    document.getElementById("beforeSelected").style.display = "none";
+    document.getElementById("afterSelected").style.display = "block";
+    sessionStorage.currentSubject = subjectName;
+    getLecturesFromSubject(subjectName, getLecturesFromSubjectCallback);
 }
 
 function getAllSubjectsCallbackFilter(subjects){
-    console.log(subjects)
+    console.log(subjects);
     firebase.database().ref("users/students/" + sessionStorage.bruker + "/subscriptions").once("value", function(snapshot){
-    object = snapshot.val()
-    fag = []
+    object = snapshot.val();
+    fag = [];
     for (var key in object){
-      fag.push(object[key].id)
+      fag.push(object[key].id);
     }
     for(var i = 0; i < fag.length; i++){
-      for(var k = 0; k < subjects.length; k++){
-        if (fag[i] == subjects[k]){
-          subjects.splice(subjects.indexOf(subjects[k]), 1)
+        for(var k = 0; k < subjects.length; k++){
+            if (fag[i] == subjects[k]){
+                subjects.splice(subjects.indexOf(subjects[k]), 1);
+            }
         }
-      }
     }
     displayFilteredSubjects(subjects)
-  })
+    })
 }
 
 function displayFilteredSubjects(subjects){
