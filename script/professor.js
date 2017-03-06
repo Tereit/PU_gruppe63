@@ -52,6 +52,7 @@ function addSubject() {
 }
 
 //getAllLecturesToASubject
+/*
 function getLecturesFromSubjectCallback(lectures){
 	var lecturesTodayList = document.getElementById("lecturesToday")
 	var upcomingLecturesList = document.getElementById("upcomingLectures")
@@ -79,6 +80,7 @@ function getLecturesFromSubjectCallback(lectures){
 
 	}
 }
+*/
 
 
 
@@ -93,6 +95,7 @@ function newLecture() {
 	var day = document.getElementById("date").value;
 	var currentDate = new Date();
 	currentDate.setHours(0,0,0,0);
+	var rom = document.getElementById("rom").value;
 	var tidFra = document.getElementById("tidFra").value;
 	var tidTil = document.getElementById("tidTil").value;
 	var currentYear = new Date().getFullYear()
@@ -105,6 +108,7 @@ function newLecture() {
 			pace: 50,
 			fra: tidFra,
 			til: tidTil,
+			rom: rom,
 			questionID: questionID,
 			}).then(function(){
 				document.getElementById("createLecturePopUp").style.display="none";
