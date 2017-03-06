@@ -49,18 +49,16 @@ lecturify
 							|__pace
 							|__tema			(??? trenger vi dette?)
 							|__questions
-							|		|__questionID
-							|					|__lectureId
-							|					|__date
+							|		|__questionId
 							|					|__questionText
-							|					|__postedby
-							|					|__upvotecount
+							|					|__postedBy
+							|					|__upvoteCount
 							|					|__isRecommended
 							|					|__answers
 							|							|__answerID
 							|									|__answerText
-							|									|__answeredby
-							|									|__upvotecount
+							|									|__answeredBy
+							|									|__upvoteCount
 							|									|__isRecommended
 							|		
 							|__questionFromProf
