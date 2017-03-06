@@ -61,6 +61,14 @@ function listSelectedItem(element){
   addSubscriptionToUser(sessionStorage.bruker, "students", element)
 }
 
+function createQuestionAction(){
+  var now = new Date()
+  var time = (now.getMonth()+1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes();
+  console.log(time)
+  question = document.getElementById("questionText").value
+  createQuestion(question, sessionStorage.bruker, sessionStorage.currentSubject, time)
+}
+
 //TABBAR
 function openCity(evt, cityName) {
     // Declare all variables

@@ -3,19 +3,24 @@
  */
 
 //Creates a new question in a lecture
-function createQuestion(questionText, postedBy, lectureId, date){
-	dbRef.child("questions/" + lectureId).push({
-		'questionText': questionText,
-		'postedBy': postedBy,
-		'upvoteCount': 0,
-		'isRecommended': false
+function createQuestion(questionText, postedBy, questionID, date){
+	console.log(questionText)
+	console.log(postedBy)
+	console.log(questionID)
+	console.log(date)
+
+	dbRef.child("questions/" + questionID).push({
+		questionText: questionText,
+		postedBy: postedBy,
+		upvoteCount: 0,
+		isRecommended: false,
 	})
 }
 
 //Gets all questions for a lecture
-function getQuestions(lectureId, date, callback){
-	
-	dbRef.child("lecture/" + lectureId + "/" + date + "questions").once("value", function(snapshot){
+function getQuestions(lectureId, date, questionId, callback){
+
+	dbRef.child("lecture/" + lectureId + "/" + date + "/" + questionId).once("value", function(snapshot){
 		dbRef.child("questions/" + lectureId).once("value", function(childsnap){
 			callback(childsnap)
 		})
@@ -71,11 +76,11 @@ function updateQuestion(questionList){
 		var ans = document.createElement("TEXTBOX")
 		ans = answer.val().answerText + "\t Posted By: " + answer.val().answeredBy
 		answers.append()
-	});		
+	});
 }
 
 function newQuestion(question){
-	var qList = document.getElementById("questionList")
+	var qList = document.getElementsByClassName("messageFeed")
 	var qMain = document.createElement("VBOX")
 	qMain.id = question.key
 	var quest = document.createElement("HBOX")
@@ -91,11 +96,11 @@ function newQuestion(question){
 		var ans = document.createElement("TEXTBOX")
 		ans = answer.val().answerText + "\t Posted By: " + answer.val().answeredBy
 		answers.append()
-	});	
-	
+	});
+
 	qMain.appendChild(answers)
 	qList.append(qMain)
-	
+
 }
 
 function deleteQuestion(question){

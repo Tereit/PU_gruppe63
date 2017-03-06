@@ -91,6 +91,7 @@ function getUserName(uid, type, callback){
     console.log("type: "+type);
     dbRef.child("users/" + type + "/" + uid + "/username").once("value", function(name){
         if(name.val()){
+            sessionStorage.username = name.val();
             callback(name.val())
         }
     })
@@ -137,6 +138,7 @@ function getLecturesFromSubjectCallback(lectures){
 			goToLectureBtn.className="goToLectureBtn";
 			goToLectureBtn.innerHTML="Go to lecture";
 			goToLectureBtn.onclick = function() {
+          sessionStorage.questionID = lectures[key].questionID;
 			    changeToLecture(rom, lectureStart); //TODO(fix parameters): get parameters of the lecture
             };
 			liElement.appendChild(goToLectureBtn);
