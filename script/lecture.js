@@ -3,29 +3,133 @@
  */
 
 //Creates a new question in a lecture
-function createQuestion(questionText, author, lectureId, date){
-	var questionId = dbRef.child("questions").push({
-		'lectureId': lectureId,
-		'date': date,
+function createQuestion(questionText, postedBy, lectureId, date){
+	dbRef.child("questions/" + lectureId).push({
 		'questionText': questionText,
-		'postedBy': author
-	}).key();
-	dbRef.child("lectures/" + lectureId + "/" + date + "questions" + questionId).push({
-		'null': "null"
-	});
+		'postedBy': postedBy,
+		'upvoteCount': 0,
+		'isRecommended': false
+	})
 }
 
 //Gets all questions for a lecture
 function getQuestions(lectureId, date, callback){
-	var questions = []
+	
 	dbRef.child("lecture/" + lectureId + "/" + date + "questions").once("value", function(snapshot){
-		var snap = snapshot;
+		dbRef.child("questions/" + lectureId).once("value", function(childsnap){
+			callback(childsnap)
+		})
+	});
+}
+
+//Get a specific question
+function getQuestion(questionId, lectureId, callback){
+	dbRef.child("questions/" + lectureId + questionId).once("value", function(snapshot){
 		snapshot.forEach(function(childsnap){
-			dbRef.child("questions" + childsnap.key).once("value", function(snap){
-				questions.push(snap);
-			});
+			callback(snapshot);
 		});
-	}).then(function(){
-		callback(questions);
+	});
+}
+
+//Updates the upvotes for the question
+function upvoteQuestion(questionId, lectureId, userId){
+	dbRef.child("questions/" + lectureId + "/" + questionId + "/upvotedB/" + userId).push({
+		'null': "null"
+	});
+}
+
+//Removes the upvote on a question
+function removeUpvoteQuestion(questionId, lectureId, userId){
+	dbRef.child("questions/" + lectureId + "/" + questionId + "/upvotedB/" + userId).remove();
+}
+
+//Set a listener for the lecture feed
+function questionFeedListener(lectureId){
+	var questionList = []
+	var listener = ChildEventListener()
+	dbRef.child("questions/" + lectureId).on("child_added", function(question){
+		newQuestion(question);
+	});
+	dbRef.child("questions/" + lectureId).on("child_removed", function(question){
+		deleteQuestionList(question);
+	});
+}
+
+//Updates the question list for the lecture
+function updateQuestion(questionList){
+	var qList = document.getElementById("questionList")
+	var qMain = document.createElement("VBOX")
+
+	var quest = document.createElement("HBOX")
+	var text = document.createElement("TEXTBOX")
+	text.innerHTML = question.val().questionText + "\t Posted By: " + question.val().postedBy + "\t " + question.child("answers").once(function(ans){return ans.numChildren});
+
+	quest.appendChild(text)
+	qMain.appendChild(quest)
+	var answers = document.createElement("VBOX")
+	question.child("answers").forEach(function(answer){
+		var ans = document.createElement("TEXTBOX")
+		ans = answer.val().answerText + "\t Posted By: " + answer.val().answeredBy
+		answers.append()
+	});		
+}
+
+function newQuestion(question){
+	var qList = document.getElementById("questionList")
+	var qMain = document.createElement("VBOX")
+	qMain.id = question.key
+	var quest = document.createElement("HBOX")
+	var text = document.createElement("TEXTBOX")
+	var div = document.createElement("DIV")
+	qMain.appendChild(div)
+	text.innerHTML = question.val().questionText + "\t Posted By: " + question.val().postedBy + "\t " + question.child("answers").once(function(ans){return ans.numChildren});
+
+	quest.appendChild(text)
+	qMain.appendChild(quest)
+	var answers = document.createElement("VBOX")
+	question.child("answers").forEach(function(answer){
+		var ans = document.createElement("TEXTBOX")
+		ans = answer.val().answerText + "\t Posted By: " + answer.val().answeredBy
+		answers.append()
+	});	
+	
+	qMain.appendChild(answers)
+	qList.append(qMain)
+	
+}
+
+function deleteQuestion(question){
+	var qList = document.getElementById("questionList")
+	var quest = document.getElementById(question.key)
+	qList.removeChild(quest)
+}
+
+//Answer a specific question
+function answerQuestion(questionId, lectureId, answerText, answeredBy){
+	getQuestion(questionId, lectureId, function(question){
+		question.child("answers").push({
+			'answerText': answerText,
+			'answeredBy': answeredBy,
+			'upvoteCount': 0,
+			'isRecommended': false
+		});
+	});
+}
+
+//Gets all answers for a question
+function getAnswers(questionId, lectureId, callback){
+	getQuestion(questionId, lectureId, function(question){
+		question.child("answers").once("value", function(snapshot){
+			callback(snapshot);
+		});
+	});
+}
+
+//Gets a specific answer
+function getAnswer(questionId, lectureId, answerId, callback){
+	getQuestion(questionId, lectureId, function(question){
+		question.child("answers" + answerId).once("value", function(snapshot){
+			callback(snapshot);
+		});
 	});
 }

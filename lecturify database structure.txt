@@ -48,27 +48,28 @@ lecturify
 	|						|__banlist
 	|						|__pace
 	|						|__tema			(??? trenger vi dette?)
-	|						|__questions
-	|						|		|__questionID
-	|						|
+	|						|__questionId  (fagkode+year+semester+dato)
+	|						|		
 	|						|__questionFromProf
 	|										|
 	|										|__answers		(forskjellige typer svar?)
+	|
 	|__questions
-			|
-			|__questionID
-					|__lectureId
-					|__date
-					|__questionText
-					|__postedby
-					|__upvotecount
-					|__isRecommended
-					|__answers
-							|__answerID
-									|__answerText
-									|__answeredby
-									|__upvotecount
-									|__isRecommended
+			|__lectureId (fagkode+year+semester+dato)
+					|__questionId
+								|__questionText
+								|__postedBy
+								|__upvotedBy
+								|		|__userId
+								|
+								|__isRecommended
+								|__answers
+										|__answerID
+												|__answerText
+												|__answeredBy
+												|__upvotedBy
+												|		|__userId
+												|__isRecommended
 
 session storage variabler
 sessionStorage.bruker = uid
