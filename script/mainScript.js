@@ -96,9 +96,12 @@ function getUserName(uid, type, callback){
     })
 }
 
-function changeToLecture() {
-    document.getElementById("lectureFeed").style.display="block";
+function changeToLecture(type) {
+  document.getElementById("lectureFeed").style.display="block";
+  document.getElementById("subjectName").innerHTML = sessionStorage.currentSubject
 }
+
+
 function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }

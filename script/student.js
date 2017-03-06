@@ -1,5 +1,6 @@
 console.log(sessionStorage.bruker);
 console.log(sessionStorage.userType);
+console.log(sessionStorage.currentSubject)
 
 
 
