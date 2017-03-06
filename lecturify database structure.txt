@@ -2,7 +2,7 @@ lecturify
 	|
 	|__subjects
 	|		|
-	|		|__fagNavn + year + semester
+	|		|__fagNavn
 	|				|
 	|				|__id (fagkode)
 	|				|__Year
@@ -10,7 +10,7 @@ lecturify
 	|				|				  |__professor
 	|				|				  |__lectures
 	|				|				  			|
-	|				|				  			|__dato
+	|				|				  			|__date
 	|				|__professor
 	|
 	|__users
@@ -58,7 +58,7 @@ lecturify
 			|
 			|__questionID
 					|__lectureId
-					|__dato
+					|__date
 					|__questionText
 					|__postedby
 					|__upvotecount
