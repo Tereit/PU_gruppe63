@@ -105,12 +105,6 @@
     -ms-user-select: none;
 }
 
-
-/*martin: for testing*/
-#lectureFeed {
-    display: block;
-}
-
 /*messageFeed */
 .messageFeed {
     width: 90vw;

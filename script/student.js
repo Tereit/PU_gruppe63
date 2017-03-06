@@ -83,6 +83,10 @@ function openCity(evt, cityName) {
     evt.currentTarget.className += " active";
 }
 
+function sortBy(event, sortby) {
+    console.log(event+" "+sortby);
+
+}
 
 
 window.onload = function () {
