@@ -29,6 +29,15 @@
    font-weight: bold;
  }
 
+#allSubjectsList {
+    list-style-type: none;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
 #allSubjectsList li:hover {
   font-weight: bold;
 }
@@ -69,7 +78,6 @@
      border: 1px solid #ccc;
      border-top: none;
  }
-
 /*martin: pace controll field end*/
 
 @media (max-width: 900px) {

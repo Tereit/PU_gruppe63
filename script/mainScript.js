@@ -113,18 +113,19 @@ function getLecturesFromSubject(subject, callback){
 
 //getAllLecturesToASubject
 function getLecturesFromSubjectCallback(lectures){
-	var lecturesTodayList = document.getElementById("lecturesToday")
-	var upcomingLecturesList = document.getElementById("upcomingLectures")
-	currentDate = new Date().toISOString().slice(0,10).replace(/-/g,"");
-	year = currentDate.substr(0, 4)
-	month = currentDate.substr(4, 2)
-	day = currentDate.substr(6, 2)
+	var lecturesTodayList = document.getElementById("lecturesToday");
+	var upcomingLecturesList = document.getElementById("upcomingLectures");
+	upcomingLecturesList.innerHTML="";
+	var currentDate = new Date().toISOString().slice(0,10).replace(/-/g,"");
+	var year = currentDate.substr(0, 4);
+	var month = currentDate.substr(4, 2);
+	var day = currentDate.substr(6, 2);
 	currentDate = year + "-" + month + "-" + day;
 	for(var key in lectures){
 		if(currentDate == key){
 			//lecture is today
-			var liElement = document.createElement("li")
-			liElement.innerHTML = key
+			var liElement = document.createElement("li");
+			liElement.innerHTML = key;
 			lecturesTodayList.appendChild(liElement)
 		}
 		else if(compareDates(currentDate, key) == -1){

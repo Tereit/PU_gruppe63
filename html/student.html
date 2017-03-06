@@ -36,21 +36,22 @@
 		<div id="upperMain">
 			<div id="newsFeed">
 				<div class="tab">
-				  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'London')">All Subjects</a>
-				  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Paris')">Lectures</a>
+				  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'allSubjectsBar')">All Subjects</a>
+				  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'lecturesBar')">Lectures</a>
 				  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Tokyo')">Random</a>
 				</div>
 
-				<div id="London" class="tabcontent">
+				<div id="allSubjectsBar" class="tabcontent">
 					<h3>Available subjects</h3>
 					<ul id="allSubjectsList">
 					</ul>
 					<a id="loader"><img src="images/ring-alt.svg" style="width: 4vw" alt="loading"></a>
 				</div>
 
-				<div id="Paris" class="tabcontent">
-					<div id="beforeSelected">
-						<h3 id="selectSubjectText">Please select a subject -------------></h3>
+				<div id="lecturesBar" class="tabcontent">
+					<div id="beforeSelected" class="beforeSelectedSubject">
+						<h3 id="selectSubjectText">Please select a subject</h3>
+						<img class="arrowAnimation" src="images/arrow.png"/>
 					</div>
 					<div id="afterSelected">
 						<h4>Lectures Today:</h4>
