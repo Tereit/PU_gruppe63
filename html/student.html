@@ -20,7 +20,7 @@
 			<button class="paceBtn" id="fastBtn" onclick=paceController("f")>Faster</button>
 		</div>
 		<div id="lectureMainContainer">
-			<div class="messageFeed">
+			<div class="messageContainer">
 				<div class="messageFeedTopContainer">
 					<div class="tab">
 						<a href="javascript:void(0)" class="tablinks" onclick="sortBy(event, 'mostUpvoted')">Trending</a>
@@ -30,9 +30,13 @@
 				</div>
 				<div class="messageFeed">
 					<div class="message">This is a test message. I wonder how it works. If this is a good format, or if should be changed?</div>
+					<div class="message">This is a test message. I wonder how it works. If this is a good format, or if should be changed?</div>
+					<div class="message">This is a test message. I wonder how it works. If this is a good format, or if should be changed?</div>
+					<div class="message">This is a test message. I wonder how it works. If this is a good format, or if should be changed?</div>
+					<div class="message">This is a test message. I wonder how it works. If this is a good format, or if should be changed?</div>
 				</div>
-				<textarea placeholder="Type your question"></textarea>
-				<div id="submitMessage">Submit</div>
+				<textarea id="questionText" placeholder="Type your question"></textarea>
+				<div id="submitMessageBtn" onclick="createQuestionAction()">Submit</div>
 			</div>
 		</div>
 		<p id="studentPace"></p>

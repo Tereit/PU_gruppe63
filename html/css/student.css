@@ -1,10 +1,16 @@
+#lectureFeed {
+    display: block;
+}
+
 /*martin: pace control buttons*/
 .paceBtn {
     display: inline-block;
-    width: 7vw;
+    width: 10vw;
+    font-size: 2.5vw;
     height: inherit;
     border: none;
     color: #fff;
+    top: 0;
     background: rgba(0, 0, 0, .2);
     cursor: pointer;
 }
@@ -58,7 +64,7 @@
  }
 
  /* Style the links inside the tab */
- div.tab a {
+ .tab a {
      float: left;
      display: block;
      color: black;
@@ -86,7 +92,6 @@
      border: 1px solid #ccc;
      border-top: none;
  }
-/*martin: pace controll field end*/
 
 @media (max-width: 900px) {
     #newsFeed {
@@ -116,10 +121,23 @@
 
 
 /*messageFeed */
-.messageFeed {
+.messageContainer {
     width: 90vw;
     float: right;
     max-height: 61vw;
+}
+.messageFeed div:nth-child(1) {
+    background-color: #107020;
+}
+.messageFeed div:nth-child(2) {
+    background-color: #1b7b2b;
+}
+.messageFeed div:nth-child(3) {
+    background-color: #3C8F30;
+}
+.messageFeed div {
+    background-color: #4CAF50;
+
 }
 
 .messageFeedTopContainer {
@@ -129,7 +147,6 @@
 .message {
     width: inherit;
     min-height: 8ch;
-    background-color: #3C8F30;
 }
 #newMessage {
     width: inherit;
@@ -137,22 +154,33 @@
     display: inline-block;
 }
 
-.messageFeed textarea {
+.messageContainer textarea {
     width: inherit;
-    height: 8ch;
+    height: 10ch;
     resize: none;
     font-size: 1vw;
     box-sizing: border-box;
+    border: none;
 }
 
-#submitMessage {
-    background-color: #007fff;
-    float: right;
-    font-size: 1vw;
+#submitMessageBtn {
+    background-color: #34495e;
+    color: #fff;
+    font-size: 3vw;
     width: inherit;
-    height: 8ch;
-    line-height: 8ch;
+    height: 5vw;
+    line-height: 3ch;
     text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+#submitMessageBtn:hover {
+    background-color: #203040;
 }
 
 .tab {
