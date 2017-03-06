@@ -74,35 +74,9 @@ body {
     }
 /*martin: end of lecture window*******************/
 
-/*martin: pace control bar*/
-#paceControll {
-    position: absolute;
-    display: inline-flex;
-    color: #fff;
-    height: 7vh;
-    width: 30vw;
-    left: 30vw;
-    text-align: center;
-}
-#pcIndicator {
-    width: 15vw;
-}
-#paceControll img {
-    height: 4vh;
-    width: 100%;
-}
-#indicator {
-    position: relative;
-    height: 4vh;
-    width: 0.3vw;
-    border: 3px solid #000;
-    left: 47.5%;
-    top: -72%;
-}
-/*martin: end of pace control*/
-
 #subjectName {
     font-size: 2vw;
+    margin-left: 24vw;
 }
 
 
@@ -137,7 +111,6 @@ body {
 }
 
 /*martin: end of lecture content**********/
-
 #newsFeed {
     float: left;
     height: 100%;
