@@ -39,32 +39,34 @@ lecturify
 	|														|__studass (boolean) default->false
 	|				
 	|__lectures
-			|
-			|__lectureId (fagkode+year+semester)
-						|
-						|__dato
-							|
-							|__usercount
-							|__banlist
-							|__pace
-							|__tema			(??? trenger vi dette?)
-							|__questions
-							|		|__questionId
-							|					|__questionText
-							|					|__postedBy
-							|					|__upvoteCount
-							|					|__isRecommended
-							|					|__answers
-							|							|__answerID
-							|									|__answerText
-							|									|__answeredBy
-							|									|__upvoteCount
-							|									|__isRecommended
-							|		
-							|__questionFromProf
-											|
-											|__answers		(forskjellige typer svar?)
-
+	|		|
+	|		|__lectureId (fagkode+year+semester)
+	|					|
+	|					|__dato
+	|						|
+	|						|__usercount
+	|						|__banlist
+	|						|__pace
+	|						|__tema			(??? trenger vi dette?)
+	|						|__questionId  (fagkode+year+semester+dato)
+	|						|		
+	|						|__questionFromProf
+	|										|
+	|										|__answers		(forskjellige typer svar?)
+	|
+	|__questions
+			|__lectureId (fagkode+year+semester+dato)
+					|__questionId
+								|__questionText
+								|__postedBy
+								|__upvoteCount
+								|__isRecommended
+								|__answers
+										|__answerID
+												|__answerText
+												|__answeredBy
+												|__upvoteCount
+												|__isRecommended
 
 session storage variabler
 sessionStorage.bruker = uid
