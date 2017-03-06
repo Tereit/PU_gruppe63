@@ -8,26 +8,26 @@
     background: rgba(0, 0, 0, .2);
     cursor: pointer;
 }
- #allSubjects li {
-     cursor: pointer;
-     -webkit-touch-callout: none;
-     -webkit-user-select: none;
-     -khtml-user-select: none;
-     -moz-user-select: none;
-     -ms-user-select: none;
- }
- #allSubjects li:hover {
-     font-weight: bold;
- }
+#allSubjects li {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+#allSubjects li:hover {
+    font-weight: bold;
+}
 
- #selectSubjectText {
-   opacity: 0.5;
-   text-align: center;
- }
+#selectSubjectText {
+    opacity: 0.5;
+    text-align: center;
+}
 
- #subjectList li:hover {
-   font-weight: bold;
- }
+#subjectList li:hover {
+    font-weight: bold;
+}
 
 #allSubjectsList {
     list-style-type: none;
@@ -84,4 +84,23 @@
     #newsFeed {
         width: 60vw;
     }
+}
+
+.goToLectureBtn {
+    background-color: #4CAF50; /* Green */
+    position: absolute;
+    margin-left: .5vw;
+    border: none;
+    color: white;
+    padding: 7px;
+    display: inline-block;
+    font-size: 1vw;
+    z-index: 2;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
