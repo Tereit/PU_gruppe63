@@ -96,9 +96,12 @@ function getUserName(uid, type, callback){
     })
 }
 
-function changeToLecture() {
-    document.getElementById("lectureFeed").style.display="block";
+function changeToLecture(type) {
+  document.getElementById("lectureFeed").style.display="block";
+  document.getElementById("subjectName").innerHTML = sessionStorage.currentSubject
 }
+
+
 function exitLecture() {
     document.getElementById("lectureFeed").style.display="none";
 }
@@ -116,16 +119,22 @@ function getLecturesFromSubjectCallback(lectures){
 	var lecturesTodayList = document.getElementById("lecturesToday");
 	var upcomingLecturesList = document.getElementById("upcomingLectures");
 	upcomingLecturesList.innerHTML="";
+  lecturesTodayList.innerHTML="";
 	var currentDate = new Date().toISOString().slice(0,10).replace(/-/g,"");
 	var year = currentDate.substr(0, 4);
 	var month = currentDate.substr(4, 2);
 	var day = currentDate.substr(6, 2);
 	currentDate = year + "-" + month + "-" + day;
 	for(var key in lectures){
+    var rom = lectures[key].rom
+    var lectureStart = lectures[key].fra
+    var string = rom + " " + lectureStart
+    console.log(string)
+    console.log("kjører")
 		if(currentDate == key){
 			//lecture is today
 			var liElement = document.createElement("li");
-			liElement.innerHTML = key;
+      liElement.innerHTML = string
 			var goToLectureBtn = document.createElement("button");
 			goToLectureBtn.class="goToLectureBtn";
 			goToLectureBtn.onclick=function () {
@@ -137,7 +146,7 @@ function getLecturesFromSubjectCallback(lectures){
 		else if(compareDates(currentDate, key) == -1){
 			//lecture is in the future
 			var liElement = document.createElement("li");
-			liElement.innerHTML = key
+			liElement.innerHTML = string + " " + key
 			upcomingLecturesList.appendChild(liElement)
 		}
 		else{
