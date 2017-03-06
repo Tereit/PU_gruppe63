@@ -2,16 +2,16 @@ lecturify
 	|
 	|__subjects
 	|		|
-	|		|__fagNavn
+	|		|__fagNavn+Year+semester
 	|				|
 	|				|__id (fagkode)
-	|				|__Year
-	|				|		|__semester
-	|				|				  |__professor
-	|				|				  |__lectures
-	|				|				  			|
-	|				|				  			|__date
 	|				|__professor
+	|
+	|
+	|
+	|
+	|
+	|
 	|
 	|__users
 	|	|
@@ -37,7 +37,7 @@ lecturify
 	|						|
 	|						|__subjectId (fagkode+year+semester)
 	|														|__studass (boolean) default->false
-	|				
+	|
 	|__lectures
 	|		|
 	|		|__lectureId (fagkode+year+semester)

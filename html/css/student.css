@@ -2,12 +2,20 @@
 .paceBtn {
     display: inline-block;
     width: 7vw;
-    height: 101%;
+    height: inherit;
     border: none;
     color: #fff;
     background: rgba(0, 0, 0, .2);
     cursor: pointer;
 }
+
+.paceBtn:hover {
+    background: rgba(0, 0, 0, .6);
+}
+.paceBtn:last-child {
+    float: right;
+}
+
 #allSubjects li {
     cursor: pointer;
     -webkit-touch-callout: none;
@@ -103,4 +111,54 @@
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+}
+
+
+
+/*messageFeed */
+.messageFeed {
+    width: 90vw;
+    float: right;
+    max-height: 61vw;
+}
+
+.messageFeedTopContainer {
+    width: inherit;
+}
+
+.message {
+    width: inherit;
+    min-height: 8ch;
+    background-color: #3C8F30;
+}
+#newMessage {
+    width: inherit;
+    height: 8ch;
+    display: inline-block;
+}
+
+.messageFeed textarea {
+    width: inherit;
+    height: 8ch;
+    resize: none;
+    font-size: 1vw;
+    box-sizing: border-box;
+}
+
+#submitMessage {
+    background-color: #007fff;
+    float: right;
+    font-size: 1vw;
+    width: inherit;
+    height: 8ch;
+    line-height: 8ch;
+    text-align: center;
+}
+
+.tab {
+    display: flex;
+    flex-grow: 1;
+}
+.tab a {
+    flex: 1;
 }

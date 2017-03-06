@@ -15,18 +15,27 @@
 	<a id="exit" onclick="exitLecture()">X</a>
 	<div id="lectureContent" class="lecture">
 		<div id="lectureTopContainer">
+			<button class="paceBtn" id="slowBtn" onclick=paceController("s")>Slower</button>
 			<a id="subjectName">Subject name/lecture name</a>
-		<div id="paceControll">
-			<button class="paceBtn" id="slowBtn" onclick=paceController("s")>To slow</button>
-			<div id="pcIndicator">
-				<a>Pace controll</a>
-				<img src="images/wave.PNG">
-				<div id="indicator"></div>
+			<button class="paceBtn" id="fastBtn" onclick=paceController("f")>Faster</button>
+		</div>
+		<div id="lectureMainContainer">
+			<div class="messageFeed">
+				<div class="messageFeedTopContainer">
+					<div class="tab">
+						<a href="javascript:void(0)" class="tablinks" onclick="sortBy(event, 'mostUpvoted')">Trending</a>
+						<a href="javascript:void(0)" class="tablinks" onclick="sortBy(event, 'newest')">Newest</a>
+						<a href="javascript:void(0)" class="tablinks" onclick="sortBy(event, 'random')">Random</a>
+					</div>
+				</div>
+				<div class="messageFeed">
+					<div class="message">This is a test message. I wonder how it works. If this is a good format, or if should be changed?</div>
+				</div>
+				<textarea placeholder="Type your question"></textarea>
+				<div id="submitMessage">Submit</div>
 			</div>
-			<button class="paceBtn" id="fastBtn" onclick=paceController("f")>To fast</button>
 		</div>
-		</div>
-		<p id= "studentPace"></p>
+		<p id="studentPace"></p>
 	</div>
 </div>
 	<div id="topContainer">
@@ -56,7 +65,6 @@
 					<div id="afterSelected">
 						<h4>Lectures Today:</h4>
 						<ul id="lecturesToday">
-							<li class="lecturesToday">R1 12:15<button class="goToLectureBtn" onclick="changeToLecture()">Go to Lecture feed</button></li>
 						</ul>
 						<h4>Upcoming Lectures:</h4>
 						<ul id="upcomingLectures">
@@ -85,6 +93,7 @@
 	<footer> </footer>
 	<script src="../script/mainScript.js"></script>
 	<script src="../script/student.js"></script>
+	<script src="../script/lecture.js"></script>
 	<script src="../script/subscriptionLogic.js"></script>
 </body>
 </html>
