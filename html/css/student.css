@@ -104,3 +104,54 @@
     -moz-user-select: none;
     -ms-user-select: none;
 }
+
+
+/*martin: for testing*/
+#lectureFeed {
+    display: block;
+}
+
+/*messageFeed */
+.messageFeed {
+    width: 90vw;
+    float: right;
+    max-height: 61vw;
+}
+
+.messageFeedTopContainer {
+    width: inherit;
+}
+
+.message {
+    width: inherit;
+    min-height: 8ch;
+    background-color: #3C8F30;
+}
+#newMessage {
+    width: inherit;
+    height: 8ch;
+    display: inline-block;
+}
+
+.messageFeed textarea {
+    width: inherit;
+    height: 8ch;
+    resize: none;
+    font-size: 1vw;
+    box-sizing: border-box;
+}
+
+#submitMessage {
+    background-color: #007fff;
+    float: right;
+    font-size: 1vw;
+    width: inherit;
+    height: 8ch;
+    line-height: 8ch;
+    text-align: center;
+    /*padding: 2.5ch .75vw;*/
+}
+
+.tab a {
+    width: 24.9%;
+}

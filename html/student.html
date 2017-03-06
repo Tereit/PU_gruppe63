@@ -26,7 +26,23 @@
 			<button class="paceBtn" id="fastBtn" onclick=paceController("f")>To fast</button>
 		</div>
 		</div>
-		<p id= "studentPace"></p>
+		<div id="lectureMainContainer">
+			<div class="messageFeed">
+				<div class="messageFeedTopContainer">
+					<div class="tab">
+						<a href="javascript:void(0)" class="tablinks" onclick="sortBy(event, 'mostUpvoted')">Trending</a>
+						<a href="javascript:void(0)" class="tablinks" onclick="sortBy(event, 'newest')">Newest</a>
+						<a href="javascript:void(0)" class="tablinks" onclick="sortBy(event, 'random')">Random</a>
+					</div>
+				</div>
+				<div class="messageFeed">
+					<div class="message">This is a test message. I wonder how it works. If this is a good format, or if should be changed?</div>
+				</div>
+				<textarea placeholder="Type your question"></textarea>
+				<div id="submitMessage">Submit</div>
+			</div>
+		</div>
+		<p id="studentPace"></p>
 	</div>
 </div>
 	<div id="topContainer">
@@ -83,8 +99,8 @@
 		</div>
 	</div>
 	<footer> </footer>
-	<script src="../script/mainScript.js"></script>
 	<script src="../script/student.js"></script>
+	<script src="../script/mainScript.js"></script>
 	<script src="../script/subscriptionLogic.js"></script>
 </body>
 </html>
