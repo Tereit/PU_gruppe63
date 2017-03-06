@@ -59,13 +59,16 @@ lecturify
 					|__questionId
 								|__questionText
 								|__postedBy
-								|__upvoteCount
+								|__upvotedBy
+								|		|__userId
+								|
 								|__isRecommended
 								|__answers
 										|__answerID
 												|__answerText
 												|__answeredBy
-												|__upvoteCount
+												|__upvotedBy
+												|		|__userId
 												|__isRecommended
 
 session storage variabler
