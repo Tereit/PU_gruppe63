@@ -53,7 +53,7 @@
     -ms-user-select: none;
 }
 #allSubjectsList li:hover {
-  font-weight: bold;
+    font-weight: bold;
 }
 
  /* Style the tab */

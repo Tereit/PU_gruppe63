@@ -26,8 +26,8 @@ function selectSubject(subjectName){
 function getAllSubjectsCallbackFilter(subjects){
     console.log(subjects);
     firebase.database().ref("users/students/" + sessionStorage.bruker + "/subscriptions").once("value", function(snapshot){
-    object = snapshot.val();
-    fag = [];
+    var object = snapshot.val();
+    var fag = [];
     for (var key in object){
       fag.push(object[key].id);
     }
@@ -43,34 +43,33 @@ function getAllSubjectsCallbackFilter(subjects){
 }
 
 function displayFilteredSubjects(subjects){
-  liste = document.getElementById("allSubjectsList")
-
-  for(var i = 0; i < subjects.length; i++){
-    liElement = document.createElement("li")
-    liElement.innerHTML = subjects[i]
-    liElement.onclick = function() {
-      listSelectedItem(this.innerHTML)
-      liste.removeChild(this)
-    }
+    var liste = document.getElementById("allSubjectsList");
+    for(var i = 0; i < subjects.length; i++){
+        var liElement = document.createElement("li");
+        liElement.innerHTML = subjects[i];
+        liElement.onclick = function() {
+            listSelectedItem(this.innerHTML);
+            liste.removeChild(this);
+        };
     liste.appendChild(liElement)
-  }
+    }
 }
 
 //All subject selected item function
 function listSelectedItem(element){
-  addSubscriptionToUser(sessionStorage.bruker, "students", element)
+    addSubscriptionToUser(sessionStorage.bruker, "students", element)
 }
 
 function createQuestionAction(){
-  var now = new Date()
-  var time = (now.getMonth()+1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes();
-  console.log(time)
-  question = document.getElementById("questionText").value
-  createQuestion(question, sessionStorage.bruker, sessionStorage.currentSubject, time)
+    var now = new Date();
+    var time = (now.getMonth()+1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes();
+    var question = document.getElementById("questionText").value;
+    createQuestion(question, sessionStorage.bruker, sessionStorage.currentSubject, time);
 }
 
-//TABBAR
-function openCity(evt, cityName) {
+
+
+function openTab(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
 
@@ -93,7 +92,15 @@ function openCity(evt, cityName) {
 
 function sortBy(event, sortby) {
     console.log(event+" "+sortby);
+}
 
+function postQuestion(message) {
+    var messageDiv = document.createElement("div");
+    messageDiv.className="message";
+    messageDiv.innerHTML = message;
+    var messageFeeds = document.getElementsByClassName("messageFeed");
+    messageFeeds[0].appendChild(messageDiv);
+    //messageFeeds[1].appendChild(message);
 }
 
 
