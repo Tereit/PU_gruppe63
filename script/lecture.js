@@ -4,7 +4,6 @@
 
 //Creates a new question in a lecture
 function createQuestion(questionText, postedBy, questionID, date){
-	console.log("Question to database")
 	dbRef.child("questions/" + questionID).push({
 		questionText: questionText,
 		postedBy: postedBy,

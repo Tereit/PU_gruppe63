@@ -46,6 +46,7 @@ body {
     height: 40ch;
     width: 100%;
     box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+    display: flex;
 }
 
 #lowerMain {
@@ -115,24 +116,15 @@ body {
 
 /*martin: end of lecture content**********/
 #newsFeed {
+    flex: 3;
     float: left;
     height: 100%;
-    width: 63vw;
 }
-#lowerMain {
-    cursor: pointer;
-}
-#lowerMain:hover {
-    border: 1px solid #000;
-}
-
 #subjectsBar {
-    height: 100%;
-    width: 14vw;
-    display: inline-block;
+    flex: 1;
+    height: inherit;
     box-shadow: -8px 0px 10px rgba(0, 0, 0, .5);
 }
-
 #subjectsBar li {
     font-size: 1.6vw;
     list-style-type: none;
@@ -142,6 +134,13 @@ body {
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+}
+
+#lowerMain {
+    cursor: pointer;
+}
+#lowerMain:hover {
+    border: 1px solid #000;
 }
 
 footer {

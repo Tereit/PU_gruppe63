@@ -56,47 +56,41 @@
     font-weight: bold;
 }
 
- /* Style the tab */
- div.tab {
-     overflow: hidden;
-     border: 1px solid #ccc;
-     background-color: #f1f1f1;
- }
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
 
- /* Style the links inside the tab */
- .tab a {
-     float: left;
-     display: block;
-     color: black;
-     text-align: center;
-     padding: 14px 16px;
-     text-decoration: none;
-     transition: 0.3s;
-     font-size: 17px;
- }
+/* Style the links inside the tab */
+.tab a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
 
- /* Change background color of links on hover */
- div.tab a:hover {
-     background-color: #ddd;
- }
+/* Change background color of links on hover */
+div.tab a:hover {
+    background-color: #ddd;
+}
 
- /* Create an active/current tablink class */
- div.tab a:focus, .active {
-     background-color: #ccc;
- }
+/* Create an active/current tablink class */
+div.tab a:focus, .active {
+    background-color: #ccc;
+}
 
- /* Style the tab content */
- .tabcontent {
-     display: none;
-     padding: 6px 12px;
-     border: 1px solid #ccc;
-     border-top: none;
- }
-
-@media (max-width: 900px) {
-    #newsFeed {
-        width: 60vw;
-    }
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
 }
 
 .goToLectureBtn {
@@ -118,8 +112,6 @@
     -ms-user-select: none;
 }
 
-
-
 /*messageFeed */
 .messageContainer {
     width: 90vw;
@@ -137,7 +129,6 @@
 }
 .messageFeed div {
     background-color: #4CAF50;
-
 }
 
 .messageFeedTopContainer {
@@ -146,19 +137,31 @@
 
 .message {
     width: inherit;
+    display: flex;
     min-height: 8ch;
 }
-#newMessage {
-    width: inherit;
-    height: 8ch;
-    display: inline-block;
+.message question {
+    flex: 4;
+    margin-left: 10px;
+}
+.message a {
+    right: 1vw;
+    flex: 1;
+    position: absolute;
+    margin-top: 6px;
+}
+.message a:nth-child(3) {
+    right: 1.3vw;
+    margin-top: 4vh;
+}
+.message a:nth-child(4) {
+    margin-top: 7vh; /*TODO(fix variables): use something else than vh*/
 }
 
 .messageContainer textarea {
     width: inherit;
     height: 10ch;
     resize: none;
-    font-size: 1vw;
     box-sizing: border-box;
     border: none;
 }
@@ -185,7 +188,6 @@
 
 .tab {
     display: flex;
-    flex-grow: 1;
 }
 .tab a {
     flex: 1;
