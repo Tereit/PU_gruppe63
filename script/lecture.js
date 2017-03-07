@@ -2,6 +2,8 @@
  * Created by Mathias Lundteigen Mohus on 06/03.2017
  */
 
+//Hashmap for all question
+
 //Creates a new question in a lecture
 function createQuestion(questionText, postedBy, questionID, date){
 	dbRef.child("questions/" + questionID).push({
@@ -55,18 +57,20 @@ function questionFeedListener(lectureId){
 
 //Updates the question list for the lecture
 function updateQuestion(question){
+	document.getElementById("questionText").value = ""
 	question.ref.on("value", function(questionUp){
 		var qList = document.getElementById("questionList")
 		var qMain = document.getElementById(question.key)
+		qMain.class = "message"
 		while(qMain.firstChild){
 			qMain.removeChild(qMain.firstChild)
 		}
-			
-			
+
+
 		var quest = document.createElement("HBOX")
 		var text = document.createElement("TEXTBOX")
 		text.innerHTML = "Question: " + questionUp.val().questionText + " Posted By: " + questionUp.val().postedBy + " NrOfChildren: " + questionUp.child("answers").numChildren();
-	
+
 		quest.appendChild(text)
 		qMain.appendChild(quest)
 		var answers = document.createElement("VBOX")
@@ -81,11 +85,11 @@ function updateQuestion(question){
 
 function newQuestion(question){
 	var qList = document.getElementById("questionList")
-	var qMain = document.createElement("VBOX")
+	var qMain = document.createElement("div")
 	qMain.class = "message"
 	qMain.id = question.key
 	qList.appendChild(qMain)
-	
+
 	updateQuestion(question)
 }
 
@@ -93,7 +97,7 @@ function deleteQuestion(question){
 	var qList = document.getElementById("questionList")
 	var quest = document.getElementById(question.key)
 	qList.removeChild(quest)
-	question.ref.off()	
+	question.ref.off()
 }
 
 //Answer a specific question
