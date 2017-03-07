@@ -4,6 +4,7 @@
 
 //Creates a new question in a lecture
 function createQuestion(questionText, postedBy, questionID, date){
+	console.log("Question to database")
 	dbRef.child("questions/" + questionID).push({
 		questionText: questionText,
 		postedBy: postedBy,
@@ -45,7 +46,6 @@ function removeUpvoteQuestion(questionId, lectureId, userId){
 
 //Set a listener for the lecture feed
 function questionFeedListener(lectureId){
-	var questionList = []
 	dbRef.child("questions/" + lectureId).on("child_added", function(question){
 		newQuestion(question);
 	});
@@ -55,53 +55,46 @@ function questionFeedListener(lectureId){
 }
 
 //Updates the question list for the lecture
-function updateQuestion(questionList){
-	var qList = document.getElementById("questionList")
-	var qMain = document.createElement("VBOX")
-
-	var quest = document.createElement("HBOX")
-	var text = document.createElement("TEXTBOX")
-	text.innerHTML = question.val().questionText + "\t Posted By: " + question.val().postedBy + "\t " + question.child("answers").once(function(ans){return ans.numChildren});
-
-	quest.appendChild(text)
-	qMain.appendChild(quest)
-	var answers = document.createElement("VBOX")
-	question.child("answers").forEach(function(answer){
-		var ans = document.createElement("TEXTBOX")
-		ans = answer.val().answerText + "\t Posted By: " + answer.val().answeredBy
-		answers.append()
+function updateQuestion(question){
+	question.ref.on("value", function(questionUp){
+		var qList = document.getElementById("questionList")
+		var qMain = document.getElementById(question.key)
+		while(qMain.firstChild){
+			qMain.removeChild(qMain.firstChild)
+		}
+			
+			
+		var quest = document.createElement("HBOX")
+		var text = document.createElement("TEXTBOX")
+		text.innerHTML = "Question: " + questionUp.val().questionText + " Posted By: " + questionUp.val().postedBy + " NrOfChildren: " + questionUp.child("answers").numChildren();
+	
+		quest.appendChild(text)
+		qMain.appendChild(quest)
+		var answers = document.createElement("VBOX")
+		questionUp.child("answers").forEach(function(answer){
+			var ans = document.createElement("TEXTBOX")
+			ans = answer.val().answerText + "\t Posted By: " + answer.val().answeredBy
+			answers.append(ans)
+		})
+		qMain.appendChild(answers)
 	});
 }
 
 function newQuestion(question){
-	console.log(questions)
-	var qList = document.getElementsByClassName("messageFeed")
+	var qList = document.getElementById("questionList")
 	var qMain = document.createElement("VBOX")
 	qMain.class = "message"
-	var quest = document.createElement("HBOX")
-	var text = document.createElement("TEXTBOX")
-	var div = document.createElement("DIV")
-	qMain.appendChild(div)
-	text.innerHTML = question.val().questionText + "\t Posted By: " + question.val().postedBy + "\t " + question.child("answers").once(function(ans){return ans.numChildren});
-
-	quest.appendChild(text)
-	qMain.appendChild(quest)
-	var answers = document.createElement("VBOX")
-	question.child("answers").forEach(function(answer){
-		var ans = document.createElement("TEXTBOX")
-		ans = answer.val().answerText + "\t Posted By: " + answer.val().answeredBy
-		answers.append()
-	});
-
-	qMain.appendChild(answers)
-	qList.append(qMain)
-
+	qMain.id = question.key
+	qList.appendChild(qMain)
+	
+	updateQuestion(question)
 }
 
 function deleteQuestion(question){
 	var qList = document.getElementById("questionList")
 	var quest = document.getElementById(question.key)
 	qList.removeChild(quest)
+	question.ref.off()	
 }
 
 //Answer a specific question

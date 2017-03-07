@@ -61,6 +61,7 @@ function listSelectedItem(element){
 }
 
 function createQuestionAction(){
+	console.log("Create question")
     var now = new Date();
     var time = (now.getMonth()+1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes();
     var question = document.getElementById("questionText").value;
