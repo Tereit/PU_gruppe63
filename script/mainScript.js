@@ -139,6 +139,7 @@ function getLecturesFromSubjectCallback(lectures){
 			goToLectureBtn.innerHTML="Go to lecture";
 			goToLectureBtn.onclick = function() {
           sessionStorage.questionID = lectures[key].questionID;
+          questionFeedListener(sessionStorage.questionID)
 			    changeToLecture(rom, lectureStart); //TODO(fix parameters): get parameters of the lecture
             };
 			liElement.appendChild(goToLectureBtn);

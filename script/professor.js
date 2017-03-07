@@ -122,6 +122,10 @@ function newLecture() {
 	}
 }
 
+function cancelCreateNewLecture() {
+	document.getElementById("createLecturePopUp").style.display="none";
+}
+
 //When professor subject is clicked
 function selectSubject(subjectName) {
 	document.getElementById("beforeSelectedSubject").style.display = "none"
