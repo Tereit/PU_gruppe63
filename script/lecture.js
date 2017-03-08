@@ -10,7 +10,6 @@ function setPace(type){
 	if (type=="slower"){
 		amount *= -1;
 	}
-
 	firebase.database().ref("lectures/"+sessionStorage.currentSubject+"/"+sessionStorage.lectureDate+"/pace").transaction(function(pace){
 		console.log(pace)
 		if(pace){
