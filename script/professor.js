@@ -12,12 +12,6 @@ subjectListener(sessionStorage.bruker, "professors");
 //Pop-up notification med brukernavn
 getUserName(sessionStorage.bruker, "professors", getUserNamerCallback);
 
-//Firebase database variabel
-dbRef = firebase.database();
-
-
-
-
 // logg professor ut
 function logoutAction() {
 	logout(sessionStorage.bruker, "professors");
@@ -135,11 +129,93 @@ function selectSubject(subjectName) {
 	document.getElementById("upcomingLectures").innerHTML = ""
 	sessionStorage.currentSubject = subjectName
 	getLecturesFromSubject(subjectName, getLecturesFromSubjectCallback)
-
+	displayStudentsInSubject(subjectName)
 }
 
 function displayCreateLecture() {
 	document.getElementById("createLecturePopUp").style.display="block";
+}
+
+//Gets all students subscribed to a subject
+function getStudentsInSubject(subjectId, callback){
+	dbRef.child("subjects/" + subjectId + "/students").once("value", function(students){
+		callback(students)
+	})
+}
+
+function displayStudentsInSubject(subjectId){
+	var studInSubject = document.getElementById("studentsInSubject")
+	while(studInSubject.firstChild){
+		studInSubject.removeChild(studInSubject.firstChild)
+	}
+	
+	getStudentsInSubject(subjectId, function(students) {
+		students.forEach(function(student){
+			var li = document.createElement("li")
+			var text = document.createElement("h4")
+			dbRef.child("users/students/" + student.key).once("value", function(stud){
+					text.innerHTML = stud.username
+			})
+			var btnUp = document.createElement("button")
+			btnUp.innerHTML = "Upgrade"
+			var key = student.key
+			btnUp.onclick = function(){
+				upgradeToStudentAss(key, subjectId)
+			}
+		
+			var btnDown = document.createElement("button")
+			btnDown.innerHTML = "Downgrade"
+			btnDown.onclick = function(){
+				downgradeFromStudentAss(key, subjectId)
+			}
+			li.appendChild(text)
+			li.appendChild(btnUp)
+			li.appendChild(btnDown)
+			studInSubject.appendChild(li)
+		})
+	})
+}
+
+function getStudentsFunc(){
+	upgradeToStudentAss('"dOE3Nf6T8KY5iH252q5Ou1zR9083"', "Algdat 2017 Vår")
+}
+
+function getStudentFromSubject(studentId, subjectId, callback){
+	dbRef.child("subjects/" + subjectId + "/students").once("value", function(students){
+		var stud = null
+		students.forEach(function(student){
+			if(studentId == student.key){
+				stud = student
+			}
+		})
+		callback(stud)
+	});
+}
+
+function upgradeToStudentAss(studentId, subjectId){
+	getStudentFromSubject(studentId, subjectId, function(student) {
+		if(student){
+			student.ref.set({
+				studass: true
+			})
+		}
+		else{
+			console.log("Student is not in subject")
+		}
+	});
+}
+
+function downgradeFromStudass(studentId, subjectId){
+	getStudentFromSubject(studentId, subjectId, function(student) {
+		if(student){
+			student.ref.set({
+				studass: false,
+			})
+		}
+		else{
+			console.log("Student is not in subject")
+		}
+	})
 }
 
 //kjetils piss

@@ -127,22 +127,23 @@ function getLecturesFromSubjectCallback(lectures){
 	var day = currentDate.substr(6, 2);
 	currentDate = year + "-" + month + "-" + day;
 	for(var key in lectures){
-        var rom = lectures[key].rom;
-        var lectureStart = lectures[key].fra;
-        var string = rom + " " + lectureStart;
 		if(currentDate == key){
+	        var rom = lectures[key].rom;
+	        var lectureStart = lectures[key].fra;
+	        var string = rom + " " + lectureStart;
 			//lecture is today
 			var liElement = document.createElement("li");
             liElement.innerHTML = string;
 			var goToLectureBtn = document.createElement("button");
-      var qid = lectures[key].questionID
+
+			var qid = lectures[key].questionID
 			var date = key
 			goToLectureBtn.className="goToLectureBtn";
 			goToLectureBtn.innerHTML="Go to lecture";
 			goToLectureBtn.onclick = function() {
-          sessionStorage.questionID = qid
-          sessionStorage.lectureDate = date
-          questionFeedListener(sessionStorage.questionID)
+				sessionStorage.questionID = qid
+				sessionStorage.lectureDate = date
+				questionFeedListener(sessionStorage.questionID)
 			    changeToLecture(rom, lectureStart); //TODO(fix parameters): get parameters of the lecture
             };
 			liElement.appendChild(goToLectureBtn);
