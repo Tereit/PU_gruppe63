@@ -11,17 +11,15 @@ function setPace(type){
 		amount *= -1;
 	}
 
-	console.log(sessionStorage.currentSubject)
-	console.log(sessionStorage.lectureDate)
-	firebase.database().ref("lectures/"+sessionStorage.currentSubject+"/"+sessionStorage.lectureDate).child("pace").transaction(function(pace){
+	firebase.database().ref("lectures/"+sessionStorage.currentSubject+"/"+sessionStorage.lectureDate+"/pace").transaction(function(pace){
+		console.log(pace)
 		if(pace){
-			pace += amount;
+			return pace += amount;
 		}
 		else{
-			alert("Could not fetch pace for this lecture..")
+			return pace
 		}
-
-	})
+	});
 }
 
 
