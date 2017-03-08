@@ -135,13 +135,13 @@ function getLecturesFromSubjectCallback(lectures){
 			var liElement = document.createElement("li");
             liElement.innerHTML = string;
 			var goToLectureBtn = document.createElement("button");
-      sessionStorage.questionID = qid
-			sessionStorage.lectureDate = date
+      var qid = lectures[key].questionID
+			var date = key
 			goToLectureBtn.className="goToLectureBtn";
 			goToLectureBtn.innerHTML="Go to lecture";
 			goToLectureBtn.onclick = function() {
-          sessionStorage.questionID = qid;
-          sessionStorage.questionID = date;
+          sessionStorage.questionID = qid
+          sessionStorage.lectureDate = date
           questionFeedListener(sessionStorage.questionID)
 			    changeToLecture(rom, lectureStart); //TODO(fix parameters): get parameters of the lecture
             };
