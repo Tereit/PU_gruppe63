@@ -4,6 +4,27 @@
 
 //Hashmap for all question
 
+//Vote for pace
+function setPace(type){
+	amount = 1
+	if (type=="slower"){
+		amount *= -1;
+	}
+
+	console.log(sessionStorage.currentSubject)
+	console.log(sessionStorage.lectureDate)
+	firebase.database().ref("lectures/"+sessionStorage.currentSubject+"/"+sessionStorage.lectureDate).child("pace").transaction(function(pace){
+		if(pace){
+			pace += amount;
+		}
+		else{
+			alert("Could not fetch pace for this lecture..")
+		}
+
+	})
+}
+
+
 //Creates a new question in a lecture
 function createQuestion(questionText, postedBy, questionID, date){
 	dbRef.child("questions/" + questionID).push({
