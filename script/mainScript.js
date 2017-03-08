@@ -44,23 +44,52 @@ function logout(uid, type){
     });
 }
 
-//Listener for pace TODO(Code clean-up): add to correct subject.
-/*function addListenerToPace(type){
-  dbRef.child("subjects/subject/lecture/pace").on("value", function(tall){ //TODO(Code clean-up): make list of listeners and detatch all.
-    var pace = tall.val();
-    if(type == "professor"){
-      var professorPace = document.getElementById("professorPace");
-      professorPace.innerHTML = pace;
+//remove student from lecture viewers
+function removeStudentToLectureViewers(){
+  dbRef.child("lectures/" + sessionStorage.currentSubject + "/" + sessionStorage.lectureDate + "/viewers/" + sessionStorage.bruker).remove().then(
+    function(){
+      incrementStudCountLecture(-1)
     }
-    else if(type == "student"){
-      var studentPace = document.getElementById("studentPace");
-      studentPace.innerHTML = pace
+  )
+}
+
+//Add student to lecture viewers
+function addStudentToLectureViewers(){
+  dbRef.child("lectures/" + sessionStorage.currentSubject + "/" + sessionStorage.lectureDate + "/viewers").set({
+    id: sessionStorage.bruker
+  }).then(function(){
+    incrementStudCountLecture(1)
+  })
+}
+
+//Increment studCount for lecture
+function incrementStudCountLecture(amount){
+  dbRef.child("lectures/" + sessionStorage.currentSubject + "/" + sessionStorage.lectureDate+"/userCount").transaction(function(count){
+    if(count){
+      count = count + amount
+      return count
     }
     else{
-      alertOfChange("Invalid userType for pace listener");
+      return count
     }
   })
-}*/
+}
+
+//add listener for lecture stud count when opened
+function lectureStudentCountListener(){
+  dbRef.child("lectures/" + sessionStorage.currentSubject + "/" + sessionStorage.lectureDate+"/viewers").on("child_added", function(snapshot){
+    incrementStudCountLecture(1)
+  })
+}
+
+
+//add listener for lecture stud count when closed
+function lectureStudentCountListener(){
+  dbRef.child("lectures/" + sessionStorage.currentSubject + "/" + sessionStorage.lectureDate+ "/viewers").on("child_removed", function(snapshot){
+    incrementStudCountLecture(-1)
+  })
+}
+
 
 //Add subject to user profile
 //Subject skal inneholde fag + " " + år + " " + semester
@@ -100,10 +129,12 @@ function getUserName(uid, type, callback){
 function changeToLecture(rom, lectureStart) {
   document.getElementById("lectureFeed").style.display="block";
   document.getElementById("subjectName").innerHTML = sessionStorage.currentSubject+": "+rom+" "+lectureStart;
+  addStudentToLectureViewers(sessionStorage.currentSubject, sessionStorage.lectureDate)
 }
 
 
 function exitLecture() {
+    removeStudentToLectureViewers()
     document.getElementById("lectureFeed").style.display="none";
 }
 
