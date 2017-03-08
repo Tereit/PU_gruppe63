@@ -4,6 +4,25 @@
 
 //Hashmap for all question
 
+//Vote for pace
+function setPace(type){
+	amount = 1
+	if (type=="slower"){
+		amount *= -1;
+	}
+
+	firebase.database().ref("lectures/"+sessionStorage.currentSubject+"/"+sessionStorage.lectureDate+"/pace").transaction(function(pace){
+		console.log(pace)
+		if(pace){
+			return pace += amount;
+		}
+		else{
+			return pace
+		}
+	});
+}
+
+
 //Creates a new question in a lecture
 function createQuestion(questionText, postedBy, questionID, date){
 	dbRef.child("questions/" + questionID).push({

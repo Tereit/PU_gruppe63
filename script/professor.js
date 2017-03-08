@@ -12,12 +12,6 @@ subjectListener(sessionStorage.bruker, "professors");
 //Pop-up notification med brukernavn
 getUserName(sessionStorage.bruker, "professors", getUserNamerCallback);
 
-//Firebase database variabel
-dbRef = firebase.database();
-
-
-
-
 // logg professor ut
 function logoutAction() {
 	logout(sessionStorage.bruker, "professors");
@@ -135,7 +129,7 @@ function selectSubject(subjectName) {
 	document.getElementById("upcomingLectures").innerHTML = ""
 	sessionStorage.currentSubject = subjectName
 	getLecturesFromSubject(subjectName, getLecturesFromSubjectCallback)
-
+	displayStudentsInSubject(subjectName)
 }
 
 function displayCreateLecture() {
@@ -149,12 +143,41 @@ function getStudentsInSubject(subjectId, callback){
 	})
 }
 
-function getStudentsFunc(){
-	getStudentsIbSubject("Algdat 2017 Vår", function(students){
-		students.forEach({
-			
+function displayStudentsInSubject(subjectId){
+	var studInSubject = document.getElementById("studentsInSubject")
+	while(studInSubject.firstChild){
+		studInSubject.removeChild(studInSubject.firstChild)
+	}
+	
+	getStudentsInSubject(subjectId, function(students) {
+		students.forEach(function(student){
+			var li = document.createElement("li")
+			var text = document.createElement("h4")
+			dbRef.child("users/students/" + student.key).once("value", function(stud){
+					text.innerHTML = stud.username
+			})
+			var btnUp = document.createElement("button")
+			btnUp.innerHTML = "Upgrade"
+			var key = student.key
+			btnUp.onclick = function(){
+				upgradeToStudentAss(key, subjectId)
+			}
+		
+			var btnDown = document.createElement("button")
+			btnDown.innerHTML = "Downgrade"
+			btnDown.onclick = function(){
+				downgradeFromStudentAss(key, subjectId)
+			}
+			li.appendChild(text)
+			li.appendChild(btnUp)
+			li.appendChild(btnDown)
+			studInSubject.appendChild(li)
 		})
 	})
+}
+
+function getStudentsFunc(){
+	upgradeToStudentAss('"dOE3Nf6T8KY5iH252q5Ou1zR9083"', "Algdat 2017 Vår")
 }
 
 function getStudentFromSubject(studentId, subjectId, callback){

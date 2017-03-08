@@ -135,6 +135,7 @@ function getLecturesFromSubjectCallback(lectures){
 			var liElement = document.createElement("li");
             liElement.innerHTML = string;
 			var goToLectureBtn = document.createElement("button");
+
 			var qid = lectures[key].questionID
 			var date = key
 			goToLectureBtn.className="goToLectureBtn";
