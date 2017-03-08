@@ -140,8 +140,8 @@ function getLecturesFromSubjectCallback(lectures){
 			goToLectureBtn.className="goToLectureBtn";
 			goToLectureBtn.innerHTML="Go to lecture";
 			goToLectureBtn.onclick = function() {
-				sessionStorage.questionID = qid;
-				sessionStorage.lectureDate = date;
+				sessionStorage.questionID = qid
+				sessionStorage.lectureDate = date
 				questionFeedListener(sessionStorage.questionID)
 			    changeToLecture(rom, lectureStart); //TODO(fix parameters): get parameters of the lecture
             };
