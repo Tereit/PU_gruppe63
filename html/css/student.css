@@ -1,3 +1,6 @@
+#lectureFeed {
+    display: block;
+}
 /*martin: pace control buttons*/
 .paceBtn {
     display: inline-block;
@@ -136,9 +139,21 @@ div.tab a:focus, .active {
     display: flex;
     min-height: 8ch;
 }
-.message question {
+.question {
     flex: 4;
     margin-left: 10px;
+}
+.answer {
+    flex: 1;
+    display: none;
+}
+.answerBar {
+    float: right;
+    height: inherit;
+    font-size: 10px;
+    padding: 3em 0;
+    letter-spacing: -2px;
+    background-color: #666666 !important;
 }
 .message a {
     right: 1vw;

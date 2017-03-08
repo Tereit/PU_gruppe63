@@ -29,8 +29,15 @@
 					</div>
 				</div>
 				<div class="messageFeed" id="questionList">
-					<div class="message"><question>This is a test message. I wonder how it works. If this is a good format, or if it should be changed?</question>
-						<a>&#x25B2;</a><a id="messagePoints">0</a><a>&#x25BC;</a>
+					<div class="message"><div class="question">This is a test message. I wonder how it works. If this is a good format, or if it should be changed?</div>
+						<!--<a>&#x25B2;</a><a id="messagePoints">0</a><a>&#x25BC;</a>-->
+						<div class="answerBar" onclick="showAnswer()">|||</div>
+						<div class="answer"></div>
+					</div>
+					<div class="message">
+						<div class="question">This is a test message. I wonder how it works. If this is a good format, or if it should be changed?</div>
+						<!--<a>&#x25B2;</a><a id="messagePoints">0</a><a>&#x25BC;</a>-->
+						<div class="answer"></div>
 					</div>
 				</div>
 				<textarea id="questionText" placeholder="Type your question"></textarea>
@@ -93,5 +100,15 @@
 	<script src="../script/student.js"></script>
 	<script src="../script/lecture.js"></script>
 	<script src="../script/subscriptionLogic.js"></script>
+<script>
+	function showAnswer() {
+        //console.log(document.getElementsByClassName("answer"));
+		var answer = document.getElementsByClassName("answer")[0];
+		if(answer.style.display=="none") {
+		    answer.style.display="block";
+		} else
+            answer.style.display="none";
+    }
+</script>
 </body>
 </html>
