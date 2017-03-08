@@ -142,6 +142,59 @@ function displayCreateLecture() {
 	document.getElementById("createLecturePopUp").style.display="block";
 }
 
+//Gets all students subscribed to a subject
+function getStudentsInSubject(subjectId, callback){
+	dbRef.child("subjects/" + subjectId + "/students").once("value", function(students){
+		callback(students)
+	})
+}
+
+function getStudentsFunc(){
+	getStudentsIbSubject("Algdat 2017 Vår", function(students){
+		students.forEach({
+			
+		})
+	})
+}
+
+function getStudentFromSubject(studentId, subjectId, callback){
+	dbRef.child("subjects/" + subjectId + "/students").once("value", function(students){
+		var stud = null
+		students.forEach(function(student){
+			if(studentId == student.key){
+				stud = student
+			}
+		})
+		callback(stud)
+	});
+}
+
+function upgradeToStudentAss(studentId, subjectId){
+	getStudentFromSubject(studentId, subjectId, function(student) {
+		if(student){
+			student.ref.set({
+				studass: true
+			})
+		}
+		else{
+			console.log("Student is not in subject")
+		}
+	});
+}
+
+function downgradeFromStudass(studentId, subjectId){
+	getStudentFromSubject(studentId, subjectId, function(student) {
+		if(student){
+			student.ref.set({
+				studass: false,
+			})
+		}
+		else{
+			console.log("Student is not in subject")
+		}
+	})
+}
+
 //kjetils piss
 function openCity(evt, cityName) {
     // Declare all variables

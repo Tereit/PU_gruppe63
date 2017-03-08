@@ -6,6 +6,9 @@ lecturify
 	|				|
 	|				|__id (fagkode)
 	|				|__professor
+	|				|__students
+	|						|__studentId
+	|								|__studass (boolean, default false) 
 	|
 	|
 	|
